@@ -24,7 +24,7 @@ class Api::SessionsController < ApplicationController
   end
 
   def destroy
-    logout!
-    head :no_content
+    logout
+    render json: { message: 'success' }
   end
 end
