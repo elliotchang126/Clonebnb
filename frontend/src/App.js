@@ -1,11 +1,13 @@
 import React from 'react';
-import Home from './components/Splash/Home';
+import NavBar from './components/Splash/NavBar';
+import Navigation from './components/Navigation/Navigation';
 
 function App() {
   return (
     <>
+      {/* <NavBar /> */}
+      <Navigation />
       <h1>Hello world!</h1>
-      <Home />
     </>
   );
 }

@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :users, only: :create
     resource :session, only: [:show, :create, :destroy]
+
+    post 'check_email', to: 'users#check_email'
   end
 end
