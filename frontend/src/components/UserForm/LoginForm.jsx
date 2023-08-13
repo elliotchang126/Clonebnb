@@ -8,7 +8,6 @@ const LoginForm = (props) => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState(emailData)
     const [password, setPassword] = useState('')
-    console.log('Rendering form')
 
     const handleSubmit = e => {
         e.preventDefault()

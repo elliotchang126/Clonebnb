@@ -23,7 +23,7 @@ const UserModal = ({ setShowModal }) => {
             {modalType ==='checkEmail' && (
                 <div className='first-form'>
                     <header className='modal-header'>Log in or sign up</header>
-                    <h3>Welcome to Clonebnb</h3>
+                    <h3 className='modal-welcome'>Welcome to Clonebnb</h3>
                     <input
                         className='user-input'
                         type='text'

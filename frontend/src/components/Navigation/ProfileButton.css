@@ -9,6 +9,10 @@
     padding: 5px 5px 5px 15px;
 }
 
+.profile:hover {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .fa-solid {
     font-size: 30px;
 }
@@ -18,13 +22,40 @@
 
 .profile-dropdown {
     position: absolute;
+    display: inline-block;
     border: 1px solid lightgray;
     border-radius: 10px;
+    margin-top: 15px;
     right: 35px;
     width: 240px;
-    height: 240px;
+    height: 225px;
 }
 
 .dropdown-eles {
-    margin: 10px
+    margin: 10px 10px 10px 0px;
+}
+.dropdown-eles:hover {
+    background-color: rgb(243, 243, 243);
+    /* box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2); */
+}
+
+.dropdown-name {
+    text-indent: 10%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%
+}
+.dropdown-email {
+    text-indent: 10%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgray;
+    width: 100%
+}
+
+.dropdown-trips, .dropdown-logout {
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%
 }
