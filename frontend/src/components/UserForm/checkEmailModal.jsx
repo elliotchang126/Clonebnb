@@ -17,7 +17,29 @@ const UserModal = ({ setShowModal }) => {
         const user = await res.json();
         user.exists ? setModalType('login') : setModalType('signup')
     }
-    
+
+    useEffect(() => {
+        const button = document.querySelector('.user-button')
+
+        if (!button) return;
+
+        const handleMouseover = e => {
+            const rect = button.getBoundingClientRect();
+            const x = (e.clientX - rect.left) * 100 / button.clientWidth;
+            const y = (e.clientY - rect.top) * 100 / button.clientHeight;
+            
+            button.style.setProperty('--mouse-x', x)
+            button.style.setProperty('--mouse-y', y)
+        }
+
+        button.addEventListener('mousemove', handleMouseover);
+
+        return () => {
+            button.removeEventListener('mousemove', handleMouseover)
+        }
+    }, [])
+
+
     return (
         <div>
             {modalType ==='checkEmail' && (
