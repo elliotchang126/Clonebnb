@@ -2,6 +2,7 @@ import { useSelector } from "react-redux"
 import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import UserFormModal from "../UserForm";
+import './Navigation.css'
 
 const Navigation = () => {
     const user = useSelector(state => state.session.user);
@@ -22,12 +23,14 @@ const Navigation = () => {
     }
 
     return (
-        <ul>
-            <li>
+        <div className='navbar'>
+            <div>
                 <NavLink exact to='/'>Home</NavLink>
+            </div>
+            <div>
                 {sessionLinks}
-            </li>
-        </ul>
+            </div>
+        </div>
     )
 }
 

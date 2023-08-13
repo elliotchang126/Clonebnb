@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import csrfFetch from "../../store/csrf";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
-
+import '../../context/Modal.css'
 
 
 const UserModal = ({ setShowModal }) => {
@@ -21,15 +21,17 @@ const UserModal = ({ setShowModal }) => {
     return (
         <div>
             {modalType ==='checkEmail' && (
-                <>
+                <div className='first-form'>
+                    <header className='modal-header'>Log in or sign up</header>
+                    <h3>Welcome to Clonebnb</h3>
                     <input
+                        className='user-input'
                         type='text'
                         placeholder='Email'
                         value={email}
                         onChange={e => setEmail(e.target.value)} />
-                    <button onClick={() => {console.log("Button clicked")
-                    checkEmail()}}>Continue</button>
-                </>
+                    <button className='user-button' onClick={() =>{checkEmail()}}>Continue</button>
+                </div>
             )}
             {modalType ==='login' && <LoginForm email={email} />}
             {modalType ==='signup' && <SignupForm email={email} />}

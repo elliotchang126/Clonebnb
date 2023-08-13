@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux"
 import { useState, useEffect } from "react";
+import './ProfileButton.css'
 import * as sessionActions from '../../store/sessionReducer'
 
 
@@ -32,17 +33,18 @@ const ProfileButton = ({ user }) => {
 
     return(
         <>
-            <button onClick={e => openMenu(e)}>
-                <i className="fa-solid fa-user-circle" />
-            </button>
+            <div className='profile' onClick={e => openMenu(e)}>
+                <i class="fa-solid fa-regular fa-bars" style={{color: '#303030'}}></i>{' '}
+                <i class="fa-solid fa-circle-user" style={{color: '#828487'}}></i>
+            </div>
             {showMenu && (
-                <ul className="profile-dropdown">
-                    <li>{user.firstName + " " + user.lastName}</li>
-                    <li>{user.email}</li>
-                    <li>
+                <div className="profile-dropdown">
+                    <div className='dropdown-eles'>{user.firstName + " " + user.lastName}</div>
+                    <div className='dropdown-eles'>{user.email}</div>
+                    <div className='dropdown-eles'>
                     <button onClick={logout}>Log Out</button>
-                </li>
-                </ul>
+                </div>
+                </div>
             )}
         </>
     )
