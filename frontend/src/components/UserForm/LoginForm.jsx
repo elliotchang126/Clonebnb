@@ -8,6 +8,7 @@ const LoginForm = (props) => {
     const [email, setEmail] = useState(props.email)
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
+    const {setShowModal} = props
 
     const demoLogin = (e) => {
         e.preventDefault()
@@ -58,7 +59,10 @@ const LoginForm = (props) => {
 
     return(
         <form className='login-form' onSubmit={handleSubmit}>
+            <div className='header'>
+            <button className="close-button" onClick={()=> setShowModal(false)}>&times;</button>
             <header className='modal-header'>Finish logging in</header>
+            </div>
             <div className="input-wrapper">
                 <input
                     className='user-input'

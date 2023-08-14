@@ -6,7 +6,7 @@ import '../../context/Modal.css'
 import { useDispatch } from "react-redux";
 import * as sessionActions from '../../store/sessionReducer'
 
-const UserModal = ({ setShowModal }) => {
+const UserModal = ({showModal, setShowModal }) => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [modalType, setModalType] = useState('checkEmail')
@@ -64,11 +64,27 @@ const UserModal = ({ setShowModal }) => {
 
     const demoLogin = () => dispatch(sessionActions.login({email: 'demo@demo.io', password: 'password'}))
 
+    // useEffect(() => {
+    //     if (showModal) return;
+        
+    //     const closeModal = () => {
+    //         setShowModal(false)
+    //     }
+    //     const closeButton = document.querySelector('.close-button')
+
+    //     closeButton.addEventListener('click', closeModal)
+
+    //     return () => closeButton.removeEventListener('click', closeModal)
+    // }, [showModal])
+
     return (
         <div>
             {modalType ==='checkEmail' && (
                 <div className='first-form'>
-                    <header className='modal-header'>Log in or sign up</header>
+                    <div className='header'>
+                        <button className="close-button" onClick={()=> setShowModal(false)}>&times;</button>
+                        <header className='modal-header'>Log in or sign up</header>
+                    </div>
                     <h3 className='modal-welcome'>Welcome to Clonebnb</h3>
                     <div className="input-wrapper">
                         <input
@@ -88,8 +104,8 @@ const UserModal = ({ setShowModal }) => {
                     <button className='user-button' onClick={demoLogin}>Demo Login</button>
                 </div>
             )}
-            {modalType ==='login' && <LoginForm email={email} />}
-            {modalType ==='signup' && <SignupForm email={email} />}
+            {modalType ==='login' && <LoginForm email={email} setShowModal={setShowModal} />}
+            {modalType ==='signup' && <SignupForm email={email} setShowModal={setShowModal} />}
         </div>
     )
 }

@@ -13,6 +13,7 @@ const SignupForm = (props) => {
     const [firstNameError, setFirstNameError] = useState('')
     const [lastNameError, setLastNameError] = useState('')
     const [passwordError, setPasswordError] = useState('')
+    const { setShowModal } = props
 
     const demoLogin = (e) => {
         e.preventDefault();
@@ -94,7 +95,10 @@ const SignupForm = (props) => {
     
     return(
         <form className='signup-form' onSubmit={handleSubmit}>
-            <header className='modal-header'>Finish signing up</header>
+            <div className="header">
+                <button className="close-button" onClick={()=> setShowModal(false)}>&times;</button>
+                <header className='modal-header'>Finish signing up</header>
+            </div>
             <div className="input-wrapper">
                 <input
                     id='first-name-input' 

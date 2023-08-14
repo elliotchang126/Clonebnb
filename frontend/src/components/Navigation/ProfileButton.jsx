@@ -82,7 +82,7 @@ const ProfileButton = ({ user }) => {
             )}
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <UserModal />
+                    <UserModal setShowModal={setShowModal} showModal={showModal}/>
                 </Modal>
             )}
         </>

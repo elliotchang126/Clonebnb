@@ -22,12 +22,12 @@
 }
 
 .modal-header {
-    padding: 0px 15px 20px 15px;
+    padding: 5px 15px 20px 15px;
     text-align: center;
     font-weight: 500;
     width: 93.5%;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    border-bottom: 1px solid lightgray;
+    /* border-bottom: 1px solid lightgray; */
 }
 
 .modal-welcome {
@@ -35,6 +35,27 @@
     font-weight: 500;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.header {
+    display:flex;
+    border-bottom: 1px solid lightgray;
+}
+
+.close-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+}
+
+.close-button:hover {
+    background-color: rgb(240, 240, 240);
 }
 
 .first-form {
