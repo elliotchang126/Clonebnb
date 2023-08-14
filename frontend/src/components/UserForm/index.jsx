@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { Modal } from "../../context/Modal";
-// import UserForm from "./UserForm";
-import './UserForm.css'
 import UserModal from "./checkEmailModal";
 
 

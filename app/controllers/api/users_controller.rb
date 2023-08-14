@@ -1,6 +1,6 @@
 class Api::UsersController < ApplicationController
   wrap_parameters include: User.attribute_names + ['password']
-  
+
   def create
     @user = User.new(user_params)
     
@@ -13,8 +13,19 @@ class Api::UsersController < ApplicationController
   end
 
   def check_email
-    @user = User.find_by(email: params[:email])
+    email = params[:email]
 
+    if email.blank?
+      render json: {errors: ['Email is required']}, status: 400
+      return
+    end
+
+    unless email =~ URI::MailTo::EMAIL_REGEXP
+      render json: {errors: ["Enter a valid email."]}, status: 400
+      return
+    end
+
+    @user = User.find_by(email: email)
     if @user
       render json: { exists: true }
     else

@@ -3,36 +3,86 @@ import { useDispatch } from "react-redux"
 import * as sessionActions from '../../store/sessionReducer'
 import '../../context/Modal.css'
 
-const SignupForm = () => {
+const SignupForm = (props) => {
     const dispatch = useDispatch();
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(props.email);
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('')
+    const [emailError, setEmailError] = useState('')
+    const [firstNameError, setFirstNameError] = useState('')
+    const [lastNameError, setLastNameError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
+
+    const demoLogin = (e) => {
+        e.preventDefault();
+        dispatch(sessionActions.login({email: 'demo@demo.io', password: 'password'}))
+    }
 
     useEffect(() => {
-        const button = document.querySelector('.user-button')
+        const buttons = document.querySelectorAll('.user-button')
 
-        if (!button) return;
+        if (!buttons.length) return;
 
         const handleMouseover = e => {
-            const rect = button.getBoundingClientRect();
-            const x = (e.clientX - rect.left) * 100 / button.clientWidth;
-            const y = (e.clientY - rect.top) * 100 / button.clientHeight;
+            const rect = e.target.getBoundingClientRect();
+            const x = (e.clientX - rect.left) * 100 / e.target.clientWidth;
+            const y = (e.clientY - rect.top) * 100 / e.target.clientHeight;
             
-            button.style.setProperty('--mouse-x', x)
-            button.style.setProperty('--mouse-y', y)
+            e.target.style.setProperty('--mouse-x', x)
+            e.target.style.setProperty('--mouse-y', y)
         }
-
-        button.addEventListener('mousemove', handleMouseover);
+        buttons.forEach(button => {
+            button.addEventListener('mousemove', handleMouseover);
+        })
 
         return () => {
-            button.removeEventListener('mousemove', handleMouseover)
+            buttons.forEach(button => {
+                button.removeEventListener('mousemove', handleMouseover)
+            })
         }
     }, [])
 
     const handleSubmit = e => {
         e.preventDefault();
+        setEmailError('')
+        setPasswordError('')
+        setFirstNameError('')
+        setLastNameError('')
+
+        // needs major refactoring
+
+        let hasError = 'false'
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+        setEmailError('')
+        if (!email) {
+            setEmailError('Email is required.');
+            hasError = true;
+        }
+
+        if (!emailPattern.test(email)) {
+            setEmailError("Please enter a valid email.")
+            hasError = true;
+        }
+
+        if (!firstName) {
+            setFirstNameError('First name is required.')
+            hasError = true;
+        }
+
+        if (!lastName) {
+            setLastNameError('Last name is required.')
+            hasError = true;
+        }
+
+        if (password.length < 6) {
+            setPasswordError('Password must be at least 6 characters')
+            hasError = true;
+        }
+
+        if (hasError) return;
+
         let user = {
             email,
             password,
@@ -45,41 +95,66 @@ const SignupForm = () => {
     return(
         <form className='signup-form' onSubmit={handleSubmit}>
             <header className='modal-header'>Finish signing up</header>
-            <label className='user-label'>First Name
+            <div className="input-wrapper">
                 <input
+                    id='first-name-input' 
                     className='user-input first-name'
                     type='text'
                     placeholder="First name"
                     onChange ={e => setFirstName(e.target.value)} />
-            </label>
-            <label className='user-label'>Last Name
+                <label htmlFor='first-name-input' className='user-label'>First Name</label>
+            </div>
+                {firstNameError && <div className="error-message">
+                <i className="fa-solid fa-circle-exclamation" style={{color: "#ff0000"}}></i>
+                {firstNameError}
+                </div> }
+            <div className="input-wrapper">
                 <input
+                    id='last-name-input'
                     className='user-input last-name'
                     type='text'
                     placeholder="Last name"
                     value={lastName}
                     onChange ={e => setLastName(e.target.value)} />
-            </label>
+                <label htmlFor='last-name-input' className='user-label'>Last Name</label>
+            </div>
+                {lastNameError && <div className="error-message">                        
+                    <i className="fa-solid fa-circle-exclamation" style={{color: "#ff0000"}}></i>
+                    {lastNameError}
+                </div> }
             <p className='user-form-desc'>Make sure it matches the name on your government ID.</p>
-            <label className='user-label'>Email
+            <div className="input-wrapper">
                 <input
+                    id='email-input'
                     className='user-input email-input'
                     type='text'
                     placeholder="Email"
                     value={email}
                     onChange ={e => setEmail(e.target.value)} />
-            </label>
+                <label htmlFor='email-input' className='user-label'>Email</label>
+            </div>
+            {emailError && <div className="error-message">
+                <i className="fa-solid fa-circle-exclamation" style={{color: "#ff0000"}}></i>
+                {emailError}
+                </div> }
             <p className='user-form-desc'>We'll email you trip confirmations and receipts.</p>
-            <label className='user-label'>Password
+            <div className="input-wrapper">
                 <input
+                    id='password-input'
                     className='user-input password-input'
                     type='password'
                     placeholder="Password"
                     value={password}
                     onChange ={e => setPassword(e.target.value)} />
-            </label>
+                <label htmlFor='password-input' className='user-label'>Password</label>
+            </div>
+                {passwordError && <div className="error-message">
+                    <i className="fa-solid fa-circle-exclamation" style={{color: "#ff0000"}}></i>
+                    {passwordError}
+                </div> }
             <p className='user-form-terms'>By selecting Agree and Continue, I agree to Clonebnb's Terms of Service, Payments Terms of Service, and Nondiscrimination Policy and acknowledge the Privacy Policy.</p>
-            <button className='user-button'>Agree and continue</button>
+            <button className='user-button' type='submit'>Agree and continue</button>
+            <button id='demo-login' className='user-button' onClick={demoLogin}>Demo Login</button>
         </form>
     )
 }

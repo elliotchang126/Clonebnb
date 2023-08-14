@@ -25,10 +25,10 @@
     display: inline-block;
     border: 1px solid lightgray;
     border-radius: 10px;
-    margin-top: 15px;
+    margin-top: 20px;
     right: 35px;
     width: 240px;
-    height: 225px;
+    height: auto;
 }
 
 .dropdown-eles {
@@ -36,6 +36,7 @@
 }
 .dropdown-eles:hover {
     background-color: rgb(243, 243, 243);
+    cursor:pointer
     /* box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2); */
 }
 
@@ -53,7 +54,7 @@
     width: 100%
 }
 
-.dropdown-trips, .dropdown-logout {
+.dropdown-trips, .dropdown-logout, .dropdown-signup, .dropdown-login {
     text-align: center;
     padding-top: 15px;
     padding-bottom: 15px;
