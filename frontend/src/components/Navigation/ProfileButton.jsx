@@ -36,9 +36,9 @@ const ProfileButton = ({ user }) => {
         return () => document.removeEventListener('click', closeMenu)
     }, [showMenu])
 
-    const logout = e => {
+    const logout = async e => {
         e.preventDefault();
-        dispatch(sessionActions.logout())
+        await dispatch(sessionActions.logout())
     }
 
     const openModal = e => {
@@ -82,7 +82,7 @@ const ProfileButton = ({ user }) => {
             )}
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <UserModal setShowModal={setShowModal} showModal={showModal}/>
+                    <UserModal setShowModal={ setShowModal }/>
                 </Modal>
             )}
         </>

@@ -6,7 +6,7 @@ import '../../context/Modal.css'
 import { useDispatch } from "react-redux";
 import * as sessionActions from '../../store/sessionReducer'
 
-const UserModal = ({showModal, setShowModal }) => {
+const UserModal = ({ setShowModal }) => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [modalType, setModalType] = useState('checkEmail')
@@ -63,19 +63,6 @@ const UserModal = ({showModal, setShowModal }) => {
     }, [])
 
     const demoLogin = () => dispatch(sessionActions.login({email: 'demo@demo.io', password: 'password'}))
-
-    // useEffect(() => {
-    //     if (showModal) return;
-        
-    //     const closeModal = () => {
-    //         setShowModal(false)
-    //     }
-    //     const closeButton = document.querySelector('.close-button')
-
-    //     closeButton.addEventListener('click', closeModal)
-
-    //     return () => closeButton.removeEventListener('click', closeModal)
-    // }, [showModal])
 
     return (
         <div>
