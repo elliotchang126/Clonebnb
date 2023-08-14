@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
-import logo from '../../assets/airbnb.svg'
+import logo from '../../assets/airbnb_logo.svg'
 import UserFormModal from "../UserForm";
 import './Navigation.css'
 

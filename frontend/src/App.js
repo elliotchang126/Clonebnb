@@ -9,8 +9,8 @@ function App() {
       <Navigation />
       <h1>Hello world!</h1>
       <Switch>
+        <Route exact path='/'/>
         <Route exact path='/404' component={PageNotFound}/>
-        <Route path='/' />
         <Redirect to='/404' />
       </Switch>
     </>
