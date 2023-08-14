@@ -80,14 +80,14 @@ const UserModal = ({ setShowModal }) => {
                             type='text'
                             placeholder='Email'
                             value={email}
-                            onChange={e => setEmail(e.target.value)} />
+                            onChange={e => setEmail(e.target.value)} required/>
                         <label htmlFor='email-input'>Email</label>
                     </div>
                     {emailError && <div className="error-message">
                         <i className="fa-solid fa-circle-exclamation" style={{color: "#ff0000"}}></i>
                         {emailError}
                         </div> }
-                    <button className='user-button' onClick={() =>{checkEmail()}}>Continue</button>
+                    <button type='submit' className='user-button' onClick={() =>{checkEmail()}}>Continue</button>
                     <button className='user-button' onClick={demoLogin}>Demo Login</button>
                 </div>
             )}

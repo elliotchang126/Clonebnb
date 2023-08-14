@@ -69,7 +69,7 @@ const LoginForm = (props) => {
                     type='text'
                     placeholder='Email'
                     value={email}
-                    onChange ={e => setEmail(e.target.value)} />
+                    onChange ={e => setEmail(e.target.value)} required/>
                 <label htmlFor='email-input' className='user-label'>Email</label>
             </div>
             <div className="input-wrapper">
@@ -79,14 +79,14 @@ const LoginForm = (props) => {
                     type='password'
                     placeholder="Password"
                     value={password}
-                    onChange ={e => setPassword(e.target.value)} />
+                    onChange ={e => setPassword(e.target.value)} required/>
                 <label htmlFor='password-input' className='user-label'>Password</label>
             </div>
             {error && <div className="error-message">
                 <i className="fa-solid fa-circle-exclamation" style={{color: "#ff0000"}}></i>
                 {error}
             </div> }
-            <button className='user-button'>Log in</button>
+            <button type='submit' className='user-button'>Log in</button>
             <button id='demo-login' className='user-button' onClick={demoLogin}>Demo Login</button>
         </form>
 )

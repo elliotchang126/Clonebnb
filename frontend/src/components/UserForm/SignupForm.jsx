@@ -105,7 +105,7 @@ const SignupForm = (props) => {
                     className='user-input first-name'
                     type='text'
                     placeholder="First name"
-                    onChange ={e => setFirstName(e.target.value)} />
+                    onChange ={e => setFirstName(e.target.value)} required/>
                 <label htmlFor='first-name-input' className='user-label'>First Name</label>
             </div>
                 {firstNameError && <div className="error-message">
@@ -119,7 +119,7 @@ const SignupForm = (props) => {
                     type='text'
                     placeholder="Last name"
                     value={lastName}
-                    onChange ={e => setLastName(e.target.value)} />
+                    onChange ={e => setLastName(e.target.value)} required/>
                 <label htmlFor='last-name-input' className='user-label'>Last Name</label>
             </div>
                 {lastNameError && <div className="error-message">                        
@@ -134,7 +134,7 @@ const SignupForm = (props) => {
                     type='text'
                     placeholder="Email"
                     value={email}
-                    onChange ={e => setEmail(e.target.value)} />
+                    onChange ={e => setEmail(e.target.value)} required/>
                 <label htmlFor='email-input' className='user-label'>Email</label>
             </div>
             {emailError && <div className="error-message">
@@ -149,7 +149,7 @@ const SignupForm = (props) => {
                     type='password'
                     placeholder="Password"
                     value={password}
-                    onChange ={e => setPassword(e.target.value)} />
+                    onChange ={e => setPassword(e.target.value)} required/>
                 <label htmlFor='password-input' className='user-label'>Password</label>
             </div>
                 {passwordError && <div className="error-message">
