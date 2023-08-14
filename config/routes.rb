@@ -12,5 +12,12 @@ Rails.application.routes.draw do
     resources :listings, only: [:index, :show]
 
     post 'check_email', to: 'users#check_email'
+
   end
+
+  get '*path', 
+    to: "static_pages#frontend_index",
+    constraints: lambda { |req| !req.xhr? && req.format.html? }
+
+  root to: "static_pages#frontend_index"
 end

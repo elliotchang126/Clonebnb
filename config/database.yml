@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: Clonebnb_production
-  username: Clonebnb
-  password: <%= ENV["CLONEBNB_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
