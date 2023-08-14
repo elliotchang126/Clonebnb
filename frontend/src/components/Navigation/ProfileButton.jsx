@@ -36,9 +36,9 @@ const ProfileButton = ({ user }) => {
         return () => document.removeEventListener('click', closeMenu)
     }, [showMenu])
 
-    const logout = async e => {
-        e.preventDefault();
-        await dispatch(sessionActions.logout())
+    const logout = e => {
+        // e.preventDefault();
+        dispatch(sessionActions.logout())
     }
 
     const openModal = e => {

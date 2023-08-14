@@ -39,9 +39,9 @@ const LoginForm = (props) => {
         }
     }, [])
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault()
-        dispatch(sessionActions.login({email, password}))
+        await dispatch(sessionActions.login({email, password}))
         .catch(async (res) => {
             let data;
             try {
@@ -58,9 +58,10 @@ const LoginForm = (props) => {
 
 
     return(
-        <form className='login-form' onSubmit={handleSubmit}>
+        <div className='login-form'>
+        <form onSubmit={handleSubmit}>
             <div className='header'>
-            <button className="close-button" onClick={()=> setShowModal(false)}>&times;</button>
+            <div className="close-button" onClick={()=> setShowModal(false)}>&times;</div>
             <header className='modal-header'>Finish logging in</header>
             </div>
             <div className="input-wrapper">
@@ -86,9 +87,10 @@ const LoginForm = (props) => {
                 <i className="fa-solid fa-circle-exclamation" style={{color: "#ff0000"}}></i>
                 {error}
             </div> }
-            <button type='submit' className='user-button'>Log in</button>
-            <button id='demo-login' className='user-button' onClick={demoLogin}>Demo Login</button>
+            <button className='user-button'>Log in</button>
         </form>
+        <button type='button' id='demo-login' className='user-button' onClick={demoLogin}>Demo Login</button>
+    </div>
 )
 }
 

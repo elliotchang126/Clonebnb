@@ -63,32 +63,38 @@ const UserModal = ({ setShowModal }) => {
     }, [])
 
     const demoLogin = () => dispatch(sessionActions.login({email: 'demo@demo.io', password: 'password'}))
+    const handleSubmit = e => {
+        e.preventDefault();
+        checkEmail()
+    }
 
     return (
         <div>
             {modalType ==='checkEmail' && (
                 <div className='first-form'>
-                    <div className='header'>
-                        <button className="close-button" onClick={()=> setShowModal(false)}>&times;</button>
-                        <header className='modal-header'>Log in or sign up</header>
-                    </div>
-                    <h3 className='modal-welcome'>Welcome to Clonebnb</h3>
-                    <div className="input-wrapper">
-                        <input
-                            id='email-input'
-                            className='user-input'
-                            type='text'
-                            placeholder='Email'
-                            value={email}
-                            onChange={e => setEmail(e.target.value)} required/>
-                        <label htmlFor='email-input'>Email</label>
-                    </div>
-                    {emailError && <div className="error-message">
-                        <i className="fa-solid fa-circle-exclamation" style={{color: "#ff0000"}}></i>
-                        {emailError}
-                        </div> }
-                    <button type='submit' className='user-button' onClick={() =>{checkEmail()}}>Continue</button>
-                    <button className='user-button' onClick={demoLogin}>Demo Login</button>
+                    <form onSubmit={handleSubmit}>
+                        <div className='header'>
+                            <div className="close-button" onClick={()=> setShowModal(false)}>&times;</div>
+                            <header className='modal-header'>Log in or sign up</header>
+                        </div>
+                        <h3 className='modal-welcome'>Welcome to Clonebnb</h3>
+                        <div className="input-wrapper">
+                            <input
+                                id='email-input'
+                                className='user-input'
+                                type='text'
+                                placeholder='Email'
+                                value={email}
+                                onChange={e => setEmail(e.target.value)} required/>
+                            <label htmlFor='email-input'>Email</label>
+                        </div>
+                        {emailError && <div className="error-message">
+                            <i className="fa-solid fa-circle-exclamation" style={{color: "#ff0000"}}></i>
+                            {emailError}
+                            </div> }
+                        <button type='submit' className='user-button'>Continue</button>
+                    </form>
+                    <button type='button' className='user-button' onClick={demoLogin}>Demo Login</button>
                 </div>
             )}
             {modalType ==='login' && <LoginForm email={email} setShowModal={setShowModal} />}

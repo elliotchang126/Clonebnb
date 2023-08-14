@@ -44,7 +44,7 @@ const SignupForm = (props) => {
         }
     }, [])
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
         setEmailError('')
         setPasswordError('')
@@ -52,7 +52,6 @@ const SignupForm = (props) => {
         setLastNameError('')
 
         // needs major refactoring
-
         let hasError = false
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
@@ -90,76 +89,78 @@ const SignupForm = (props) => {
             firstName,
             lastName
         }
-        dispatch(sessionActions.signup(user))
+        await dispatch(sessionActions.signup(user))
     }
     
     return(
-        <form className='signup-form' onSubmit={handleSubmit}>
-            <div className="header">
-                <button className="close-button" onClick={()=> setShowModal(false)}>&times;</button>
-                <header className='modal-header'>Finish signing up</header>
-            </div>
-            <div className="input-wrapper">
-                <input
-                    id='first-name-input' 
-                    className='user-input first-name'
-                    type='text'
-                    placeholder="First name"
-                    onChange ={e => setFirstName(e.target.value)} required/>
-                <label htmlFor='first-name-input' className='user-label'>First Name</label>
-            </div>
-                {firstNameError && <div className="error-message">
-                <i className="fa-solid fa-circle-exclamation" style={{color: "#ff0000"}}></i>
-                {firstNameError}
-                </div> }
-            <div className="input-wrapper">
-                <input
-                    id='last-name-input'
-                    className='user-input last-name'
-                    type='text'
-                    placeholder="Last name"
-                    value={lastName}
-                    onChange ={e => setLastName(e.target.value)} required/>
-                <label htmlFor='last-name-input' className='user-label'>Last Name</label>
-            </div>
-                {lastNameError && <div className="error-message">                        
+        <div className='signup-form'>
+            <form onSubmit={handleSubmit}>
+                <div className="header">
+                    <div className="close-button" onClick={()=> setShowModal(false)}>&times;</div>
+                    <header className='modal-header'>Finish signing up</header>
+                </div>
+                <div className="input-wrapper">
+                    <input
+                        id='first-name-input' 
+                        className='user-input first-name'
+                        type='text'
+                        placeholder="First name"
+                        onChange ={e => setFirstName(e.target.value)} required/>
+                    <label htmlFor='first-name-input' className='user-label'>First Name</label>
+                </div>
+                    {firstNameError && <div className="error-message">
                     <i className="fa-solid fa-circle-exclamation" style={{color: "#ff0000"}}></i>
-                    {lastNameError}
-                </div> }
-            <p className='user-form-desc'>Make sure it matches the name on your government ID.</p>
-            <div className="input-wrapper">
-                <input
-                    id='email-input'
-                    className='user-input email-input'
-                    type='text'
-                    placeholder="Email"
-                    value={email}
-                    onChange ={e => setEmail(e.target.value)} required/>
-                <label htmlFor='email-input' className='user-label'>Email</label>
-            </div>
-            {emailError && <div className="error-message">
-                <i className="fa-solid fa-circle-exclamation" style={{color: "#ff0000"}}></i>
-                {emailError}
-                </div> }
-            <p className='user-form-desc'>We'll email you trip confirmations and receipts.</p>
-            <div className="input-wrapper">
-                <input
-                    id='password-input'
-                    className='user-input password-input'
-                    type='password'
-                    placeholder="Password"
-                    value={password}
-                    onChange ={e => setPassword(e.target.value)} required/>
-                <label htmlFor='password-input' className='user-label'>Password</label>
-            </div>
-                {passwordError && <div className="error-message">
+                    {firstNameError}
+                    </div> }
+                <div className="input-wrapper">
+                    <input
+                        id='last-name-input'
+                        className='user-input last-name'
+                        type='text'
+                        placeholder="Last name"
+                        value={lastName}
+                        onChange ={e => setLastName(e.target.value)} required/>
+                    <label htmlFor='last-name-input' className='user-label'>Last Name</label>
+                </div>
+                    {lastNameError && <div className="error-message">                        
+                        <i className="fa-solid fa-circle-exclamation" style={{color: "#ff0000"}}></i>
+                        {lastNameError}
+                    </div> }
+                <p className='user-form-desc'>Make sure it matches the name on your government ID.</p>
+                <div className="input-wrapper">
+                    <input
+                        id='email-input'
+                        className='user-input email-input'
+                        type='text'
+                        placeholder="Email"
+                        value={email}
+                        onChange ={e => setEmail(e.target.value)} required/>
+                    <label htmlFor='email-input' className='user-label'>Email</label>
+                </div>
+                {emailError && <div className="error-message">
                     <i className="fa-solid fa-circle-exclamation" style={{color: "#ff0000"}}></i>
-                    {passwordError}
-                </div> }
-            <p className='user-form-terms'>By selecting Agree and Continue, I agree to Clonebnb's Terms of Service, Payments Terms of Service, and Nondiscrimination Policy and acknowledge the Privacy Policy.</p>
-            <button className='user-button' type='submit'>Agree and continue</button>
-            <button id='demo-login' className='user-button' onClick={demoLogin}>Demo Login</button>
-        </form>
+                    {emailError}
+                    </div> }
+                <p className='user-form-desc'>We'll email you trip confirmations and receipts.</p>
+                <div className="input-wrapper">
+                    <input
+                        id='password-input'
+                        className='user-input password-input'
+                        type='password'
+                        placeholder="Password"
+                        value={password}
+                        onChange ={e => setPassword(e.target.value)} required/>
+                    <label htmlFor='password-input' className='user-label'>Password</label>
+                </div>
+                    {passwordError && <div className="error-message">
+                        <i className="fa-solid fa-circle-exclamation" style={{color: "#ff0000"}}></i>
+                        {passwordError}
+                    </div> }
+                <p className='user-form-terms'>By selecting Agree and Continue, I agree to Clonebnb's Terms of Service, Payments Terms of Service, and Nondiscrimination Policy and acknowledge the Privacy Policy.</p>
+                <button className='user-button' type='submit'>Agree and continue</button>
+            </form>
+            <button type='button' id='demo-login' className='user-button' onClick={demoLogin}>Demo Login</button>
+        </div>
     )
 }
 
