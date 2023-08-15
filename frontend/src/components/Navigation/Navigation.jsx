@@ -38,7 +38,7 @@ const Navigation = () => {
                         className='searchbar'
                         type='text'
                         value={search}
-                        placeholder='Anywhere'
+                        placeholder='Search your destination'
                         onChange={handleSearchChange}
                     />
                     <button className='search-button'><i className="fa-solid fa-magnifying-glass" style={{color: "#ffffff",}} ></i></button>
