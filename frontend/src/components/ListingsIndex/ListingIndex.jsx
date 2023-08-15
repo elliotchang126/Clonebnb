@@ -1,6 +1,0 @@
-const ListingIndex = () => {
-    return (
-        <>
-        </>
-    )
-}

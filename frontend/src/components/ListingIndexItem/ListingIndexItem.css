@@ -1,0 +1,45 @@
+
+.listing-index-item {
+    flex: 1 1 20%;
+    border: 1px solid black;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.listing-item-images {
+    height: 300px;
+    width: 100%;
+    background-color: gray;
+    border-radius: 10px;
+}
+
+.listing-item-main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.listing-item-location {
+    font-weight: 500;
+}
+
+.listing-item-title {
+    color: rgb(118, 118, 118)
+}
+
+span {
+    font-weight: 500;
+}
+
+@media (max-width: 600px) {
+    .listing-index-item {
+        flex: 1 1 calc(50% - 20px);
+    }
+}
+
+@media (max-width: 1000px) and (min-width: 601px) {
+    .listing-index-item {
+        flex: 1 1 calc(33.33% - 20px);
+    }
+}
