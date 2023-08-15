@@ -1,6 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import logger from 'redux-logger'
 import uiReducer from './uiReducer'
 import sessionReducer from './sessionReducer'
 
