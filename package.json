@@ -1,0 +1,26 @@
+{
+  "name": "clonebnb",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "sample-state.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elliotchang126/Clonebnb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elliotchang126/Clonebnb/issues"
+  },
+  "homepage": "https://github.com/elliotchang126/Clonebnb#readme",
+  "engines": {
+    "node": "16.x"
+  }
+}
