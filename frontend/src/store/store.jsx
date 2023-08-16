@@ -3,12 +3,14 @@ import thunk from 'redux-thunk'
 import uiReducer from './uiReducer'
 import sessionReducer from './sessionReducer'
 import listingsReducer from './listingsReducer'
+import usersReducer from './usersReducer'
 
 
 
 const rootReducer = combineReducers({
     session: sessionReducer,
     listings: listingsReducer,
+    users: usersReducer,
     ui: uiReducer
 })
 
