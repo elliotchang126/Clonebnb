@@ -20,7 +20,7 @@ export const fetchUser = userId => async dispatch => {
     return res
 }
 
-const usersReducer = ({state={}, action}) => {
+const usersReducer = (state={}, action) => {
     switch(action.type) {
         case RECEIVE_USER:
             return { ...state, [action.user.id]: action.user }
