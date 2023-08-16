@@ -20,7 +20,7 @@ const ListingIndex = () => {
             </div>
             <div className='listing-index'>
             {listings.map(listing =>
-                <ListingIndexItem listing={listing}/>
+                <ListingIndexItem key={listing.id} listing={listing}/>
             )}
                 {/* <ListingIndexItem />
                 <ListingIndexItem />
