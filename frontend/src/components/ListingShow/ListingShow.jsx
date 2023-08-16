@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 const ListingShow = () => {
     const dispatch = useDispatch();
     const { listingId } = useParams();
+    const user = useSelector(state => state.session.user)
 
     const listing = useSelector(getListing(listingId))
 
@@ -19,27 +20,27 @@ const ListingShow = () => {
             <div className='show-header'>
                 <div className="show-title">{listing?.title}</div>
                 <div className="show-subtitle">
-                    <span className="show-rating">&#9733; 5.0 · </span>
-                    <span className="show-reviews-total">20 reviews · </span>
+                    <span className="show-rating">&#9733; 5.0</span>{' · '}
+                    <span className="show-reviews-total">20 reviews</span>{' · '}
                     <span className='show-location'>
                         {listing?.city}, {listing?.state}, {listing?.country}
                     </span>
                 </div>
             </div>
             <div className="show-images-container">
-                <div className="show-images-left">
+                <div className="show-images-left"
+                    key={`show-${listing?.id}-${1}`}>
                     <div className="image-wrapper-left">
                         <img className='listing-image-left'
-                            key={`show-${listing?.id}-${1}`}
                             src={listing?.photoUrls[0]} 
                             alt ={`show-${listing?.id}-${1}`}/>
                     </div>
                 </div>
                 <div className="show-images-right">
                     {listing?.photoUrls.slice(1).map( (photo, i) => 
-                    <div className="image-wrapper-right">
+                    <div className="image-wrapper-right"
+                        key={`show-${listing?.id}-${i + 1}`}>
                         <img className='listing-image-right'
-                            key={`show-${listing?.id}-${i + 1}`}
                             src={photo} 
                             alt ={`show-${listing?.id}-${i + 1}`}/>
                     </div>
