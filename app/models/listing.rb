@@ -23,7 +23,7 @@
 #
 class Listing < ApplicationRecord
 
-    CATEGORIES = ['amazing pools', 'amazing views', 'beachfront', 'cabin', 'countryside', 'design', 'iconic cities', 'mansions', 'omg'].freeze
+    CATEGORIES = ['amazing pools', 'amazing views', 'beachfront', 'cabin', 'countryside', 'design', 'iconic cities', 'lakeside', 'mansions', 'omg'].freeze
 
     validates :address, :city, :state, :country, :zip_code, :title, :description, :bedrooms, :bathrooms, :price, :cleaning_fee, :longitude, :latitude, presence: true
 
@@ -31,7 +31,7 @@ class Listing < ApplicationRecord
     validates :bedrooms, :bathrooms, :price, :cleaning_fee, numericality: {only_integer: true, greater_than: 0}
     validates :address, uniqueness: { scope: [:city, :zip_code], message: 'Address already exists in this city and zip code' }
 
-    has_one_attached :photo
+    has_many_attached :photos
 
     belongs_to :user
 
