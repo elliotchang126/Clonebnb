@@ -48,9 +48,15 @@ const ListingShow = () => {
                 </div>
             </div>
             <div className="show-details">
-                <p className="show-description">
+                <div className="show-details-header">
+                    
+                </div>
+                <div className="show-description">
                     {listing?.description}
-                </p>
+                </div>
+                <div className='show-calendar'>
+
+                </div>
             </div>
             <div className="show-reviews">
 

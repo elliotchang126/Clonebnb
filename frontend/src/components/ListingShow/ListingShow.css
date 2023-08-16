@@ -22,7 +22,6 @@
 
 .show-images-container {
     display: flex;
-    align-items: stretch;
     gap: 10px;
     border-radius: 10px;
     box-sizing: border-box;
@@ -30,7 +29,7 @@
 }
 
 .show-images-left {
-    width: 50%;
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -43,7 +42,7 @@
 }
 
 .show-images-right {
-    width: 50%;
+    width: 100%;
     height: 100%;
     box-sizing: border-box;
     display: grid;
@@ -56,7 +55,7 @@
     box-sizing: border-box;
     max-width: 100%;
     height: 100%;
-    object-fit: fill;
+    object-fit: cover;
 }
 
 .image-wrapper-right:nth-child(2) img {
@@ -65,4 +64,8 @@
 
 .image-wrapper-right:nth-child(4) img {
     border-bottom-right-radius: 10px;
+}
+
+.show-description {
+    width: 50%;
 }
