@@ -4,7 +4,6 @@
 #
 #  id           :bigint           not null, primary key
 #  user_id      :bigint           not null
-#  type         :string           not null
 #  address      :string           not null
 #  city         :string           not null
 #  state        :string           not null
@@ -20,16 +19,19 @@
 #  latitude     :float            not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  category     :string           not null
 #
 class Listing < ApplicationRecord
 
-    TYPES = ['amazing pools', 'amazing views', 'beachfront', 'cabin', 'countryside', 'design', 'iconic cities', 'mansions', 'omg']
+    CATEGORIES = ['amazing pools', 'amazing views', 'beachfront', 'cabin', 'countryside', 'design', 'iconic cities', 'mansions', 'omg'].freeze
 
-    validates :type, :address, :city, :state, :country, :zip_code, :title, :description, :bedrooms, :bathrooms, :price, :cleaning_fee, :longitude, :latitude, null: false
+    validates :address, :city, :state, :country, :zip_code, :title, :description, :bedrooms, :bathrooms, :price, :cleaning_fee, :longitude, :latitude, presence: true
 
-    validates :type, inclusion: { in: TYPES }
+    validates :category, inclusion: { in: CATEGORIES }
     validates :bedrooms, :bathrooms, :price, :cleaning_fee, numericality: {only_integer: true, greater_than: 0}
-    validates :address, uniqueness: { scope: [:city, :zip_code] }, message: 'Address already exists in this city and zip code'
+    validates :address, uniqueness: { scope: [:city, :zip_code], message: 'Address already exists in this city and zip code' }
+
+    has_one_attached :photo
 
     belongs_to :user
 

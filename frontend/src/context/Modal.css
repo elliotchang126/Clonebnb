@@ -10,8 +10,10 @@
 
 .modal-content {
     position: absolute;
-    top: calc(50vh - (height/2));
+    /* top: calc(50vh - (height/2)); */
     left: calc(50vw - 250px);
+    top: calc(100vh/6);
+    /* left: calc(100vh/2); */
     height: auto;
     box-sizing: border-box;
     width: 500px;

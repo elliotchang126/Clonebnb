@@ -63,6 +63,7 @@ const UserModal = ({ setShowModal }) => {
     }, [])
 
     const demoLogin = () => dispatch(sessionActions.login({email: 'demo@demo.io', password: 'password'}))
+
     const handleSubmit = e => {
         e.preventDefault();
         checkEmail()
@@ -85,7 +86,7 @@ const UserModal = ({ setShowModal }) => {
                                 type='text'
                                 placeholder='Email'
                                 value={email}
-                                onChange={e => setEmail(e.target.value)} required/>
+                                onChange={e => setEmail(e.target.value)} required />
                             <label htmlFor='email-input'>Email</label>
                         </div>
                         {emailError && <div className="error-message">
