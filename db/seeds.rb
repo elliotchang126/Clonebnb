@@ -8,13 +8,26 @@
 
 require "open-uri"
 
+pool_listings = []
+view_listings = []
+beachfront_listings = []
+cabin_listings = []
+countryside_listings = []
+design_listings = []
+iconic_listings = []
+lakeside_listings = []
+mansions_listings = []
+omg_listings = []
+
 ApplicationRecord.transaction do
     puts 'Destroying tables...'
 
     User.destroy_all
+    Listing.destroy_all
 
     puts 'Resetting primary keys'
     ApplicationRecord.connection.reset_pk_sequence!('users')
+    ApplicationRecord.connection.reset_pk_sequence!('listings')
 
     puts "Creating users..."
 
@@ -39,17 +52,6 @@ ApplicationRecord.transaction do
 
     puts 'Creating listings...'
 
-    # pool_listings = []
-    # view_listings = []
-    # beachfront_listings = []
-    # cabin_listings = []
-    # countryside_listings = []
-    # design_listings = []
-    # iconic_listings = []
-    # lakeside_listings = []
-    # mansions_listings = []
-    # omg_listings = []
-
     # listing 1
     listing1 = Listing.create!(
         user_id: 1,
@@ -69,17 +71,19 @@ ApplicationRecord.transaction do
         longitude: -122.4448766
     )
 
-    file1 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-1-1.png')
-    file2 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-1-2.png')
-    file3 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-1-3.png')
-    file4 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-1-4.png')
-    file5 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-1-5.png')
+    pool_listings << listing1
 
-    listing1.photos.attach(io: file1, filename: 'amazingpools-1-1.png')
-    listing1.photos.attach(io: file2, filename: 'amazingpools-1-2.png')
-    listing1.photos.attach(io: file3, filename: 'amazingpools-1-3.png')
-    listing1.photos.attach(io: file4, filename: 'amazingpools-1-4.png')
-    listing1.photos.attach(io: file5, filename: 'amazingpools-1-5.png')
+    # file1 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-1-1.png')
+    # file2 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-1-2.png')
+    # file3 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-1-3.png')
+    # file4 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-1-4.png')
+    # file5 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-1-5.png')
+
+    # listing1.photos.attach(io: file1, filename: 'amazingpools-1-1.png')
+    # listing1.photos.attach(io: file2, filename: 'amazingpools-1-2.png')
+    # listing1.photos.attach(io: file3, filename: 'amazingpools-1-3.png')
+    # listing1.photos.attach(io: file4, filename: 'amazingpools-1-4.png')
+    # listing1.photos.attach(io: file5, filename: 'amazingpools-1-5.png')
 
     # listing 2
     listing2 = Listing.create!(
@@ -100,17 +104,19 @@ ApplicationRecord.transaction do
         longitude: -122.481257
     )
 
-    file6 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-2-1.png')
-    file7 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-2-2.png')
-    file8 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-2-3.png')
-    file9 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-2-4.png')
-    file10 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-2-5.png')
+    pool_listings << listing2
 
-    listing2.photos.attach(io: file6, filename: 'amazingpools-2-1.png')
-    listing2.photos.attach(io: file7, filename: 'amazingpools-2-2.png')
-    listing2.photos.attach(io: file8, filename: 'amazingpools-2-3.png')
-    listing2.photos.attach(io: file9, filename: 'amazingpools-2-4.png')
-    listing2.photos.attach(io: file10, filename: 'amazingpools-2-5.png')
+    # file6 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-2-1.png')
+    # file7 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-2-2.png')
+    # file8 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-2-3.png')
+    # file9 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-2-4.png')
+    # file10 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-2-5.png')
+
+    # listing2.photos.attach(io: file6, filename: 'amazingpools-2-1.png')
+    # listing2.photos.attach(io: file7, filename: 'amazingpools-2-2.png')
+    # listing2.photos.attach(io: file8, filename: 'amazingpools-2-3.png')
+    # listing2.photos.attach(io: file9, filename: 'amazingpools-2-4.png')
+    # listing2.photos.attach(io: file10, filename: 'amazingpools-2-5.png')
 
         # listing 3
     listing3 = Listing.create!(
@@ -131,17 +137,19 @@ ApplicationRecord.transaction do
         longitude: -122.4368568
     )
 
-    file11 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingpools-1-1.png')
-    file12 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-1-2.png')
-    file13 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-1-3.png')
-    file14 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-1-4.png')
-    file15 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-1-5.png')
+    view_listings << listing3
+
+    # file11 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingpools-1-1.png')
+    # file12 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-1-2.png')
+    # file13 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-1-3.png')
+    # file14 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-1-4.png')
+    # file15 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-1-5.png')
     
-    listing3.photos.attach(io: file11, filename: 'amazingviews-1-1.png')
-    listing3.photos.attach(io: file12, filename: 'amazingviews-1-2.png')
-    listing3.photos.attach(io: file13, filename: 'amazingviews-1-3.png')
-    listing3.photos.attach(io: file14, filename: 'amazingviews-1-4.png')
-    listing3.photos.attach(io: file15, filename: 'amazingviews-1-5.png')
+    # listing3.photos.attach(io: file11, filename: 'amazingviews-1-1.png')
+    # listing3.photos.attach(io: file12, filename: 'amazingviews-1-2.png')
+    # listing3.photos.attach(io: file13, filename: 'amazingviews-1-3.png')
+    # listing3.photos.attach(io: file14, filename: 'amazingviews-1-4.png')
+    # listing3.photos.attach(io: file15, filename: 'amazingviews-1-5.png')
     
         # listing 4
     listing4 = Listing.create!(
@@ -162,17 +170,19 @@ ApplicationRecord.transaction do
         longitude: -122.4865757
     )
 
-    file16 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-2-1.png')
-    file17 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-2-2.png')
-    file18 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-2-3.png')
-    file19 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-2-4.png')
-    file20 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-2-5.png')
+    view_listings << listing4
+
+    # file16 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-2-1.png')
+    # file17 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-2-2.png')
+    # file18 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-2-3.png')
+    # file19 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-2-4.png')
+    # file20 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-2-5.png')
     
-    listing4.photos.attach(io: file16, filename: 'amazingviews-2-1.png')
-    listing4.photos.attach(io: file17, filename: 'amazingviews-2-2.png')
-    listing4.photos.attach(io: file18, filename: 'amazingviews-2-3.png')
-    listing4.photos.attach(io: file19, filename: 'amazingviews-2-4.png')
-    listing4.photos.attach(io: file20, filename: 'amazingviews-2-5.png')
+    # listing4.photos.attach(io: file16, filename: 'amazingviews-2-1.png')
+    # listing4.photos.attach(io: file17, filename: 'amazingviews-2-2.png')
+    # listing4.photos.attach(io: file18, filename: 'amazingviews-2-3.png')
+    # listing4.photos.attach(io: file19, filename: 'amazingviews-2-4.png')
+    # listing4.photos.attach(io: file20, filename: 'amazingviews-2-5.png')
     
         # listing 5
     listing5 = Listing.create!(
@@ -193,17 +203,19 @@ ApplicationRecord.transaction do
         longitude: -122.5110819
     )
 
-    file21 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-1-1.png')
-    file22 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-1-2.png')
-    file23 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/aeachfront/beachfront-1-3.png')
-    file24 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-1-4.png')
-    file25 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-1-5.png')
+    beachfront_listings << listing5
+
+    # file21 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-1-1.png')
+    # file22 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-1-2.png')
+    # file23 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/aeachfront/beachfront-1-3.png')
+    # file24 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-1-4.png')
+    # file25 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-1-5.png')
     
-    listing5.photos.attach(io: file21, filename: 'beachfront-1-1.png')
-    listing5.photos.attach(io: file22, filename: 'beachfront-1-2.png')
-    listing5.photos.attach(io: file23, filename: 'beachfront-1-3.png')
-    listing5.photos.attach(io: file24, filename: 'beachfront-1-4.png')
-    listing5.photos.attach(io: file25, filename: 'beachfront-1-5.png')
+    # listing5.photos.attach(io: file21, filename: 'beachfront-1-1.png')
+    # listing5.photos.attach(io: file22, filename: 'beachfront-1-2.png')
+    # listing5.photos.attach(io: file23, filename: 'beachfront-1-3.png')
+    # listing5.photos.attach(io: file24, filename: 'beachfront-1-4.png')
+    # listing5.photos.attach(io: file25, filename: 'beachfront-1-5.png')
     
         # listing 6
     listing6 = Listing.create!(
@@ -224,17 +236,19 @@ ApplicationRecord.transaction do
         longitude: -122.4364991
     )
 
-    file26 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-2-1.png')
-    file27 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-2-2.png')
-    file28 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-2-3.png')
-    file29 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-2-4.png')
-    file30 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-2-5.png')
+    beachfront_listings << listing6
+
+    # file26 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-2-1.png')
+    # file27 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-2-2.png')
+    # file28 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-2-3.png')
+    # file29 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-2-4.png')
+    # file30 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-2-5.png')
     
-    listing6.photos.attach(io: file26, filename: 'beachfront-2-1.png')
-    listing6.photos.attach(io: file27, filename: 'beachfront-2-2.png')
-    listing6.photos.attach(io: file28, filename: 'beachfront-2-3.png')
-    listing6.photos.attach(io: file29, filename: 'beachfront-2-4.png')
-    listing6.photos.attach(io: file30, filename: 'beachfront-2-5.png')
+    # listing6.photos.attach(io: file26, filename: 'beachfront-2-1.png')
+    # listing6.photos.attach(io: file27, filename: 'beachfront-2-2.png')
+    # listing6.photos.attach(io: file28, filename: 'beachfront-2-3.png')
+    # listing6.photos.attach(io: file29, filename: 'beachfront-2-4.png')
+    # listing6.photos.attach(io: file30, filename: 'beachfront-2-5.png')
     
         # listing 7
     listing7 = Listing.create!(
@@ -255,17 +269,19 @@ ApplicationRecord.transaction do
         longitude: -122.4733352
     )
 
-    file31 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-1-1.png')
-    file32 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-1-2.png')
-    file33 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-1-3.png')
-    file34 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-1-4.png')
-    file35 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-1-5.png')
+    cabin_listings << listing7
+
+    # file31 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-1-1.png')
+    # file32 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-1-2.png')
+    # file33 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-1-3.png')
+    # file34 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-1-4.png')
+    # file35 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-1-5.png')
     
-    listing7.photos.attach(io: file31, filename: 'cabin-1-1.png')
-    listing7.photos.attach(io: file32, filename: 'cabin-1-2.png')
-    listing7.photos.attach(io: file33, filename: 'cabin-1-3.png')
-    listing7.photos.attach(io: file34, filename: 'cabin-1-4.png')
-    listing7.photos.attach(io: file35, filename: 'cabin-1-5.png')
+    # listing7.photos.attach(io: file31, filename: 'cabin-1-1.png')
+    # listing7.photos.attach(io: file32, filename: 'cabin-1-2.png')
+    # listing7.photos.attach(io: file33, filename: 'cabin-1-3.png')
+    # listing7.photos.attach(io: file34, filename: 'cabin-1-4.png')
+    # listing7.photos.attach(io: file35, filename: 'cabin-1-5.png')
     
         # listing  8
     listing8 = Listing.create!(
@@ -286,17 +302,19 @@ ApplicationRecord.transaction do
         longitude: -122.4792593
     )
 
-    file36 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-2-1.png')
-    file37 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-2-2.png')
-    file38 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-2-3.png')
-    file39 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-2-4.png')
-    file40 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-2-5.png')
+    cabin_listings << listing8
+
+    # file36 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-2-1.png')
+    # file37 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-2-2.png')
+    # file38 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-2-3.png')
+    # file39 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-2-4.png')
+    # file40 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-2-5.png')
     
-    listing8.photos.attach(io: file36, filename: 'cabin-2-1.png')
-    listing8.photos.attach(io: file37, filename: 'cabin-2-2.png')
-    listing8.photos.attach(io: file38, filename: 'cabin-2-3.png')
-    listing8.photos.attach(io: file39, filename: 'cabin-2-4.png')
-    listing8.photos.attach(io: file40, filename: 'cabin-2-5.png')
+    # listing8.photos.attach(io: file36, filename: 'cabin-2-1.png')
+    # listing8.photos.attach(io: file37, filename: 'cabin-2-2.png')
+    # listing8.photos.attach(io: file38, filename: 'cabin-2-3.png')
+    # listing8.photos.attach(io: file39, filename: 'cabin-2-4.png')
+    # listing8.photos.attach(io: file40, filename: 'cabin-2-5.png')
     
         # listing 9
     listing9 = Listing.create!(
@@ -317,17 +335,19 @@ ApplicationRecord.transaction do
         longitude: -122.210704
     )
 
-    file41 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-1-1.png')
-    file42 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-1-2.png')
-    file43 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-1-3.png')
-    file44 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-1-4.png')
-    file45 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-1-5.png')
+    countryside_listings << listing9
+
+    # file41 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-1-1.png')
+    # file42 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-1-2.png')
+    # file43 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-1-3.png')
+    # file44 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-1-4.png')
+    # file45 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-1-5.png')
     
-    listing9.photos.attach(io: file41, filename: 'countryside-1-1.png')
-    listing9.photos.attach(io: file42, filename: 'countryside-1-2.png')
-    listing9.photos.attach(io: file43, filename: 'countryside-1-3.png')
-    listing9.photos.attach(io: file44, filename: 'countryside-1-4.png')
-    listing9.photos.attach(io: file45, filename: 'countryside-1-5.png')
+    # listing9.photos.attach(io: file41, filename: 'countryside-1-1.png')
+    # listing9.photos.attach(io: file42, filename: 'countryside-1-2.png')
+    # listing9.photos.attach(io: file43, filename: 'countryside-1-3.png')
+    # listing9.photos.attach(io: file44, filename: 'countryside-1-4.png')
+    # listing9.photos.attach(io: file45, filename: 'countryside-1-5.png')
     
         # listing 10
     listing10 = Listing.create!(
@@ -348,17 +368,19 @@ ApplicationRecord.transaction do
         longitude: -122.4433525
     )
 
-    file46 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-2-1.png')
-    file47 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-2-2.png')
-    file48 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-2-3.png')
-    file49 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-2-4.png')
-    file50 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-2-5.png')
+    countryside_listings << listing10
+
+    # file46 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-2-1.png')
+    # file47 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-2-2.png')
+    # file48 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-2-3.png')
+    # file49 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-2-4.png')
+    # file50 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-2-5.png')
     
-    listing10.photos.attach(io: file46, filename: 'countryside-2-1.png')
-    listing10.photos.attach(io: file47, filename: 'countryside-2-2.png')
-    listing10.photos.attach(io: file48, filename: 'countryside-2-3.png')
-    listing10.photos.attach(io: file49, filename: 'countryside-2-4.png')
-    listing10.photos.attach(io: file50, filename: 'countryside-2-5.png')
+    # listing10.photos.attach(io: file46, filename: 'countryside-2-1.png')
+    # listing10.photos.attach(io: file47, filename: 'countryside-2-2.png')
+    # listing10.photos.attach(io: file48, filename: 'countryside-2-3.png')
+    # listing10.photos.attach(io: file49, filename: 'countryside-2-4.png')
+    # listing10.photos.attach(io: file50, filename: 'countryside-2-5.png')
     
         # listing 11
     listing11 = Listing.create!(
@@ -379,17 +401,19 @@ ApplicationRecord.transaction do
         longitude: -122.4028469
     )
 
-    file51 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-1-1.png')
-    file52 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-1-2.png')
-    file53 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-1-3.png')
-    file54 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-1-4.png')
-    file55 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-1-5.png')
+    design_listings << listing11
+
+    # file51 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-1-1.png')
+    # file52 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-1-2.png')
+    # file53 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-1-3.png')
+    # file54 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-1-4.png')
+    # file55 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-1-5.png')
     
-    listing11.photos.attach(io: file51, filename: 'design-1-1.png')
-    listing11.photos.attach(io: file52, filename: 'design-1-2.png')
-    listing11.photos.attach(io: file53, filename: 'design-1-3.png')
-    listing11.photos.attach(io: file54, filename: 'design-1-4.png')
-    listing11.photos.attach(io: file55, filename: 'design-1-5.png')
+    # listing11.photos.attach(io: file51, filename: 'design-1-1.png')
+    # listing11.photos.attach(io: file52, filename: 'design-1-2.png')
+    # listing11.photos.attach(io: file53, filename: 'design-1-3.png')
+    # listing11.photos.attach(io: file54, filename: 'design-1-4.png')
+    # listing11.photos.attach(io: file55, filename: 'design-1-5.png')
     
         # listing 12
     listing12 = Listing.create!(
@@ -410,17 +434,19 @@ ApplicationRecord.transaction do
         longitude: -122.4540734
     )
 
-    file56 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-2-1.png')
-    file57 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-2-2.png')
-    file58 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-2-3.png')
-    file59 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-2-4.png')
-    file60 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-2-5.png')
+    design_listings << listing12
+
+    # file56 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-2-1.png')
+    # file57 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-2-2.png')
+    # file58 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-2-3.png')
+    # file59 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-2-4.png')
+    # file60 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-2-5.png')
     
-    listing12.photos.attach(io: file56, filename: 'design-2-1.png')
-    listing12.photos.attach(io: file57, filename: 'design-2-2.png')
-    listing12.photos.attach(io: file58, filename: 'design-2-3.png')
-    listing12.photos.attach(io: file59, filename: 'design-2-4.png')
-    listing12.photos.attach(io: file60, filename: 'design-2-5.png')
+    # listing12.photos.attach(io: file56, filename: 'design-2-1.png')
+    # listing12.photos.attach(io: file57, filename: 'design-2-2.png')
+    # listing12.photos.attach(io: file58, filename: 'design-2-3.png')
+    # listing12.photos.attach(io: file59, filename: 'design-2-4.png')
+    # listing12.photos.attach(io: file60, filename: 'design-2-5.png')
     
         # listing 13
     listing13 = Listing.create!(
@@ -441,17 +467,19 @@ ApplicationRecord.transaction do
         longitude: -122.4421848
     )
 
-    file61 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-1-1.png')
-    file62 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-1-2.png')
-    file63 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-1-3.png')
-    file64 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-1-4.png')
-    file65 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-1-5.png')
+    iconic_listings << listing13
+
+    # file61 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-1-1.png')
+    # file62 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-1-2.png')
+    # file63 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-1-3.png')
+    # file64 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-1-4.png')
+    # file65 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-1-5.png')
     
-    listing13.photos.attach(io: file61, filename: 'iconiccities-1-1.png')
-    listing13.photos.attach(io: file62, filename: 'iconiccities-1-2.png')
-    listing13.photos.attach(io: file63, filename: 'iconiccities-1-3.png')
-    listing13.photos.attach(io: file64, filename: 'iconiccities-1-4.png')
-    listing13.photos.attach(io: file65, filename: 'iconiccities-1-5.png')
+    # listing13.photos.attach(io: file61, filename: 'iconiccities-1-1.png')
+    # listing13.photos.attach(io: file62, filename: 'iconiccities-1-2.png')
+    # listing13.photos.attach(io: file63, filename: 'iconiccities-1-3.png')
+    # listing13.photos.attach(io: file64, filename: 'iconiccities-1-4.png')
+    # listing13.photos.attach(io: file65, filename: 'iconiccities-1-5.png')
     
         # listing 14
     listing14 = Listing.create!(
@@ -472,17 +500,19 @@ ApplicationRecord.transaction do
         longitude: -122.4258617
     )
 
-    file66 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-2-1.png')
-    file67 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-2-2.png')
-    file68 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-2-3.png')
-    file69 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-2-4.png')
-    file70 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-2-5.png')
+    iconic_listings << listing14
+
+    # file66 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-2-1.png')
+    # file67 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-2-2.png')
+    # file68 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-2-3.png')
+    # file69 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-2-4.png')
+    # file70 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-2-5.png')
     
-    listing14.photos.attach(io: file66, filename: 'iconiccities-2-1.png')
-    listing14.photos.attach(io: file67, filename: 'iconiccities-2-2.png')
-    listing14.photos.attach(io: file68, filename: 'iconiccities-2-3.png')
-    listing14.photos.attach(io: file69, filename: 'iconiccities-2-4.png')
-    listing14.photos.attach(io: file70, filename: 'iconiccities-2-5.png')
+    # listing14.photos.attach(io: file66, filename: 'iconiccities-2-1.png')
+    # listing14.photos.attach(io: file67, filename: 'iconiccities-2-2.png')
+    # listing14.photos.attach(io: file68, filename: 'iconiccities-2-3.png')
+    # listing14.photos.attach(io: file69, filename: 'iconiccities-2-4.png')
+    # listing14.photos.attach(io: file70, filename: 'iconiccities-2-5.png')
     
         # listing 15
     listing15 = Listing.create!(
@@ -503,17 +533,19 @@ ApplicationRecord.transaction do
         longitude: -122.4876728
     )
 
-    file71 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-1-1.png')
-    file72 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-1-2.png')
-    file73 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-1-3.png')
-    file74 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-1-4.png')
-    file75 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-1-5.png')
+    lakeside_listings << listing15
+
+    # file71 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-1-1.png')
+    # file72 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-1-2.png')
+    # file73 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-1-3.png')
+    # file74 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-1-4.png')
+    # file75 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-1-5.png')
     
-    listing15.photos.attach(io: file71, filename: 'lakefront-1-1.png')
-    listing15.photos.attach(io: file72, filename: 'lakefront-1-2.png')
-    listing15.photos.attach(io: file73, filename: 'lakefront-1-3.png')
-    listing15.photos.attach(io: file74, filename: 'lakefront-1-4.png')
-    listing15.photos.attach(io: file75, filename: 'lakefront-1-5.png')
+    # listing15.photos.attach(io: file71, filename: 'lakefront-1-1.png')
+    # listing15.photos.attach(io: file72, filename: 'lakefront-1-2.png')
+    # listing15.photos.attach(io: file73, filename: 'lakefront-1-3.png')
+    # listing15.photos.attach(io: file74, filename: 'lakefront-1-4.png')
+    # listing15.photos.attach(io: file75, filename: 'lakefront-1-5.png')
     
         # listing 16
     listing16 = Listing.create!(
@@ -534,17 +566,19 @@ ApplicationRecord.transaction do
         longitude: -122.2578886
     )
 
-    file76 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-2-1.png')
-    file77 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-2-2.png')
-    file78 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-2-3.png')
-    file79 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-2-4.png')
-    file80 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-2-5.png')
+    lakeside_listings << listing16
+
+    # file76 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-2-1.png')
+    # file77 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-2-2.png')
+    # file78 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-2-3.png')
+    # file79 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-2-4.png')
+    # file80 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-2-5.png')
     
-    listing16.photos.attach(io: file76, filename: 'lakefront-2-1.png')
-    listing16.photos.attach(io: file77, filename: 'lakefront-2-2.png')
-    listing16.photos.attach(io: file78, filename: 'lakefront-2-3.png')
-    listing16.photos.attach(io: file79, filename: 'lakefront-2-4.png')
-    listing16.photos.attach(io: file80, filename: 'lakefront-2-5.png')
+    # listing16.photos.attach(io: file76, filename: 'lakefront-2-1.png')
+    # listing16.photos.attach(io: file77, filename: 'lakefront-2-2.png')
+    # listing16.photos.attach(io: file78, filename: 'lakefront-2-3.png')
+    # listing16.photos.attach(io: file79, filename: 'lakefront-2-4.png')
+    # listing16.photos.attach(io: file80, filename: 'lakefront-2-5.png')
     
         # listing 17
     listing17 = Listing.create!(
@@ -565,17 +599,19 @@ ApplicationRecord.transaction do
         longitude: -122.415301
     )
 
-    file81 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-1-1.png')
-    file82 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-1-2.png')
-    file83 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-1-3.png')
-    file84 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-1-4.png')
-    file85 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-1-5.png')
+    mansions_listings << listing17
+
+    # file81 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-1-1.png')
+    # file82 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-1-2.png')
+    # file83 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-1-3.png')
+    # file84 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-1-4.png')
+    # file85 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-1-5.png')
     
-    listing17.photos.attach(io: file81, filename: 'mansion-1-1.png')
-    listing17.photos.attach(io: file82, filename: 'mansion-1-2.png')
-    listing17.photos.attach(io: file83, filename: 'mansion-1-3.png')
-    listing17.photos.attach(io: file84, filename: 'mansion-1-4.png')
-    listing17.photos.attach(io: file85, filename: 'mansion-1-5.png')
+    # listing17.photos.attach(io: file81, filename: 'mansion-1-1.png')
+    # listing17.photos.attach(io: file82, filename: 'mansion-1-2.png')
+    # listing17.photos.attach(io: file83, filename: 'mansion-1-3.png')
+    # listing17.photos.attach(io: file84, filename: 'mansion-1-4.png')
+    # listing17.photos.attach(io: file85, filename: 'mansion-1-5.png')
     
         # listing 18
     listing18 = Listing.create!(
@@ -596,17 +632,19 @@ ApplicationRecord.transaction do
         longitude: -122.4040532
     )
 
-    file86 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-2-1.png')
-    file87 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-2-2.png')
-    file88 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-2-3.png')
-    file89 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-2-4.png')
-    file90 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-2-5.png')
+    mansions_listings << listing18
+
+    # file86 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-2-1.png')
+    # file87 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-2-2.png')
+    # file88 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-2-3.png')
+    # file89 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-2-4.png')
+    # file90 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-2-5.png')
     
-    listing18.photos.attach(io: file86, filename: 'mansion-2-1.png')
-    listing18.photos.attach(io: file87, filename: 'mansion-2-2.png')
-    listing18.photos.attach(io: file88, filename: 'mansion-2-3.png')
-    listing18.photos.attach(io: file89, filename: 'mansion-2-4.png')
-    listing18.photos.attach(io: file90, filename: 'mansion-2-5.png')
+    # listing18.photos.attach(io: file86, filename: 'mansion-2-1.png')
+    # listing18.photos.attach(io: file87, filename: 'mansion-2-2.png')
+    # listing18.photos.attach(io: file88, filename: 'mansion-2-3.png')
+    # listing18.photos.attach(io: file89, filename: 'mansion-2-4.png')
+    # listing18.photos.attach(io: file90, filename: 'mansion-2-5.png')
     
         # listing 19
     listing19 = Listing.create!(
@@ -627,17 +665,19 @@ ApplicationRecord.transaction do
         longitude: -122.4491799
     )
 
-    file91 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-1-1.png')
-    file92 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-1-2.png')
-    file93 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-1-3.png')
-    file94 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-1-4.png')
-    file95 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-1-5.png')
+    omg_listings << listing19
+
+    # file91 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-1-1.png')
+    # file92 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-1-2.png')
+    # file93 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-1-3.png')
+    # file94 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-1-4.png')
+    # file95 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-1-5.png')
     
-    listing19.photos.attach(io: file91, filename: 'omg-1-1.png')
-    listing19.photos.attach(io: file92, filename: 'omg-1-2.png')
-    listing19.photos.attach(io: file93, filename: 'omg-1-3.png')
-    listing19.photos.attach(io: file94, filename: 'omg-1-4.png')
-    listing19.photos.attach(io: file95, filename: 'omg-1-5.png')
+    # listing19.photos.attach(io: file91, filename: 'omg-1-1.png')
+    # listing19.photos.attach(io: file92, filename: 'omg-1-2.png')
+    # listing19.photos.attach(io: file93, filename: 'omg-1-3.png')
+    # listing19.photos.attach(io: file94, filename: 'omg-1-4.png')
+    # listing19.photos.attach(io: file95, filename: 'omg-1-5.png')
     
         # listing 20
     listing20 = Listing.create!(
@@ -658,17 +698,110 @@ ApplicationRecord.transaction do
         longitude: -122.4472691
     )
 
-    file96 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-2-1.png')
-    file97 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-2-2.png')
-    file98 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-2-3.png')
-    file99 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-2-4.png')
-    file100 = open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-2-5.png')
+    omg_listings << listing20
+
+    # file96 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-2-1.png')
+    # file97 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-2-2.png')
+    # file98 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-2-3.png')
+    # file99 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-2-4.png')
+    # file100 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-2-5.png')
     
-    listing20.photos.attach(io: file96, filename: 'omg-2-1.png')
-    listing20.photos.attach(io: file97, filename: 'omg-2-2.png')
-    listing20.photos.attach(io: file98, filename: 'omg-2-3.png')
-    listing20.photos.attach(io: file99, filename: 'omg-2-4.png')
-    listing20.photos.attach(io: file100, filename: 'omg-2-5.png')
+    # listing20.photos.attach(io: file96, filename: 'omg-2-1.png')
+    # listing20.photos.attach(io: file97, filename: 'omg-2-2.png')
+    # listing20.photos.attach(io: file98, filename: 'omg-2-3.png')
+    # listing20.photos.attach(io: file99, filename: 'omg-2-4.png')
+    # listing20.photos.attach(io: file100, filename: 'omg-2-5.png')
     
     puts 'Done!'
+end
+
+pool_listings.each_with_index do |listing, i|
+    listing.photos.attach([
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-#{i + 1}-1.png"), filename: "amazingpools-#{i + 1}-1.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-#{i + 1}-2.png"), filename: "amazingpools-#{i + 1}-2.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-#{i + 1}-3.png"), filename: "amazingpools-#{i + 1}-3.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-#{i + 1}-4.png"), filename: "amazingpools-#{i + 1}-4.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-#{i + 1}-5.png"), filename: "amazingpools-#{i + 1}-5.png" }
+    ])
+end
+view_listings.each_with_index do |listing, i|
+    listing.photos.attach([
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-#{i + 1}-1.png"), filename: "amazingviews-#{i + 1}-1.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-#{i + 1}-2.png"), filename: "amazingviews-#{i + 1}-2.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-#{i + 1}-3.png"), filename: "amazingviews-#{i + 1}-3.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-#{i + 1}-4.png"), filename: "amazingviews-#{i + 1}-4.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-views/amazingviews-#{i + 1}-5.png"), filename: "amazingviews-#{i + 1}-5.png" }
+    ])
+end
+beachfront_listings.each_with_index do |listing, i|
+    listing.photos.attach([
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-#{i + 1}-1.png"), filename: "beachfront-#{i + 1}-1.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-#{i + 1}-2.png"), filename: "beachfront-#{i + 1}-2.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-#{i + 1}-3.png"), filename: "beachfront-#{i + 1}-3.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-#{i + 1}-4.png"), filename: "beachfront-#{i + 1}-4.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/beachfront/beachfront-#{i + 1}-5.png"), filename: "beachfront-#{i + 1}-5.png" }
+    ])
+end
+cabin_listings.each_with_index do |listing, i|
+    listing.photos.attach([
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-#{i + 1}-1.png"), filename: "cabin-#{i + 1}-1.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-#{i + 1}-2.png"), filename: "cabin-#{i + 1}-2.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-#{i + 1}-3.png"), filename: "cabin-#{i + 1}-3.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-#{i + 1}-4.png"), filename: "cabin-#{i + 1}-4.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/cabin/cabin-#{i + 1}-5.png"), filename: "cabin-#{i + 1}-5.png" }
+    ])
+end
+countryside_listings.each_with_index do |listing, i|
+    listing.photos.attach([
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-#{i + 1}-1.png"), filename: "countryside-#{i + 1}-1.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-#{i + 1}-2.png"), filename: "countryside-#{i + 1}-2.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-#{i + 1}-3.png"), filename: "countryside-#{i + 1}-3.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-#{i + 1}-4.png"), filename: "countryside-#{i + 1}-4.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/countryside/countryside-#{i + 1}-5.png"), filename: "countryside-#{i + 1}-5.png" }
+    ])
+end
+design_listings.each_with_index do |listing, i|
+    listing.photos.attach([
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-#{i + 1}-1.png"), filename: "design-#{i + 1}-1.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-#{i + 1}-2.png"), filename: "design-#{i + 1}-2.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-#{i + 1}-3.png"), filename: "design-#{i + 1}-3.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-#{i + 1}-4.png"), filename: "design-#{i + 1}-4.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/design/design-#{i + 1}-5.png"), filename: "design-#{i + 1}-5.png" }
+    ])
+end
+iconic_listings.each_with_index do |listing, i|
+    listing.photos.attach([
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-#{i + 1}-1.png"), filename: "iconiccities-#{i + 1}-1.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-#{i + 1}-2.png"), filename: "iconiccities-#{i + 1}-2.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-#{i + 1}-3.png"), filename: "iconiccities-#{i + 1}-3.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-#{i + 1}-4.png"), filename: "iconiccities-#{i + 1}-4.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/iconic-cities/iconiccities-#{i + 1}-5.png"), filename: "iconiccities-#{i + 1}-5.png" }
+    ])
+end
+lakeside_listings.each_with_index do |listing, i|
+    listing.photos.attach([
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-#{i + 1}-1.png"), filename: "lakefront-#{i + 1}-1.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-#{i + 1}-2.png"), filename: "lakefront-#{i + 1}-2.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-#{i + 1}-3.png"), filename: "lakefront-#{i + 1}-3.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-#{i + 1}-4.png"), filename: "lakefront-#{i + 1}-4.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/lakefront/lakefront-#{i + 1}-5.png"), filename: "lakefront-#{i + 1}-5.png" }
+    ])
+end
+mansions_listings.each_with_index do |listing, i|
+    listing.photos.attach([
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-#{i + 1}-1.png"), filename: "mansion-#{i + 1}-1.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-#{i + 1}-2.png"), filename: "mansion-#{i + 1}-2.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-#{i + 1}-3.png"), filename: "mansion-#{i + 1}-3.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-#{i + 1}-4.png"), filename: "mansion-#{i + 1}-4.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/mansions/mansion-#{i + 1}-5.png"), filename: "mansion-#{i + 1}-5.png" }
+    ])
+end
+omg_listings.each_with_index do |listing, i|
+    listing.photos.attach([
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-#{i + 1}-1.png"), filename: "omg-#{i + 1}-1.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-#{i + 1}-2.png"), filename: "omg-#{i + 1}-2.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-#{i + 1}-3.png"), filename: "omg-#{i + 1}-3.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-#{i + 1}-4.png"), filename: "omg-#{i + 1}-4.png" },
+        { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-#{i + 1}-5.png"), filename: "omg-#{i + 1}-5.png" }
+    ])
 end
