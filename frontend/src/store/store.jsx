@@ -4,6 +4,7 @@ import uiReducer from './uiReducer'
 import sessionReducer from './sessionReducer'
 import listingsReducer from './listingsReducer'
 import usersReducer from './usersReducer'
+import errorsReducer from './errorsReducer'
 
 
 
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     session: sessionReducer,
     listings: listingsReducer,
     users: usersReducer,
+    errors: errorsReducer,
     ui: uiReducer
 })
 

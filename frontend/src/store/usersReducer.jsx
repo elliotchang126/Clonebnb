@@ -1,7 +1,9 @@
 import csrfFetch from "./csrf";
 
-const RECEIVE_USERS = 'users/RECEIVE_USERS'
-const RECEIVE_USER = 'users/RECEIVE_USER'
+export const RECEIVE_USERS = 'users/RECEIVE_USERS'
+export const RECEIVE_USER = 'users/RECEIVE_USER'
+export const RECEIVE_USER_ERRORS = 'session/RECEIVE_USER_ERRORS'
+export const CLEAR_USER_ERRORS = 'session/CLEAR_USER_ERRORS'
 
 export const receiveUsers = users => ({
     type: RECEIVE_USERS,
@@ -12,6 +14,12 @@ export const receiveUser = user => ({
     type: RECEIVE_USER,
     user
 })
+
+export const receiveUserErrors = errorMessage => ({
+    type: RECEIVE_USER_ERRORS,
+    payload: errorMessage
+})
+
 
 export const getUsers = state => state.users ? Object.values(state.users) : [];
 export const getUser = userId => state => state.users ? state.users[userId] : null;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from '../../store/sessionReducer'
 import '../../context/Modal.css'
 
@@ -9,6 +9,7 @@ const LoginForm = (props) => {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const {setShowModal} = props
+    const sessionErrors = useSelector(state => state.errors.session)
 
     const demoLogin = (e) => {
         e.preventDefault()

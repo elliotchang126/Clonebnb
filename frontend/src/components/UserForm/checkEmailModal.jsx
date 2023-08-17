@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import csrfFetch from "../../store/csrf";
+// import { checkEmail } from "../../store/sessionReducer";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 import '../../context/Modal.css'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from '../../store/sessionReducer'
 
 const UserModal = ({ setShowModal }) => {
@@ -11,6 +12,7 @@ const UserModal = ({ setShowModal }) => {
     const [email, setEmail] = useState('');
     const [modalType, setModalType] = useState('checkEmail')
     const [emailError, setEmailError] = useState('')
+    const sessionErrors = useSelector( state => state.errors.session )
 
     const checkEmail = async () => {
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
