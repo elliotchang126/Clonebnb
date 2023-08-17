@@ -27,6 +27,18 @@ export const fetchListings = () => async dispatch => {
     return res
 }
 
+export const fetchListingsByCategory = category => async dispatch => {
+    const encodedCategory = encodeURIComponent(category)
+    const res = await csrfFetch(`/api/listings?category=${encodedCategory}`);
+    if (res.ok) {
+        const listings = await res.json();
+        dispatch(receiveListings(listings));
+    } else {
+        throw res;
+    }
+    return res;
+}
+
 export const fetchListing = listingId => async dispatch => {
     const res = await csrfFetch(`/api/listings/${listingId}`)
     if (res.ok) {
