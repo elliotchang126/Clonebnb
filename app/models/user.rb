@@ -30,6 +30,9 @@ class User < ApplicationRecord
     has_many :listings,
         dependent: :destroy
 
+    has_many :reviews,
+        dependent: :destroy
+
     def self.find_by_credentials(email, password)
         user = User.find_by(email: email)
         if user && user.authenticate(password)
