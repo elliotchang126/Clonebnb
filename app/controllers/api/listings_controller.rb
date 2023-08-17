@@ -1,7 +1,11 @@
 class Api::ListingsController < ApplicationController
 
     def index
-        @listings = Listing.all
+        if params[:category]
+            @listings = Listing.where("lower(category) = ?", params[:category].downcase)
+        else
+            @listings = Listing.all
+        end
         render :index
     end
 
@@ -10,7 +14,7 @@ class Api::ListingsController < ApplicationController
         if @listing
             render :show
         else
-            render json: ['Listing does not exist']
+            render json: {errors: ['Listing does not exist']}, status: 404
         end
     end
 

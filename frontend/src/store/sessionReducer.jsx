@@ -2,6 +2,8 @@ import csrfFetch from "./csrf";
 
 export const SET_CURRENT_USER = 'session/SET_CURRENT_USER';
 export const REMOVE_CURRENT_USER = 'session/REMOVE_CURRENT_USER';
+export const RECEIVE_SESSION_ERRORS = 'session/RECEIVE_SESSION_ERRORS'
+export const CLEAR_SESSION_ERRORS = 'session/CLEAR_SESSION_ERRORS'
 
 export const setCurrentUser = user => ({
     type: SET_CURRENT_USER,
@@ -11,6 +13,11 @@ export const setCurrentUser = user => ({
 export const removeCurrentUser = userId => ({
     type: REMOVE_CURRENT_USER,
     userId
+})
+
+export const receiveSessionErrors = errorMessage => ({
+    type: RECEIVE_SESSION_ERRORS,
+    payload: errorMessage
 })
 
 const storeCSRFToken = res => {
@@ -28,10 +35,15 @@ export const login = ({email, password}) => async dispatch => {
         method: 'POST',
         body: JSON.stringify({email, password})
     })
-    const userData = await res.json();
-    restoreSession(userData.user)
-    dispatch(setCurrentUser(userData.user))
-    return res
+    if (res.ok) {
+        const userData = await res.json();
+        restoreSession(userData.user)
+        dispatch(setCurrentUser(userData.user))
+        return res
+    } else {
+        const errors = await res.json();
+        dispatch(receiveSessionErrors(errors))
+    }
 }
 
 export const restoreSession = () => async dispatch => {
@@ -47,9 +59,14 @@ export const logout = () => async dispatch => {
     const res = await csrfFetch('/api/session', {
         method: 'DELETE'
     })
-    storeCurrentUser(null);
-    dispatch(removeCurrentUser())
-    return res
+    if (res.ok) {
+        storeCurrentUser(null);
+        dispatch(removeCurrentUser())
+        return res
+    } else {
+        const errors = await res.json();
+        dispatch(receiveSessionErrors(errors))
+    }
 }
 
 export const signup = ({email, password, firstName, lastName}) => async dispatch => {
@@ -62,6 +79,9 @@ export const signup = ({email, password, firstName, lastName}) => async dispatch
         storeCurrentUser(userData.user);
         dispatch(setCurrentUser(userData.user))
         return res
+    } else {
+        const errors = await res.json();
+        dispatch(receiveSessionErrors(errors))
     }
 }
 

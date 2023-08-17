@@ -1,8 +1,15 @@
+import { useHistory } from 'react-router-dom/cjs/react-router-dom'
 import './ListingIndexItem.css'
 
 const ListingIndexItem = ({ listing }) => {
+        const history = useHistory()
+
+    const handleClick = () => {
+        history.push(`listings/${listing.id}`)
+    }
+
     return (
-        <div className='listing-index-item'>
+        <div className='listing-index-item' onClick={handleClick}>
             <div className='listing-item-images'>
                 {listing.photoUrls.map( (photo, i) => 
                     <img className='listing-image'

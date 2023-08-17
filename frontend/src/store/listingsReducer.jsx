@@ -1,7 +1,9 @@
 import csrfFetch from "./csrf"
 
-const RECEIVE_LISTINGS = 'listings/RECEIVE_LISTINGS'
-const RECEIVE_LISTING = 'listings/RECEIVE_LISTING'
+export const RECEIVE_LISTINGS = 'listings/RECEIVE_LISTINGS'
+export const RECEIVE_LISTING = 'listings/RECEIVE_LISTING'
+export const RECEIVE_LISTING_ERRORS = 'session/RECEIVE_LISTING_ERRORS'
+export const CLEAR_LISTING_ERRORS = 'session/CLEAR_LISTING_ERRORS'
 
 export const receiveListings = listings => ({
     type: RECEIVE_LISTINGS,
@@ -13,6 +15,11 @@ export const receiveListing = listing => ({
     listing
 })
 
+export const receiveListingErrors = errorMessage => ({
+    type: RECEIVE_LISTING_ERRORS,
+    payload: errorMessage
+})
+
 export const getListings = state => state.listings ? Object.values(state.listings) : [];
 export const getListing = listingId => state => state.listings ? state.listings[listingId] : null;
 
@@ -21,10 +28,24 @@ export const fetchListings = () => async dispatch => {
     if (res.ok) {
         const listings = await res.json();
         dispatch(receiveListings(listings))
+        return res
     } else {
-        throw res
+        const errors = await res.json();
+        dispatch(receiveListingErrors(errors))
     }
-    return res
+}
+
+export const fetchListingsByCategory = category => async dispatch => {
+    const encodedCategory = encodeURIComponent(category)
+    const res = await csrfFetch(`/api/listings?category=${encodedCategory}`);
+    if (res.ok) {
+        const listings = await res.json();
+        dispatch(receiveListings(listings));
+        return res;
+    } else {
+        const errors = await res.json();
+        dispatch(receiveListingErrors(errors))
+    }
 }
 
 export const fetchListing = listingId => async dispatch => {
@@ -32,12 +53,12 @@ export const fetchListing = listingId => async dispatch => {
     if (res.ok) {
         const listing = await res.json();
         dispatch(receiveListing(listing))
+        return res
     } else {
-        throw res
+        const errors = await res.json();
+        dispatch(receiveListingErrors(errors))
     }
-    return res
 }
-
 
 const listingsReducer = (state={}, action) => {
     switch (action.type) {

@@ -22,5 +22,8 @@
   "homepage": "https://github.com/elliotchang126/Clonebnb#readme",
   "engines": {
     "node": "16.x"
+  },
+  "dependencies": {
+    "react-icons": "^4.10.1"
   }
 }
