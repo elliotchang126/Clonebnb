@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :index, :show]
     resource :session, only: [:show, :create, :destroy]
     resources :listings, only: [:index, :show]
+    resources :reviews, only: [:index, :create, :update, :destroy]
 
     post 'check_email', to: 'users#check_email'
 
