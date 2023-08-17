@@ -30,15 +30,21 @@
 
 .show-images-left {
     width: 100%;
+    height: 100%;
     box-sizing: border-box;
 }
 
+.image-wrapper-left {
+    max-width: 100%;
+    height: auto;
+}
+
 .listing-image-left {
-    width: 100%;
-    height: 100%;
+    width: calc(100vw - 60px);
+    height: auto;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    object-fit: cover;
+    object-fit: fill;
 }
 
 .show-images-right {
@@ -46,7 +52,6 @@
     height: 100%;
     box-sizing: border-box;
     display: grid;
-    align-content: stretch;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
 }
@@ -56,6 +61,11 @@
     max-width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.image-wrapper-left:hover, .image-wrapper-right:hover {
+    filter: brightness(90%);
+    cursor: pointer;
 }
 
 .image-wrapper-right:nth-child(2) img {

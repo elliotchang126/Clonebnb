@@ -38,7 +38,6 @@ export const fetchListing = listingId => async dispatch => {
     return res
 }
 
-
 const listingsReducer = (state={}, action) => {
     switch (action.type) {
         case RECEIVE_LISTINGS:

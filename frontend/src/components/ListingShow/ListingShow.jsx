@@ -3,17 +3,25 @@ import { useParams } from 'react-router-dom'
 import './ListingShow.css'
 import { fetchListing, getListing } from '../../store/listingsReducer';
 import { useEffect } from 'react';
+import { fetchUser, getUser } from '../../store/usersReducer';
 
 const ListingShow = () => {
     const dispatch = useDispatch();
     const { listingId } = useParams();
     const user = useSelector(state => state.session.user)
-
+    
     const listing = useSelector(getListing(listingId))
+    
+    // const userId = listing?.userId
+    // const host = useSelector(getUser(userId))
 
     useEffect(() => {
         dispatch(fetchListing(listingId))
     }, [dispatch, listingId])
+
+    // useEffect(() => {
+    //     dispatch(fetchUser(userId))
+    // }, [dispatch, userId])
 
     return(
         <div className='show-container'>
@@ -49,7 +57,6 @@ const ListingShow = () => {
             </div>
             <div className="show-details">
                 <div className="show-details-header">
-                    
                 </div>
                 <div className="show-description">
                     {listing?.description}

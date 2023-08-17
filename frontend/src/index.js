@@ -10,6 +10,7 @@ import * as sessionActions from './store/sessionReducer'
 import {activateSessionModal, deactivateSessionModal} from './store/uiReducer'
 import csrfFetch from './store/csrf';
 import { ModalProvider } from './context/Modal';
+import * as userActions from './store/usersReducer'
 
 // ReactDOM.render(
 // );
@@ -20,6 +21,7 @@ const store = configureStore();
   window.sessionActions = sessionActions;
   window.activate = activateSessionModal;
   window.deactivate = deactivateSessionModal;
+  window.userActions = userActions;
 
 
 function Root() {
