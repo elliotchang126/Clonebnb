@@ -73,7 +73,7 @@ export const createReview = review => async dispatch => {
 }
 
 export const updateReview = review => async dispatch => {
-    const res = await csrfFetch(`/api/reviews/${reviewId}`, {
+    const res = await csrfFetch(`/api/reviews/${review.id}`, {
         method: 'PATCH',
         body: JSON.stringify(review)
     })
