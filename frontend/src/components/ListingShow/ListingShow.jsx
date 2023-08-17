@@ -42,7 +42,7 @@ const ListingShow = () => {
                 </div>
             </div>
             <div className="show-images-container">
-                <div className="show-images-left"
+                <div className="show-image-left"
                     key={`show-${listing?.id}-${1}`}>
                         <img className='listing-image-left'
                             src={listing?.photoUrls[0]} 

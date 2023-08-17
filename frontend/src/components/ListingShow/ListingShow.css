@@ -68,7 +68,7 @@
     object-fit: cover;
 }
 
-.image-wrapper-left:hover, .image-wrapper-right:hover {
+.show-image-left:hover, .image-wrapper-right:hover {
     filter: brightness(90%);
     cursor: pointer;
 }
