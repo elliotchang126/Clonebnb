@@ -1,7 +1,11 @@
 class Api::ListingsController < ApplicationController
 
     def index
-        @listings = Listing.all
+        if params[:category]
+            @listings = Listing.where("lower(category) = ?", params[:category].downcase)
+        else
+            @listings = Listing.all
+        end
         render :index
     end
 

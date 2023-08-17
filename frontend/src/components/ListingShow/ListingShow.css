@@ -17,7 +17,7 @@
 }
 
 .show-container {
-    margin: 20px 60px 20px 60px;
+    margin: 20px 60px 0px 60px;
 }
 
 .show-images-container {
@@ -25,7 +25,9 @@
     gap: 10px;
     border-radius: 10px;
     box-sizing: border-box;
-    margin: 20px 0px 20px 0px;
+    margin: 20px 0px 0px 0px;
+    display: grid;
+    grid-template-columns: 2fr 2fr;
 }
 
 .show-images-left {
@@ -40,8 +42,11 @@
 }
 
 .listing-image-left {
-    width: calc(100vw - 60px);
-    height: auto;
+    display: block;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     object-fit: fill;
@@ -76,6 +81,32 @@
     border-bottom-right-radius: 10px;
 }
 
+.show-details {
+    width: 55%
+}
+
+.show-details-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgb(227, 227, 227);
+}
+
+.house-host {
+    font-size: 25px;
+    padding-bottom: 10px
+}
+
+
+.profile-icon {
+    font-size: 60px;
+    color: #e31c5f;
+}
+
 .show-description {
-    width: 50%;
+    padding-top: 25px;
+    width: 100%;
 }

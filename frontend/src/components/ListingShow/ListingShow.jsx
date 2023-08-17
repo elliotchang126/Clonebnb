@@ -4,6 +4,8 @@ import './ListingShow.css'
 import { fetchListing, getListing } from '../../store/listingsReducer';
 import { useEffect } from 'react';
 import { fetchUser, getUser } from '../../store/usersReducer';
+import { BsPersonCircle } from 'react-icons/bs'
+
 
 const ListingShow = () => {
     const dispatch = useDispatch();
@@ -12,16 +14,20 @@ const ListingShow = () => {
     
     const listing = useSelector(getListing(listingId))
     
-    // const userId = listing?.userId
-    // const host = useSelector(getUser(userId))
+    const userId = listing?.userId
+    const host = useSelector(getUser(userId))
 
     useEffect(() => {
-        dispatch(fetchListing(listingId))
+        if (listingId) {
+            dispatch(fetchListing(listingId))
+        }
     }, [dispatch, listingId])
 
-    // useEffect(() => {
-    //     dispatch(fetchUser(userId))
-    // }, [dispatch, userId])
+    useEffect(() => {
+        if (userId) {
+            dispatch(fetchUser(userId))
+        }
+    }, [dispatch, userId])
 
     return(
         <div className='show-container'>
@@ -38,11 +44,9 @@ const ListingShow = () => {
             <div className="show-images-container">
                 <div className="show-images-left"
                     key={`show-${listing?.id}-${1}`}>
-                    <div className="image-wrapper-left">
                         <img className='listing-image-left'
                             src={listing?.photoUrls[0]} 
                             alt ={`show-${listing?.id}-${1}`}/>
-                    </div>
                 </div>
                 <div className="show-images-right">
                     {listing?.photoUrls.slice(1).map( (photo, i) => 
@@ -57,6 +61,20 @@ const ListingShow = () => {
             </div>
             <div className="show-details">
                 <div className="show-details-header">
+                    <div className='house-info'>
+                        <div className='house-host'>
+                            House hosted by {host?.firstName}
+                        </div>
+                        <div className='bed-bath-info'>
+                            <span>
+                                {listing?.bedrooms > 1 ? `${listing?.bedrooms} bedrooms` : `${listing?.bedrooms} bedroom`}
+                            </span>{' · '}
+                            <span>
+                                {listing?.bathrooms > 1 ? `${listing?.bathrooms} baths` : `${listing?.bathrooms} bath`}
+                            </span>
+                        </div>
+                    </div>
+                    <BsPersonCircle className='profile-icon' />
                 </div>
                 <div className="show-description">
                     {listing?.description}
