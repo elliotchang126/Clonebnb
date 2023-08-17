@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::API
     include ActionController::RequestForgeryProtection
+    
+    helper_method :current_user, :logged_in?
 
     rescue_from StandardError, with: :unhandled_error
     rescue_from ActionController::InvalidAuthenticityToken,
