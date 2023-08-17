@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import './ListingShow.css'
 import { fetchListing, getListing } from '../../store/listingsReducer';

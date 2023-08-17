@@ -1,4 +1,5 @@
 import { CLEAR_LISTING_ERRORS, RECEIVE_LISTING, RECEIVE_LISTINGS, RECEIVE_LISTING_ERRORS } from "./listingsReducer";
+import { RECEIVE_REVIEWS, RECEIVE_REVIEW_ERRORS, REMOVE_REVIEW } from "./reviewsReducer";
 import { CLEAR_SESSION_ERRORS, RECEIVE_SESSION_ERRORS, REMOVE_CURRENT_USER, SET_CURRENT_USER } from "./sessionReducer";
 import { CLEAR_USER_ERRORS, RECEIVE_USER, RECEIVE_USERS, RECEIVE_USER_ERRORS } from "./usersReducer";
 
@@ -30,6 +31,14 @@ const errorsReducer = ( state={ session: [], users: [], listings: [], reviews: [
             return { ...nextState, users: action.payload.errors }
         case CLEAR_USER_ERRORS:
             return { ...nextState, users: [] }
+        case RECEIVE_REVIEWS:
+            return { ...nextState, reviews: [] }
+        case RECEIVE_REVIEW:
+            return { ...nextState, reviews: [] }
+        case RECEIVE_REVIEW_ERRORS:
+            return { ...nextState, reviews: action.payload.errors }
+        case REMOVE_REVIEW:
+            return { ...nextState, reviews: [] }
         default:
             return state;
     }

@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import ListingIndexItem from '../ListingIndexItem/ListingIndexItem';
 import ListingTypes from '../ListingTypes/ListingType';
 import './ListingIndex.css'
@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 
 const ListingIndex = () => {
     const dispatch = useDispatch();
-    const listings = useSelector(getListings);
+    const listings = useSelector(getListings,shallowEqual);
 
     useEffect(() => {
         dispatch(fetchListings())
