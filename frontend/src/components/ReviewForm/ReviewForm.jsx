@@ -47,6 +47,16 @@ const ReviewForm = ({ listing }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        // const form = {
+        //     ...formData,
+        //     cleanliness,
+        //     communication,
+        //     checkIn,
+        //     accuracy,
+        //     location,
+        //     value,
+        //     body,
+        // }
         dispatch(createReview(formData))
     }
 
@@ -55,17 +65,18 @@ const ReviewForm = ({ listing }) => {
             <form className='review-form' onSubmit={handleSubmit}>
                 <h2 className="form-header">Write a New Review</h2>
                 {ratings.map((rating, idx) =>(
-                    <div key ={rating}>
+                    <div className= 'form-radio-container' key ={rating}>
                         <fieldset>
-                            <legend>{ratingTitles[idx]}
+                            <legend className='rating-title'>{ratingTitles[idx]}
                                 <br />
                                 {[1, 2, 3, 4, 5].map(num => (
                                     <label 
+                                        className='radio-buttons'
                                         htmlFor={`${rating}-${num}`}
                                         key={`radio-${rating}-${num}`}
                                         onMouseEnter={() => setHoverRating({rating, num})}
                                         onMouseLeave={() => setHoverRating({rating: '', num: 0})}
-                                    >{num}
+                                    >
                                     <input type="radio"
                                         id={`${rating}-${num}`}
                                         className='rating-input'
@@ -84,9 +95,9 @@ const ReviewForm = ({ listing }) => {
                         </fieldset>
                     </div> 
                 ))}
-                <h2>Write a Public Review</h2>
-                <h3>Tell the next guests what you loved and anything else they should know about this place</h3>
-                <input
+                <h2 className='body-header'>Write a Public Review</h2>
+                <h3 className='body-instructions'>Tell the next guests what you loved and anything else they should know about this place.</h3>
+                <textarea
                     type='text'
                     className="input-body"
                     name='body'
