@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import ReviewsIndexItem from "../ReviewsIndexItem/ReviewsIndexItem";
 import './ReviewsIndex.css'
 
-const ReviewsIndex = () => {
+const ReviewsIndex = ({ listing }) => {
     const dispatch = useDispatch();
     const reviews = useSelector(getReviews)
 

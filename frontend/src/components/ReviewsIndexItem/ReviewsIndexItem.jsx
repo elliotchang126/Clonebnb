@@ -11,7 +11,7 @@ const ReviewsIndexItem = ({ review }) => {
         <div className="review-item-container">
             <div className='guest-container'>
                 <BsPersonCircle className='guest-icon'/>
-                <div className='guest-name'>{guest.firstName}</div>
+                <div className='guest-name'>{guest?.firstName}</div>
             </div>
             <div className='guest-review'>{review?.body}</div>
         </div>

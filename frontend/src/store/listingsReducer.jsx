@@ -10,10 +10,13 @@ export const receiveListings = listings => ({
     listings
 })
 
-export const receiveListing = listing => ({
-    type: RECEIVE_LISTING,
-    listing
-})
+export const receiveListing = payload => {
+    // debugger
+    return {
+        type: RECEIVE_LISTING,
+        payload
+    }
+}
 
 export const receiveListingErrors = errorMessage => ({
     type: RECEIVE_LISTING_ERRORS,
@@ -61,11 +64,12 @@ export const fetchListing = listingId => async dispatch => {
 }
 
 const listingsReducer = (state={}, action) => {
+    // debugger
     switch (action.type) {
         case RECEIVE_LISTINGS:
             return { ...action.listings }
         case RECEIVE_LISTING:
-            return { ...state, [action.listing.id]: action.listing }
+            return { ...state, [action.payload.listing.id]: action.payload.listing }
         default:
             return state;
     }

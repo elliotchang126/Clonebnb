@@ -27,14 +27,12 @@ const ListingShow = (props) => {
     }, [])
 
     const openModal = e => {
-        // debugger
         if (showModal) return;
         e.stopPropagation();
         setShowModal(true)
     }
 
     useEffect(() => {
-        // debugger
         if (showModal) return;
 
         const closeModal = () => {
@@ -116,7 +114,7 @@ const ListingShow = (props) => {
                 </div>
             </div>
             <div className="show-reviews">
-                <ReviewsIndex />
+                <ReviewsIndex listing={listing} />
             </div>
             <div className="show-map">
 

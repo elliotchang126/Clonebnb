@@ -16,7 +16,7 @@ const ProfileButton = ({ user }) => {
     const [showModal, setShowModal] = useState(false)
 
     const handleProfileClick = () => {
-        history.push(`users/${user.id}`)
+        history.push(`/users/${user.id}`)
     }
 
     const openMenu = (e) => {

@@ -1,0 +1,10 @@
+.profile-reviews-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.profile-reviews {
+    width: 48%;
+}
