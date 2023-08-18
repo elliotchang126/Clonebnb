@@ -8,6 +8,7 @@ import { BsPersonCircle } from 'react-icons/bs'
 import { Modal } from "../../context/Modal";
 import ReviewForm from '../ReviewForm/ReviewForm';
 import ReviewsIndex from '../ReviewsIndex/ReviewsIndex'
+import handleMouseover from '../../util/buttonUtil';
 
 const ListingShow = (props) => {
     const dispatch = useDispatch();
@@ -18,6 +19,12 @@ const ListingShow = (props) => {
     const host = useSelector(getUser(userId))
     const [showModal, setShowModal] = useState(false)
 
+    useEffect(() => {
+        const button = document.querySelector('.user-button')
+         button.addEventListener('mousemove', handleMouseover);
+
+        return () => button.removeEventListener('mousemove', handleMouseover);
+    }, [])
 
     const openModal = e => {
         // debugger
@@ -102,7 +109,7 @@ const ListingShow = (props) => {
                 <div className='show-calendar-container'>
                     <div className="show-calendar"></div>
                     <div className="new-review-container">
-                        <button onClick={e => openModal(e)}>
+                        <button className='user-button' onClick={e => openModal(e)}>
                             Review Listing
                         </button>
                     </div>

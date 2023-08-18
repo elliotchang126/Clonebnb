@@ -15,7 +15,7 @@ const ReviewsIndex = () => {
     return(
         <div className="listing-reviews">
             <div className="reviews-header">
-                <div>&#9733;</div>
+                <div>&#9733; 4.94 · 336 reviews</div>
             </div>
             <div className="reviews-index">
                 {reviews?.map(review =>

@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     /* flex-direction: column; */
+    padding: 20px 0px
 }
 
 .guest-container {
@@ -17,7 +18,8 @@
 
 .guest-name {
     font-size: 20px;
-    padding-top: 20px;
+    padding: 20px 0px;
+
 }
 
 .guest-review {

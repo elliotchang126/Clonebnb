@@ -11,6 +11,7 @@ function App() {
     <>
       <Navigation />
       <Switch>
+        <Route path ='/users/:userId' />
         <Route exact path='/' component={ListingIndex}/>
         <Route exact path='/404' component={PageNotFound}/>
         <Route path ='/reviews/new' component={ReviewForm}/>
