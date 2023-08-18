@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom";
 import { createReview } from "../../store/reviewsReducer";
 import { FaStar } from 'react-icons/fa'
@@ -19,8 +19,27 @@ const ReviewForm = () => {
         body: ''
     })
 
+
+
     const ratings = ['cleanliness', 'communication', 'checkIn', 'accuracy', 'location', 'value']
     const ratingTitles = ['Cleanliness', 'Communication', 'Check-In', 'Accuracy', 'Location', 'Value']
+
+    useEffect(() => {
+        const button = document.querySelector('.user-button')
+
+        const handleMouseover = e => {
+            const rect = e.target.getBoundingClientRect();
+            const x = (e.clientX - rect.left) * 100 / e.target.clientWidth;
+            const y = (e.clientY - rect.top) * 100 / e.target.clientHeight;
+            
+            e.target.style.setProperty('--mouse-x', x)
+            e.target.style.setProperty('--mouse-y', y)
+        }
+         button.addEventListener('mousemove', handleMouseover);
+
+        return () => button.removeEventListener('mousemove', handleMouseover);
+    }, [])
+
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -33,77 +52,42 @@ const ReviewForm = () => {
     }
 
     return(
-        <form className='review-form' onSubmit={handleSubmit}>
-            <h2 className="form-header">Write a New Review</h2>
-            {ratings.map((rating, idx) =>(
-                <div>
-                    <fieldset>
-                        <legend>{ratingTitles[idx]}
-                            <br />
-                            <label htmlFor={`${rating}-1`}>1
-                                <input type="radio"
-                                    id={`${rating}-1`}
-                                    className='rating-input'
-                                    name={`${rating}`}
-                                    value={1}
-                                    onChange={handleChange}
-                                />
-                                <FaStar />
-                            </label>
-                            <label htmlFor={`${rating}-1`}>2
-                                <input type="radio"
-                                    id={`${rating}-1`}
-                                    className='rating-input'
-                                    name={`${rating}`}
-                                    value={2}
-                                    onChange={handleChange}
-                                />
-                                <FaStar />
-                            </label>
-                            <label htmlFor={`${rating}-1`}>3
-                                <input type="radio"
-                                    id={`${rating}-1`}
-                                    className='rating-input'
-                                    name={`${rating}`}
-                                    value={3}
-                                    onChange={handleChange}
-                                />
-                                <FaStar />
-                            </label>
-                            <label htmlFor={`${rating}-1`}>4
-                                <input type="radio"
-                                    id={`${rating}-1`}
-                                    className='rating-input'
-                                    name={`${rating}`}
-                                    value={4}
-                                    onChange={handleChange}
-                                />
-                                <FaStar />
-                            </label>
-                            <label htmlFor={`${rating}-1`}>5
-                                <input type="radio"
-                                    id={`${rating}-1`}
-                                    className='rating-input'
-                                    name={`${rating}`}
-                                    value={5}
-                                    onChange={handleChange}
-                                />
-                                <FaStar className='input-star' />
-                            </label>
-                        </legend>
-                    </fieldset>
-                </div> 
-            ))}
-            <h2>Write a Public Review</h2>
-            <h3>Tell the next guests what you loved and anything else they should know about this place</h3>
-            <input
-                type='text'
-                className="input-body"
-                value={formData.body}
-                onChange={handleChange}
-                placeholder="Write a public review"
-            />
-        </form>
+        <div className="review-container">
+            <form className='review-form' onSubmit={handleSubmit}>
+                <h2 className="form-header">Write a New Review</h2>
+                {ratings.map((rating, idx) =>(
+                    <div>
+                        <fieldset>
+                            <legend>{ratingTitles[idx]}
+                                <br />
+                                {[1, 2, 3, 4, 5].map(num => (
+                                    <label htmlFor={`${rating}-${num}`}>{num}
+                                    <input type="radio"
+                                        id={`${rating}-${num}`}
+                                        className='rating-input'
+                                        name={`${rating}`}
+                                        value={num}
+                                        onChange={handleChange}
+                                    />
+                                    <FaStar />
+                                    </label>
+                                    ))}
+                            </legend>
+                        </fieldset>
+                    </div> 
+                ))}
+                <h2>Write a Public Review</h2>
+                <h3>Tell the next guests what you loved and anything else they should know about this place</h3>
+                <input
+                    type='text'
+                    className="input-body"
+                    value={formData.body}
+                    onChange={handleChange}
+                    placeholder="Write a public review"
+                    />
+                <button className='user-button'>Submit Your Review</button>
+            </form>
+        </div>
     )
 }
 

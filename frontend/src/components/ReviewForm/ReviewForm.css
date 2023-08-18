@@ -1,3 +1,45 @@
+.review-container {
+    margin: 20px 40px;
+    border: 1px solid rgb(211, 210, 210);
+    display: flex;
+    justify-content: center;
+}
+
+.review-form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    box-sizing: border-box;
+}
+
 .rating-input {
-    
+
+}
+
+.input-body {
+    border-radius: 10px;
+    width: 100%;
+    height: 200px;
+    box-sizing: border-box;
+}
+
+.user-button {
+    /* https://codepen.io/Nkzq/pen/powOGze used for button gradient set up*/
+    border: 1px solid lightgray;
+    color: white;
+    font-size: medium;
+    border-radius: 10px;
+    padding: 15px;
+    width: 460px;
+    height: 50.5px;
+    --mouse-x: 50;
+    --mouse-y: 50;
+    background-size: 200% 200%;
+    background-position: calc((100 - var(--mouse-x, 0)) * 1%) calc((100 - var(--mouse-y, 0)) * 1%);
+    background-image: radial-gradient(circle, #ff385c 0%, #e61e4d 27.5%,#e31c5f 40%,#d70466 57.5%,#bd1e59 75%,#bd1e59 100%); 
+    /* borrowed 0% color from previous project Nextbnb. Rest of gradient taken from Airbnb*/
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    align-self: center;
 }
