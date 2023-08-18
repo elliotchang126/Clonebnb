@@ -64,37 +64,39 @@ const ReviewForm = ({ listing }) => {
         <div className="review-container">
             <form className='review-form' onSubmit={handleSubmit}>
                 <h2 className="form-header">Write a New Review</h2>
-                {ratings.map((rating, idx) =>(
-                    <div className= 'form-radio-container' key ={rating}>
-                        <fieldset>
-                            <legend className='rating-title'>{ratingTitles[idx]}
-                                <br />
-                                {[1, 2, 3, 4, 5].map(num => (
-                                    <label 
+                <div className="form-radio-container">
+                    {ratings.map((rating, idx) =>(
+                        <div className= 'form-radio-container' key ={rating}>
+                            <fieldset>
+                                <legend className='rating-title'>{ratingTitles[idx]}
+                                    <br />
+                                    {[1, 2, 3, 4, 5].map(num => (
+                                        <label 
                                         className='radio-buttons'
                                         htmlFor={`${rating}-${num}`}
                                         key={`radio-${rating}-${num}`}
                                         onMouseEnter={() => setHoverRating({rating, num})}
                                         onMouseLeave={() => setHoverRating({rating: '', num: 0})}
-                                    >
-                                    <input type="radio"
-                                        id={`${rating}-${num}`}
-                                        className='rating-input'
-                                        name={`${rating}`}
-                                        value={num}
-                                        onChange={handleChange}
-                                    />
-                                    <FaStar className={hoverRating.rating === rating ?
-                                        (num <= hoverRating.num ? 'hovered' : 'empty') :
-                                        (num <= formData[rating] ? 'selected' : 'empty')
-                                    }
-                                    />
-                                    </label>
-                                    ))}
-                            </legend>
-                        </fieldset>
-                    </div> 
-                ))}
+                                        >
+                                        <input type="radio"
+                                            id={`${rating}-${num}`}
+                                            className='rating-input'
+                                            name={`${rating}`}
+                                            value={num}
+                                            onChange={handleChange}
+                                            />
+                                        <FaStar className={hoverRating.rating === rating ?
+                                            (num <= hoverRating.num ? 'hovered' : 'empty') :
+                                            (num <= formData[rating] ? 'selected' : 'empty')
+                                        }
+                                        />
+                                        </label>
+                                        ))}
+                                </legend>
+                            </fieldset>
+                        </div> 
+                    ))}
+                </div>
                 <h2 className='body-header'>Write a Public Review</h2>
                 <h3 className='body-instructions'>Tell the next guests what you loved and anything else they should know about this place.</h3>
                 <textarea
