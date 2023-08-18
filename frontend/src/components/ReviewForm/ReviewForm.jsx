@@ -1,22 +1,30 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom";
 import { createReview } from "../../store/reviewsReducer";
 import './ReviewForm.css'
 import { IoIosStar } from 'react-icons/io'
 
-const ReviewForm = ({ listing }) => {
+const ReviewForm = () => {
     const dispatch = useDispatch();
-    // const { listingId } = useParams();
+    const { listingId } = useParams();
+    const userId = useSelector(state => state.session.user.id)
     const [formData, setFormData] = useState({
+        listingId: listingId,
+        // userId: userId,
         cleanliness: null,
         communication: null,
-        checkIn: null,
+        check_in: null,
         accuracy: null,
         location: null,
         value: null,
         body: ''
     })
+
+    const handleFormClick = e => {
+        e.stopPropagation();
+    }
+    
 
     const [hoverRating, setHoverRating] = useState({rating: '', num: 0})
 
@@ -36,7 +44,7 @@ const ReviewForm = ({ listing }) => {
         return () => button.removeEventListener('mousemove', handleMouseover);
     }, [])
 
-    const ratings = ['cleanliness', 'communication', 'checkIn', 'accuracy', 'location', 'value']
+    const ratings = ['cleanliness', 'communication', 'check_in', 'accuracy', 'location', 'value']
     const ratingTitles = ['Cleanliness', 'Communication', 'Check-In', 'Accuracy', 'Location', 'Value']
 
     const handleChange = e => {
@@ -46,22 +54,12 @@ const ReviewForm = ({ listing }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        // const form = {
-        //     ...formData,
-        //     cleanliness,
-        //     communication,
-        //     checkIn,
-        //     accuracy,
-        //     location,
-        //     value,
-        //     body,
-        // }
         dispatch(createReview(formData))
     }
 
     return(
         <div className="review-container">
-            <form className='review-form' onSubmit={handleSubmit} >
+            <form className='review-form' onSubmit={handleSubmit} onClick={handleFormClick}>
                 <h2 className="form-header">Write a New Review</h2>
                 <div className="form-radio-container">
                     {ratings.map((rating, idx) =>(

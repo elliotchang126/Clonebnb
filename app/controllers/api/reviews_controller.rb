@@ -18,10 +18,12 @@ class Api::ReviewsController < ApplicationController
 
     def create
         @review = Review.new(review_params)
+        # @review.listing_id = params[:listing_id]
         @review.user_id = current_user.id
         if @review.save
             render :index
         else
+            puts @review.errors.full_messages
             render json: @review.errors.full_messages, status: 422
         end
     end
@@ -45,6 +47,6 @@ class Api::ReviewsController < ApplicationController
     end
 
     def review_params
-        params.require(:user).permit(:listing_id, :user_id, :cleanliness, :communication, :check_in, :accuracy, :location, :value, :body)
+        params.require(:review).permit(:listing_id, :user_id, :cleanliness, :communication, :check_in, :accuracy, :location, :value, :body)
     end
 end
