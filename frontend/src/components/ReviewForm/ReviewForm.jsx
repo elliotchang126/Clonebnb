@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom/cjs/react-router-dom";
 import { createReview } from "../../store/reviewsReducer";
 import './ReviewForm.css'
 import { IoIosStar } from 'react-icons/io'
+import handleMouseover from "../../util/buttonUtil";
 
-const ReviewForm = ({closeReviewModal}) => {
+const ReviewForm = (props) => {
+    const {setShowModal} = props
     const dispatch = useDispatch();
     const { listingId } = useParams();
     const [formData, setFormData] = useState({
@@ -21,24 +23,10 @@ const ReviewForm = ({closeReviewModal}) => {
     })
     const reviewErrors = useSelector(state => state.errors.reviews)
 
-    const handleFormClick = e => {
-        e.stopPropagation();
-    }
-    
-
     const [hoverRating, setHoverRating] = useState({rating: '', num: 0})
 
     useEffect(() => {
         const button = document.querySelector('.user-button')
-
-        const handleMouseover = e => {
-            const rect = e.target.getBoundingClientRect();
-            const x = (e.clientX - rect.left) * 100 / e.target.clientWidth;
-            const y = (e.clientY - rect.top) * 100 / e.target.clientHeight;
-            
-            e.target.style.setProperty('--mouse-x', x)
-            e.target.style.setProperty('--mouse-y', y)
-        }
          button.addEventListener('mousemove', handleMouseover);
 
         return () => button.removeEventListener('mousemove', handleMouseover);
@@ -54,14 +42,14 @@ const ReviewForm = ({closeReviewModal}) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(formData)
-        dispatch(createReview(formData))
-        closeReviewModal();
+        console.log(formData);
+        dispatch(createReview(formData));
+        setShowModal(false);
     }
 
     return(
-        <div className="review-container">
-            <form className='review-form' onSubmit={handleSubmit} onClick={handleFormClick}>
+        // <div className="review-container">
+            <form className='review-form' onSubmit={handleSubmit} >
                 <h2 className="form-header">Write a New Review</h2>
                 <div className="form-radio-container">
                     {ratings.map((rating, idx) =>(
@@ -109,7 +97,7 @@ const ReviewForm = ({closeReviewModal}) => {
                     />
                 <button className='user-button'>Submit Your Review</button>
             </form>
-        </div>
+        // </div>
     )
 }
 

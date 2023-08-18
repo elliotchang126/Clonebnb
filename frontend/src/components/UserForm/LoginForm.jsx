@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from '../../store/sessionReducer'
+import handleMouseover from "../../util/buttonUtil";
 import '../../context/Modal.css'
 
 const LoginForm = (props) => {
@@ -21,14 +22,6 @@ const LoginForm = (props) => {
 
         if (!buttons.length) return;
 
-        const handleMouseover = e => {
-            const rect = e.target.getBoundingClientRect();
-            const x = (e.clientX - rect.left) * 100 / e.target.clientWidth;
-            const y = (e.clientY - rect.top) * 100 / e.target.clientHeight;
-            
-            e.target.style.setProperty('--mouse-x', x)
-            e.target.style.setProperty('--mouse-y', y)
-        }
         buttons.forEach(button => {
             button.addEventListener('mousemove', handleMouseover);
         })

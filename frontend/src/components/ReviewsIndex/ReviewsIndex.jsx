@@ -17,7 +17,9 @@ const ReviewsIndex = () => {
                 <div>&#9733;</div>
             </div>
             <div className="reviews-index">
-                <ReviewsIndexItem review={review}/>
+                {reviews?.map(review =>
+                    <ReviewsIndexItem review={review}/>
+                )}
             </div>
         </div>
     )

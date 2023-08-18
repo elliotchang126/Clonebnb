@@ -5,36 +5,37 @@ import { fetchListing, getListing } from '../../store/listingsReducer';
 import { useEffect, useState } from 'react';
 import { fetchUser, getUser } from '../../store/usersReducer';
 import { BsPersonCircle } from 'react-icons/bs'
+import { Modal } from "../../context/Modal";
 import ReviewForm from '../ReviewForm/ReviewForm';
+import ReviewsIndex from '../ReviewsIndex/ReviewsIndex'
 
-const ListingShow = () => {
+const ListingShow = (props) => {
     const dispatch = useDispatch();
     const { listingId } = useParams();
     const user = useSelector(state => state.session.user)
     const listing = useSelector(getListing(listingId))
     const userId = listing?.userId
     const host = useSelector(getUser(userId))
-    const [showReviewModal, setShowReviewModal] = useState(false)
+    const [showModal, setShowModal] = useState(false)
 
 
-    const openReviewModal = e => {
-        if (showReviewModal) return;
+    const openModal = e => {
+        // debugger
+        if (showModal) return;
         e.stopPropagation();
-        setShowReviewModal(true);
-    }
-
-    const closeReviewModal = () => {
-        setShowReviewModal(false)
+        setShowModal(true)
     }
 
     useEffect(() => {
-        // const closeReviewModal = () => {
-        //     setShowReviewModal(false)
-        // }
+        // debugger
+        if (showModal) return;
 
-        document.addEventListener('click', closeReviewModal)
-        return () => document.removeEventListener('click', closeReviewModal)
-    }, [showReviewModal])
+        const closeModal = () => {
+            setShowModal(false)
+        }
+        document.addEventListener('click', closeModal)
+        return () => document.removeEventListener('click', closeModal)
+    }, [showModal])
 
     useEffect(() => {
         if (listingId) {
@@ -101,21 +102,23 @@ const ListingShow = () => {
                 <div className='show-calendar-container'>
                     <div className="show-calendar"></div>
                     <div className="new-review-container">
-                        <button onClick={e => openReviewModal(e)}>
+                        <button onClick={e => openModal(e)}>
                             Review Listing
                         </button>
                     </div>
                 </div>
             </div>
             <div className="show-reviews">
-
+                <ReviewsIndex />
             </div>
             <div className="show-map">
 
             </div>
-            {showReviewModal && (
+            {showModal && (
                 user ? (
-                    <ReviewForm listingId = {listingId} closeReviewModal={closeReviewModal}/>
+                    <Modal onClose={() => setShowModal(false)}>
+                        <ReviewForm setShowModal={setShowModal}/>
+                    </Modal>
                 ) :
                 <div>Sorry, must be logged in to leave a review.</div>
             )}
