@@ -2,9 +2,8 @@ import { useDispatch } from "react-redux"
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom";
 import { createReview } from "../../store/reviewsReducer";
-import { FaStar } from 'react-icons/fa'
 import './ReviewForm.css'
-
+import { IoIosStar } from 'react-icons/io'
 
 const ReviewForm = ({ listing }) => {
     const dispatch = useDispatch();
@@ -62,7 +61,7 @@ const ReviewForm = ({ listing }) => {
 
     return(
         <div className="review-container">
-            <form className='review-form' onSubmit={handleSubmit}>
+            <form className='review-form' onSubmit={handleSubmit} >
                 <h2 className="form-header">Write a New Review</h2>
                 <div className="form-radio-container">
                     {ratings.map((rating, idx) =>(
@@ -85,7 +84,7 @@ const ReviewForm = ({ listing }) => {
                                             value={num}
                                             onChange={handleChange}
                                             />
-                                        <FaStar className={hoverRating.rating === rating ?
+                                        <IoIosStar className={hoverRating.rating === rating ?
                                             (num <= hoverRating.num ? 'hovered' : 'empty') :
                                             (num <= formData[rating] ? 'selected' : 'empty')
                                         }

@@ -2,20 +2,35 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import './ListingShow.css'
 import { fetchListing, getListing } from '../../store/listingsReducer';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchUser, getUser } from '../../store/usersReducer';
 import { BsPersonCircle } from 'react-icons/bs'
-
+import ReviewForm from '../ReviewForm/ReviewForm';
 
 const ListingShow = () => {
     const dispatch = useDispatch();
     const { listingId } = useParams();
     const user = useSelector(state => state.session.user)
-    
     const listing = useSelector(getListing(listingId))
-    
     const userId = listing?.userId
     const host = useSelector(getUser(userId))
+    const [showReviewModal, setShowReviewModal] = useState(false)
+
+
+    const openReviewModal = e => {
+        if (showReviewModal) return;
+        e.stopPropagation();
+        setShowReviewModal(true);
+    }
+
+    useEffect(() => {
+        const closeReviewModal = () => {
+            setShowReviewModal(false)
+        }
+
+        document.addEventListener('click', closeReviewModal)
+        return () => document.removeEventListener('click', closeReviewModal)
+    }, [showReviewModal])
 
     useEffect(() => {
         if (listingId) {
@@ -79,8 +94,13 @@ const ListingShow = () => {
                 <div className="show-description">
                     {listing?.description}
                 </div>
-                <div className='show-calendar'>
-
+                <div className='show-calendar-container'>
+                    <div className="show-calendar"></div>
+                    <div className="new-review-container">
+                        <button onClick={e => openReviewModal(e)}>
+                            Review Listing
+                        </button>
+                    </div>
                 </div>
             </div>
             <div className="show-reviews">
@@ -89,6 +109,12 @@ const ListingShow = () => {
             <div className="show-map">
 
             </div>
+            {showReviewModal && (
+                user ? (
+                    <ReviewForm listingId = {listingId}/>
+                ) :
+                <div>Sorry, must be logged in to leave a review.</div>
+            )}
         </div>
     )
 }
