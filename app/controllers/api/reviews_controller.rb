@@ -21,7 +21,8 @@ class Api::ReviewsController < ApplicationController
         # @review.listing_id = params[:listing_id]
         @review.user_id = current_user.id
         if @review.save
-            render :index
+            # @listing = Listing.find_by(id: params[:listing_id])
+            render :show
         else
             puts @review.errors.full_messages
             render json: @review.errors.full_messages, status: 422

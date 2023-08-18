@@ -23,10 +23,14 @@ const ListingShow = () => {
         setShowReviewModal(true);
     }
 
+    const closeReviewModal = () => {
+        setShowReviewModal(false)
+    }
+
     useEffect(() => {
-        const closeReviewModal = () => {
-            setShowReviewModal(false)
-        }
+        // const closeReviewModal = () => {
+        //     setShowReviewModal(false)
+        // }
 
         document.addEventListener('click', closeReviewModal)
         return () => document.removeEventListener('click', closeReviewModal)
@@ -111,7 +115,7 @@ const ListingShow = () => {
             </div>
             {showReviewModal && (
                 user ? (
-                    <ReviewForm listingId = {listingId}/>
+                    <ReviewForm listingId = {listingId} closeReviewModal={closeReviewModal}/>
                 ) :
                 <div>Sorry, must be logged in to leave a review.</div>
             )}

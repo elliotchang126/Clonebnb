@@ -5,12 +5,11 @@ import { createReview } from "../../store/reviewsReducer";
 import './ReviewForm.css'
 import { IoIosStar } from 'react-icons/io'
 
-const ReviewForm = () => {
+const ReviewForm = ({closeReviewModal}) => {
     const dispatch = useDispatch();
     const { listingId } = useParams();
-    const userId = useSelector(state => state.session.user.id)
     const [formData, setFormData] = useState({
-        listingId: listingId,
+        listing_id: listingId,
         // userId: userId,
         cleanliness: null,
         communication: null,
@@ -20,6 +19,7 @@ const ReviewForm = () => {
         value: null,
         body: ''
     })
+    const reviewErrors = useSelector(state => state.errors.reviews)
 
     const handleFormClick = e => {
         e.stopPropagation();
@@ -54,7 +54,9 @@ const ReviewForm = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        console.log(formData)
         dispatch(createReview(formData))
+        closeReviewModal();
     }
 
     return(
@@ -93,6 +95,7 @@ const ReviewForm = () => {
                             </fieldset>
                         </div> 
                     ))}
+                    {/* { reviewErrors ? (reviewErrors.map(error => (<div>{error}</div>))) : <></> } */}
                 </div>
                 <h2 className='body-header'>Write a Public Review</h2>
                 <h3 className='body-instructions'>Tell the next guests what you loved and anything else they should know about this place.</h3>
