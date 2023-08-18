@@ -47,9 +47,7 @@ const LoginForm = (props) => {
             else if (data) setError([data]);
             else setError([res.statusText]);
         })
-
     }
-
 
     return(
         <div className='login-form'>

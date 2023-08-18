@@ -1,0 +1,10 @@
+.reviews-index {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.reviews-index-item {
+    width: 48%;
+}

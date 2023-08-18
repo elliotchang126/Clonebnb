@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchReviews, getReviews } from "../../store/reviewsReducer";
 import { useEffect } from "react";
 import ReviewsIndexItem from "../ReviewsIndexItem/ReviewsIndexItem";
+import './ReviewsIndex.css'
 
 const ReviewsIndex = () => {
     const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const ReviewsIndex = () => {
             </div>
             <div className="reviews-index">
                 {reviews?.map(review =>
-                    <ReviewsIndexItem review={review}/>
+                    <ReviewsIndexItem className='reviews-index-item' key={review.id} review={review}/>
                 )}
             </div>
         </div>
