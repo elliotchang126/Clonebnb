@@ -6,9 +6,9 @@ import { FaStar } from 'react-icons/fa'
 import './ReviewForm.css'
 
 
-const ReviewForm = () => {
+const ReviewForm = ({ listing }) => {
     const dispatch = useDispatch();
-    const { listingId } = useParams();
+    // const { listingId } = useParams();
     const [formData, setFormData] = useState({
         cleanliness: null,
         communication: null,
@@ -19,10 +19,7 @@ const ReviewForm = () => {
         body: ''
     })
 
-
-
-    const ratings = ['cleanliness', 'communication', 'checkIn', 'accuracy', 'location', 'value']
-    const ratingTitles = ['Cleanliness', 'Communication', 'Check-In', 'Accuracy', 'Location', 'Value']
+    const [hoverRating, setHoverRating] = useState({rating: '', num: 0})
 
     useEffect(() => {
         const button = document.querySelector('.user-button')
@@ -40,6 +37,8 @@ const ReviewForm = () => {
         return () => button.removeEventListener('mousemove', handleMouseover);
     }, [])
 
+    const ratings = ['cleanliness', 'communication', 'checkIn', 'accuracy', 'location', 'value']
+    const ratingTitles = ['Cleanliness', 'Communication', 'Check-In', 'Accuracy', 'Location', 'Value']
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -56,12 +55,17 @@ const ReviewForm = () => {
             <form className='review-form' onSubmit={handleSubmit}>
                 <h2 className="form-header">Write a New Review</h2>
                 {ratings.map((rating, idx) =>(
-                    <div>
+                    <div key ={rating}>
                         <fieldset>
                             <legend>{ratingTitles[idx]}
                                 <br />
                                 {[1, 2, 3, 4, 5].map(num => (
-                                    <label htmlFor={`${rating}-${num}`}>{num}
+                                    <label 
+                                        htmlFor={`${rating}-${num}`}
+                                        key={`radio-${rating}-${num}`}
+                                        onMouseEnter={() => setHoverRating({rating, num})}
+                                        onMouseLeave={() => setHoverRating({rating: '', num: 0})}
+                                    >{num}
                                     <input type="radio"
                                         id={`${rating}-${num}`}
                                         className='rating-input'
@@ -69,7 +73,11 @@ const ReviewForm = () => {
                                         value={num}
                                         onChange={handleChange}
                                     />
-                                    <FaStar />
+                                    <FaStar className={hoverRating.rating === rating ?
+                                        (num <= hoverRating.num ? 'hovered' : 'empty') :
+                                        (num <= formData[rating] ? 'selected' : 'empty')
+                                    }
+                                    />
                                     </label>
                                     ))}
                             </legend>
@@ -81,6 +89,7 @@ const ReviewForm = () => {
                 <input
                     type='text'
                     className="input-body"
+                    name='body'
                     value={formData.body}
                     onChange={handleChange}
                     placeholder="Write a public review"
@@ -91,4 +100,4 @@ const ReviewForm = () => {
     )
 }
 
-export default ReviewForm
+export default ReviewForm;

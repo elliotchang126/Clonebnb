@@ -12,8 +12,16 @@
     box-sizing: border-box;
 }
 
-.rating-input {
+.hovered {
+    color: yellow;
+}
 
+.selected {
+    color: gold;
+}
+
+.empty {
+    color: gray
 }
 
 .input-body {
