@@ -21,7 +21,7 @@ const ReviewsIndex = ({ listing }) => {
             <ReviewProgressbar listing={listing} />
             <div className="reviews-index">
                 {reviews?.map(review =>
-                    <ReviewsIndexItem className='reviews-index-item' key={review.id} review={review}/>
+                    <ReviewsIndexItem className='reviews-index-item' key={review.id} review={review} />
                 )}
             </div>
         </div>

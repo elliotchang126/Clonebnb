@@ -9,7 +9,7 @@ import { Modal } from "../../context/Modal";
 import ReviewForm from '../ReviewForm/ReviewForm';
 import ReviewsIndex from '../ReviewsIndex/ReviewsIndex'
 import handleMouseover from '../../util/buttonUtil';
-import { getReviews } from '../../store/reviewsReducer';
+import { fetchReviews, getReviews } from '../../store/reviewsReducer';
 
 const ListingShow = (props) => {
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const ListingShow = (props) => {
 
     useEffect(() => {
         const button = document.querySelector('.user-button')
-         button.addEventListener('mousemove', handleMouseover);
+        button.addEventListener('mousemove', handleMouseover);
 
         return () => button.removeEventListener('mousemove', handleMouseover);
     }, [])
@@ -33,7 +33,7 @@ const ListingShow = (props) => {
         e.stopPropagation();
         setShowModal(true)
     }
-
+ 
     useEffect(() => {
         if (showModal) return;
 
@@ -49,6 +49,10 @@ const ListingShow = (props) => {
             dispatch(fetchListing(listingId))
         }
     }, [dispatch, listingId])
+
+    useEffect(() => {
+        dispatch(fetchReviews)
+    }, [dispatch])
 
     useEffect(() => {
         if (userId) {

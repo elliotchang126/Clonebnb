@@ -1,11 +1,19 @@
-import { useSelector } from "react-redux";
-import { getUser } from "../../store/usersReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUser, getUser } from "../../store/usersReducer";
 import { BsPersonCircle } from 'react-icons/bs'
 import './ReviewsIndexItem.css'
+import { useEffect } from "react";
 
 const ReviewsIndexItem = ({ review }) => {
-    const guestId = review?.userId
-    const guest = useSelector(getUser(guestId))
+    const dispatch = useDispatch()
+    const userId = review?.userId
+    const guest = useSelector(getUser(userId))
+
+    useEffect(() => {
+        if (!guest && userId) {
+            dispatch(fetchUser(userId))
+        }
+    }, [dispatch, userId, guest])
 
     const average = ((review.cleanliness + review.communication + review.checkIn + review.accuracy + review.location + review.value) / 6).toFixed(2)
     const averageReview = parseFloat(average)
