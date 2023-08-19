@@ -19,7 +19,7 @@ export const receiveReview = review => ({
 })
 
 export const removeReview = reviewId => ({
-    type: RECEIVE_REVIEW,
+    type: REMOVE_REVIEW,
     reviewId
 })
 

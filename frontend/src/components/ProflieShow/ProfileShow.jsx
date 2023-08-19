@@ -2,18 +2,44 @@ import { useDispatch, useSelector } from "react-redux"
 import "./ProfileShow.css"
 import ReviewsIndexItem from "../ReviewsIndexItem/ReviewsIndexItem"
 import { fetchUser, getUser } from "../../store/usersReducer"
-import { useEffect } from "react"
-import { getReviews } from "../../store/reviewsReducer"
+import { useEffect, useState } from "react"
+import { deleteReview, getReviews } from "../../store/reviewsReducer"
+import { Modal } from "../../context/Modal"
+import UpdateReviewForm from "../ReviewForm/UpdateReviewForm"
 
 const ProfileShow = () => {
     const dispatch = useDispatch();
-    const currentUser = useSelector(state => state?.session?.user)
-    const user = useSelector(getUser(currentUser?.id))
-    const reviews = useSelector(getReviews)
+    const user = useSelector(state => state?.session?.user);
+    // const user = useSelector(getUser(user?.id))
+    const reviews = useSelector(getReviews);
+    const [showModal, setShowModal] = useState(false);
+    const [updateId, setUpdateId] = useState(null);
 
     useEffect(() => {
-        dispatch(fetchUser(currentUser?.id))
-    }, [dispatch, currentUser.id])
+        dispatch(fetchUser(user?.id))
+    }, [dispatch, user.id])
+
+    const openModal = e => {
+        if (showModal) return;
+        e.stopPropagation();
+        setShowModal(true)
+    }
+
+    useEffect(() => {
+        if (showModal) return;
+
+        const closeModal = () => {
+            setShowModal(false)
+        }
+        document.addEventListener('click', closeModal)
+        return () => document.removeEventListener('click', closeModal)
+    }, [showModal])
+
+    const handleUpdateButton = (e, reviewId) => {
+        setUpdateId(reviewId)
+        openModal(e)
+    }
+
     return(
         <div className="profile-container">
             <h1 className="profile-header">Trips</h1>
@@ -21,9 +47,27 @@ const ProfileShow = () => {
             <h1 className="profile-header">Reviews</h1>
             <div className='profile-reviews-container'>
                 {reviews?.map(review => (
-                    <ReviewsIndexItem className='profile-reviews' review={review} />
+                    <div key={`review-${review.id}`}className='profile-review'>
+                        <ReviewsIndexItem className='profile-review-content'review={review} />
+                        <button 
+                            onClick={(e) => handleUpdateButton(e, review.id)}>
+                            Update Review
+                        </button>
+                        <button 
+                            onClick={() => dispatch(deleteReview(review.id))}>
+                            Delete Review
+                        </button>
+                    </div>
                 ))}
             </div>
+            {showModal && (
+                user ? (
+                    <Modal onClose={() => setShowModal(false)}>
+                        <UpdateReviewForm setShowModal={setShowModal} reviewId={updateId}/>
+                    </Modal>
+                ) :
+                <div>Sorry, must be logged in to leave a review.</div>
+            )}
         </div>
     )
 }

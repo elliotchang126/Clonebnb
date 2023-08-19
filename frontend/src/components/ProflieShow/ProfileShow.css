@@ -1,3 +1,7 @@
+.profile-container {
+    margin: 10px 40px;
+}
+
 .profile-reviews-container {
     display: flex;
     flex-wrap: wrap;
@@ -5,6 +9,12 @@
     justify-content: space-between;
 }
 
-.profile-reviews {
+.profile-review {
     width: 48%;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+.profile-review-content {
+    width: 100%
 }

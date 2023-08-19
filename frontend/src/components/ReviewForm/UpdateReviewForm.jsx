@@ -1,24 +1,27 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom";
-import { createReview } from "../../store/reviewsReducer";
+import { updateReview, getReview } from "../../store/reviewsReducer";
 import './ReviewForm.css'
 import { IoIosStar } from 'react-icons/io'
 import handleMouseover from "../../util/buttonUtil";
 
-const ReviewForm = (props) => {
-    const {setShowModal} = props
+const UpdateReviewForm = (props) => {
+    const {setShowModal, reviewId} = props
     const dispatch = useDispatch();
-    const { listingId } = useParams();
+    // const { listingId } = useParams();
+    let review = useSelector(getReview(reviewId))
+
     const [formData, setFormData] = useState({
-        listing_id: listingId,
-        cleanliness: null,
-        communication: null,
-        check_in: null,
-        accuracy: null,
-        location: null,
-        value: null,
-        body: ''
+        listing_id: review.listingId,
+        user_id: review.userId,
+        cleanliness: review.cleanliness,
+        communication: review.communication,
+        check_in: review.checkIn,
+        accuracy: review.accuracy,
+        location: review.location,
+        value: review.value,
+        body: review.body
     })
     const reviewErrors = useSelector(state => state.errors.reviews)
 
@@ -42,14 +45,14 @@ const ReviewForm = (props) => {
     const handleSubmit = e => {
         e.preventDefault();
         console.log(formData);
-        dispatch(createReview(formData));
+        dispatch(updateReview(formData));
         setShowModal(false);
     }
 
     return(
         // <div className="review-container">
             <form className='review-form' onSubmit={handleSubmit} >
-                <h2 className="form-header">Write a New Review</h2>
+                <h2 className="form-header">Update Your Review</h2>
                 <div className="form-radio-container">
                     {ratings.map((rating, idx) =>(
                         <div className= 'form-radio-container' key ={rating}>
@@ -94,10 +97,10 @@ const ReviewForm = (props) => {
                     onChange={handleChange}
                     placeholder="Write a public review"
                     />
-                <button className='user-button'>Submit Your Review</button>
+                <button className='user-button'>Update Review</button>
             </form>
         // </div>
     )
 }
 
-export default ReviewForm;
+export default UpdateReviewForm;
