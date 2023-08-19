@@ -13,6 +13,7 @@ const UpdateReviewForm = (props) => {
     let review = useSelector(getReview(reviewId))
 
     const [formData, setFormData] = useState({
+        id: reviewId,
         listing_id: review.listingId,
         user_id: review.userId,
         cleanliness: review.cleanliness,

@@ -32,7 +32,7 @@ class Api::ReviewsController < ApplicationController
     def update
         @review = Review.find_by(id: params[:id])
         if @review.user_id == current_user.id && @review.update(review_params)
-            render :index
+            render json: {message: 'success!'}
         else
             render json: @review.errors.full_messages, status: 422
         end
@@ -48,6 +48,6 @@ class Api::ReviewsController < ApplicationController
     end
 
     def review_params
-        params.require(:review).permit(:listing_id, :user_id, :cleanliness, :communication, :check_in, :accuracy, :location, :value, :body)
+        params.require(:review).permit(:listing_id, :cleanliness, :communication, :check_in, :accuracy, :location, :value, :body)
     end
 end
