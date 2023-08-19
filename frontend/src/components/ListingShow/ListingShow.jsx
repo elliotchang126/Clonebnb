@@ -9,12 +9,14 @@ import { Modal } from "../../context/Modal";
 import ReviewForm from '../ReviewForm/ReviewForm';
 import ReviewsIndex from '../ReviewsIndex/ReviewsIndex'
 import handleMouseover from '../../util/buttonUtil';
+import { getReviews } from '../../store/reviewsReducer';
 
 const ListingShow = (props) => {
     const dispatch = useDispatch();
     const { listingId } = useParams();
     const user = useSelector(state => state.session.user)
     const listing = useSelector(getListing(listingId))
+    const reviews = useSelector(getReviews)
     const userId = listing?.userId
     const host = useSelector(getUser(userId))
     const [showModal, setShowModal] = useState(false)
@@ -59,8 +61,8 @@ const ListingShow = (props) => {
             <div className='show-header'>
                 <div className="show-title">{listing?.title}</div>
                 <div className="show-subtitle">
-                    <span className="show-rating">&#9733; 5.0</span>{' · '}
-                    <span className="show-reviews-total">20 reviews</span>{' · '}
+                    <span className="show-rating">&#9733; {listing?.overallRating}</span>{' · '}
+                    <span className="show-reviews-total">{reviews.length} reviews</span>{' · '}
                     <span className='show-location'>
                         {listing?.city}, {listing?.state}, {listing?.country}
                     </span>

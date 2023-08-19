@@ -23,4 +23,8 @@ class Review < ApplicationRecord
     belongs_to :listing
     
     belongs_to :user
+
+    def average_rating
+        ((cleanliness + communication + check_in + accuracy + location + value) / 6.0).round(2)
+    end
 end

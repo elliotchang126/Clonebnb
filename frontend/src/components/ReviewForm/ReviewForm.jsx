@@ -25,7 +25,7 @@ const ReviewForm = (props) => {
     const [hoverRating, setHoverRating] = useState({rating: '', num: 0})
 
     useEffect(() => {
-        const button = document.querySelector('.user-button')
+        const button = document.querySelector('.new-review-button')
          button.addEventListener('mousemove', handleMouseover);
 
         return () => button.removeEventListener('mousemove', handleMouseover);
@@ -82,7 +82,9 @@ const ReviewForm = (props) => {
                             </fieldset>
                         </div> 
                     ))}
-                    {/* { reviewErrors ? (reviewErrors.map(error => (<div>{error}</div>))) : <></> } */}
+                    <div>
+                    { reviewErrors.map(error => <li key={error}>{error}</li>)  }
+                    </div>
                 </div>
                 <h2 className='body-header'>Write a Public Review</h2>
                 <h3 className='body-instructions'>Tell the next guests what you loved and anything else they should know about this place.</h3>
@@ -94,7 +96,7 @@ const ReviewForm = (props) => {
                     onChange={handleChange}
                     placeholder="Write a public review"
                     />
-                <button className='user-button'>Submit Your Review</button>
+                <button className='new-review-button'>Submit Your Review</button>
             </form>
         // </div>
     )

@@ -37,4 +37,11 @@ class Listing < ApplicationRecord
 
     has_many :reviews,
         dependent: :destroy
+
+    def overall_rating
+        return nil unless reviews.any?
+        # reviews.average(:average_rating).round(2)
+        avg_ratings = reviews.map(&:average_rating)
+        (avg_ratings.sum / avg_ratings.length).round(2)
+    end
 end
