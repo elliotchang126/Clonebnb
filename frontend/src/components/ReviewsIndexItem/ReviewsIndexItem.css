@@ -8,17 +8,23 @@
 .guest-container {
     display: flex;
     gap: 10px;
+    margin-bottom: 5px;
 }
 
 .guest-icon {
     color: rgb(255, 56, 92);
-    font-size: 50px
+    font-size: 50px;
 }
 
 .guest-name {
     font-size: 20px;
-    padding: 20px 0px;
+    padding: 10px 0px 0px 0px;
 
+}
+
+.guest-rating {
+    font-size: 14px;
+    color:#717171;
 }
 
 .guest-review {

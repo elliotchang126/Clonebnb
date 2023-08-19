@@ -90,7 +90,7 @@ const ListingShow = (props) => {
                 <div className="show-details-header">
                     <div className='house-info'>
                         <div className='house-host'>
-                            House hosted by {host?.firstName}
+                            Entire home hosted by {host?.firstName}
                         </div>
                         <div className='bed-bath-info'>
                             <span>
