@@ -538,9 +538,10 @@ ApplicationRecord.transaction do
     ]
     
     users.each do |user|
-        8.times do 
+        random_listings = (1..20).to_a.shuffle[0...8]
+        random_listings.each do |i|
             Review.create!(
-                listing_id: rand(1..20),
+                listing_id: i,
                 user_id: user.id,
                 cleanliness: rand(3..5),
                 communication: rand(3..5),
@@ -549,11 +550,15 @@ ApplicationRecord.transaction do
                 location: rand(3..5),
                 value: rand(3..5),
                 body: sample_reviews.sample 
-                )
-            end
+            )
         end
+    end
+
+    puts "Done!"
 end
     
+    puts 'Attaching images to listings...'
+
     pool_listings.each_with_index do |listing, i|
         listing.photos.attach([
             { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/amazing-pools/amazingpools-#{i + 1}-1.png"), filename: "amazingpools-#{i + 1}-1.png" },
@@ -644,6 +649,8 @@ end
             { io: URI.open("https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-#{i + 1}-5.png"), filename: "omg-#{i + 1}-5.png" }
         ])
     end
+    
+    puts done!
 
 # file97 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-2-2.png')
 # file92 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-1-2.png')
