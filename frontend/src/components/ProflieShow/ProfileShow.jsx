@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import { deleteReview, getReviews } from "../../store/reviewsReducer"
 import { Modal } from "../../context/Modal"
 import UpdateReviewForm from "../ReviewForm/UpdateReviewForm"
+import handleMouseover from "../../util/buttonUtil"
 
 const ProfileShow = () => {
     const dispatch = useDispatch();
@@ -35,6 +36,22 @@ const ProfileShow = () => {
         return () => document.removeEventListener('click', closeModal)
     }, [showModal])
 
+    useEffect(() => {
+        const buttons = document.querySelectorAll('.review-button')
+
+        if (!buttons.length) return;
+
+        buttons.forEach(button => {
+            button.addEventListener('mousemove', handleMouseover);
+        })
+
+        return () => {
+            buttons.forEach(button => {
+                button.removeEventListener('mousemove', handleMouseover)
+            })
+        }
+    }, [])
+
     const handleUpdateButton = (e, reviewId) => {
         setUpdateId(reviewId)
         openModal(e)
@@ -44,16 +61,18 @@ const ProfileShow = () => {
         <div className="profile-container">
             <h1 className="profile-header">Trips</h1>
 
-            <h1 className="profile-header">Reviews</h1>
+            <h1 className="profile-header">Your Previous Trip Reviews</h1>
             <div className='profile-reviews-container'>
                 {reviews?.map(review => (
                     <div key={`review-${review.id}`}className='profile-review'>
                         <ReviewsIndexItem className='profile-review-content'review={review} />
-                        <button 
+                        <button
+                            className="review-button"
                             onClick={(e) => handleUpdateButton(e, review.id)}>
                             Update Review
                         </button>
                         <button 
+                            className="review-button"
                             onClick={() => dispatch(deleteReview(review.id))}>
                             Delete Review
                         </button>

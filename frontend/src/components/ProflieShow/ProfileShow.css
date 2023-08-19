@@ -2,6 +2,11 @@
     margin: 10px 40px;
 }
 
+.profile-header {
+    font-size: 35px;
+    font-weight: 400;;
+}
+
 .profile-reviews-container {
     display: flex;
     flex-wrap: wrap;
@@ -11,10 +16,39 @@
 
 .profile-review {
     width: 48%;
-    gap: 10px;
     box-sizing: border-box;
 }
 
 .profile-review-content {
     width: 100%
+}
+
+.review-button {
+    /* https://codepen.io/Nkzq/pen/powOGze used for button gradient set up*/
+    border: 1px solid lightgray;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+    width: 150px;
+    height: 50.5px;
+    --mouse-x: 50;
+    --mouse-y: 50;
+    background-size: 200% 200%;
+    background-position: calc((100 - var(--mouse-x, 0)) * 1%) calc((100 - var(--mouse-y, 0)) * 1%);
+    background-image: radial-gradient(circle, #ff385c 0%, #e61e4d 27.5%,#e31c5f 40%,#d70466 57.5%,#bd1e59 75%,#bd1e59 100%); 
+    /* borrowed 0% color from previous project Nextbnb. Rest of gradient taken from Airbnb*/
+    outline: none;
+    cursor: pointer;
+    align-self: center;
+}
+
+.review-item-container {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0px
+}
+
+.profile-container .review-item-container {
+    width: 100%;
 }

@@ -42,9 +42,9 @@ const ProfileButton = ({ user }) => {
         return () => document.removeEventListener('click', closeMenu)
     }, [showMenu])
 
-    const logout = e => {
-        // e.preventDefault();
+    const logout = () => {
         dispatch(sessionActions.logout())
+        history.push('/')
     }
 
     const openModal = e => {
