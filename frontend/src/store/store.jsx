@@ -6,6 +6,7 @@ import listingsReducer from './listingsReducer'
 import usersReducer from './usersReducer'
 import errorsReducer from './errorsReducer'
 import reviewsReducer from './reviewsReducer'
+import reservationsReducer from './reservationsReducer'
 
 
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     listings: listingsReducer,
     users: usersReducer,
     reviews: reviewsReducer,
+    reservations: reservationsReducer;
     errors: errorsReducer,
     ui: uiReducer
 })

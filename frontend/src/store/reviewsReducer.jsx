@@ -120,4 +120,4 @@ const reviewsReducer = ( state={}, action ) => {
     }
 }
 
-export default reviewsReducer
+export default reviewsReducer;
