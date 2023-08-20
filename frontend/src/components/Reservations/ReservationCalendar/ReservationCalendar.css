@@ -1,0 +1,15 @@
+.DateInput {
+    margin-left: 10px;
+    width: 100px;
+    padding: none;
+    border: none;
+}
+
+.DateRangePickerInput {
+    border: none;
+    padding: none;
+}
+
+.DayPicker {
+    margin-right: 50px;
+}

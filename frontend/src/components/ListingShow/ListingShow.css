@@ -17,7 +17,7 @@
 }
 
 .show-container {
-    margin: 20px 60px 0px 60px;
+    margin: 20px 100px 0px 100px;
 }
 
 .show-images-container {
@@ -82,11 +82,12 @@
 }
 
 .show-details {
-    width: 55%
+    width:100%;
+    display: flex;
 }
 
 .show-details-header {
-    width: 100%;
+    width: 66%;
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
@@ -100,6 +101,10 @@
     padding-bottom: 10px
 }
 
+.new-review-container .user-button {
+    margin-top: 20px;
+    width:100%;
+}
 
 .profile-icon {
     font-size: 60px;
@@ -109,7 +114,7 @@
 .show-description {
     padding-top: 25px;
     padding-bottom: 25px;
-    width: 100%;
+    width: 60%;
     font-size: 18px;
     font-weight: 300;
 }
@@ -118,4 +123,16 @@
     color: red;
     margin-top: -15px;
     padding-bottom: 10px;
+}
+
+.show-calendar-container {
+    width: 115%;
+    padding-top: 40px;
+    position: sticky;
+}
+
+.calendar-wrapper {
+    padding: 20px;
+    border: 1px solid gray;
+    border-radius: 10px;
 }

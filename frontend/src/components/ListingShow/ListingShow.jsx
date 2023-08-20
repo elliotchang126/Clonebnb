@@ -10,6 +10,7 @@ import ReviewForm from '../ReviewForm/ReviewForm';
 import ReviewsIndex from '../ReviewsIndex/ReviewsIndex'
 import handleMouseover from '../../util/buttonUtil';
 import { fetchReviews, getReviews } from '../../store/reviewsReducer';
+import ReservationForm from '../Reservations/ReservationForm/ReservationForm';
 
 const ListingShow = (props) => {
     const dispatch = useDispatch();
@@ -28,8 +29,10 @@ const ListingShow = (props) => {
     }, [dispatch, listingId])
     
     useEffect(() => {
-        dispatch(fetchReviews)
-    }, [dispatch])
+        if (listing) {
+            dispatch(fetchReviews)
+        }
+    }, [dispatch, listing])
     
     // useEffect(() => {
     //     if (userId) {
@@ -92,32 +95,38 @@ const ListingShow = (props) => {
                 </div>
             </div>
             <div className="show-details">
-                <div className="show-details-header">
-                    <div className='house-info'>
-                        <div className='house-host'>
-                            Entire home hosted by {host?.firstName}
+                <div>
+                    <div className="show-details-header">
+                        <div className='house-info'>
+                            <div className='house-host'>
+                                Entire home hosted by {host?.firstName}
+                            </div>
+                            <div className='bed-bath-info'>
+                                <span>
+                                    {listing?.bedrooms > 1 ? `${listing?.bedrooms} bedrooms` : `${listing?.bedrooms} bedroom`}
+                                </span>{' · '}
+                                <span>
+                                    {listing?.bathrooms > 1 ? `${listing?.bathrooms} baths` : `${listing?.bathrooms} bath`}
+                                </span>
+                            </div>
                         </div>
-                        <div className='bed-bath-info'>
-                            <span>
-                                {listing?.bedrooms > 1 ? `${listing?.bedrooms} bedrooms` : `${listing?.bedrooms} bedroom`}
-                            </span>{' · '}
-                            <span>
-                                {listing?.bathrooms > 1 ? `${listing?.bathrooms} baths` : `${listing?.bathrooms} bath`}
-                            </span>
-                        </div>
+                        <BsPersonCircle className='profile-icon' />
                     </div>
-                    <BsPersonCircle className='profile-icon' />
-                </div>
-                <div className="show-description">
-                    {listing?.description}
+                    <div className="show-description">
+                        {listing?.description}
+                    </div>
                 </div>
                 <div className='show-calendar-container'>
-                    <div className="show-calendar"></div>
-                    <div className="new-review-container">
-                        <button className='user-button' onClick={e => openModal(e)}>
-                            Review Listing
-                        </button>
+                    <div className="calendar-wrapper">
+                        <div className="show-calendar">
+                            <ReservationForm listing={listing} reviews={reviews} />
+                        </div>
                     </div>
+                        <div className="new-review-container">
+                            <button className='user-button' onClick={e => openModal(e)}>
+                                Review Listing
+                            </button>
+                        </div>
                     {showModal && (
                         user ? (
                             <Modal onClose={() => setShowModal(false)}>

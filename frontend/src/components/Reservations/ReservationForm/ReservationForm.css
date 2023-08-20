@@ -1,0 +1,101 @@
+.listing-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reservation-field {
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+.calendar-title {
+    display: flex;
+    padding-top: 20px;
+    padding-left: 20px;
+    gap: 60px;
+}
+
+.num-guests {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-top: 1px solid gray
+
+}
+
+.num-guests-handler {
+    display: flex;
+    gap: 10px;
+}
+
+.guest-button {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+    background-color: white;
+    border: 1px solid lightgray;
+    color: lightgray;
+}
+
+.guest-button:hover {
+    border: 1px solid black;
+    color: black
+}
+
+.guest-count {
+    font-size: 20px;
+    font-weight: 300
+}
+
+.reservation-container {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+}
+
+.button-text {
+    align-self: center;
+    font-size: 14px;
+    color: black;
+    font-weight: 300;
+    margin-top: -10px;
+}
+
+.reservation-container .user-button {
+    margin-top: 10px;
+    width: 320px;
+}
+
+.price-calculator {
+    border-bottom: 1px solid lightgray
+}
+
+.pricing-item-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0px;
+}
+
+.pricing-total-container {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px
+}
+
+.price-text {
+    text-decoration: underline;
+    font-weight: 300;
+}
+
+.price-value {
+    font-weight: 300;
+}
+
+.price-total-text, .price-total-value {
+    font-weight: 500;
+}
+
+.pricing-item-container:last-child {
+    border-bottom: 1px solid light black;
+}
