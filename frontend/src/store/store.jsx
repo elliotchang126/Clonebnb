@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
     listings: listingsReducer,
     users: usersReducer,
     reviews: reviewsReducer,
-    reservations: reservationsReducer;
+    reservations: reservationsReducer,
     errors: errorsReducer,
     ui: uiReducer
 })
