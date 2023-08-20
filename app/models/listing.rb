@@ -37,6 +37,9 @@ class Listing < ApplicationRecord
 
     has_many :reviews,
         dependent: :destroy
+    
+    has_many :reservations,
+        dependent: :destroy
 
     def overall_rating
         return nil unless reviews.any?
