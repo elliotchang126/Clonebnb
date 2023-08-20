@@ -1,4 +1,6 @@
 import csrfFetch from "./csrf";
+import { RECEIVE_LISTING } from "./listingsReducer";
+import { RECEIVE_USER } from "./usersReducer";
 
 export const RECEIVE_RESERVATIONS = 'reservations/RECEIVE_RESERVATIONS'
 export const RECEIVE_RESERVATION = 'reservations/RECEIVE_RESERVATION'
