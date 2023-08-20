@@ -538,7 +538,7 @@ ApplicationRecord.transaction do
     ]
     
     users.each do |user|
-        random_listings = (1..20).to_a.shuffle[0...8]
+        random_listings = (1..20).to_a.shuffle[0...9]
         random_listings.each do |i|
             Review.create!(
                 listing_id: i,

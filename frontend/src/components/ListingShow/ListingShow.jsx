@@ -14,8 +14,9 @@ import { fetchReviews, getReviews } from '../../store/reviewsReducer';
 const ListingShow = (props) => {
     const dispatch = useDispatch();
     const { listingId } = useParams();
-    const user = useSelector(state => state.session.user)
     const listing = useSelector(getListing(listingId))
+    const reviews = useSelector(getReviews) 
+    const user = useSelector(state => state.session.user)
     const userId = listing?.userId
     const host = useSelector(getUser(userId))
     const [showModal, setShowModal] = useState(false)
@@ -30,13 +31,12 @@ const ListingShow = (props) => {
         dispatch(fetchReviews)
     }, [dispatch])
     
-    useEffect(() => {
-        if (userId) {
-            dispatch(fetchUser(userId))
-        }
-    }, [dispatch, userId])
+    // useEffect(() => {
+    //     if (userId) {
+    //         dispatch(fetchUser(userId))
+    //     }
+    // }, [dispatch, userId])
     
-    const reviews = useSelector(getReviews) 
 
     useEffect(() => {
         const button = document.querySelector('.user-button')
