@@ -1,10 +1,28 @@
 .listing-info {
     display: flex;
     justify-content: space-between;
+    padding: 0px 0px 15px 0px;
+}
+
+.reservation-price {
+    font-weight: 300;
+}
+
+.reservation-price-night {
+    font-size: 18px;
+}
+
+.reservation-listing-info {
+    font-size: 14px;
+    color: #767676
+}
+
+.reserve-reviews-avg {
+    color: black;
 }
 
 .reservation-field {
-    border: 1px solid gray;
+    border: 1px solid #767676;
     border-radius: 10px;
 }
 
@@ -12,14 +30,18 @@
     display: flex;
     padding-top: 20px;
     padding-left: 20px;
-    gap: 60px;
+    gap: 70px;
+}
+
+.calendar-title > p {
+    font-size: 14px;
 }
 
 .num-guests {
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    border-top: 1px solid gray
+    border-top: 1px solid #767676;
 
 }
 
@@ -34,8 +56,8 @@
     height: 25px;
     font-size: 20px;
     background-color: white;
-    border: 1px solid lightgray;
-    color: lightgray;
+    border: 1px solid #767676;
+    color: #767676;
 }
 
 .guest-button:hover {
@@ -54,6 +76,13 @@
     /* justify-content: center; */
 }
 
+.login-text {
+    margin-top: -15px;
+    color: red;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
 .button-text {
     align-self: center;
     font-size: 14px;
@@ -68,7 +97,7 @@
 }
 
 .price-calculator {
-    border-bottom: 1px solid lightgray
+    border-bottom: 1px solid #767676
 }
 
 .pricing-item-container {

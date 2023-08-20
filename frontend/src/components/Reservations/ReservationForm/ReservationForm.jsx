@@ -2,18 +2,20 @@ import { useEffect, useState } from 'react'
 import './ReservationForm.css'
 import ReservationCalendar from '../ReservationCalendar/ReservationCalendar'
 import { useDispatch, useSelector } from 'react-redux'
+import { createReservation } from '../../../store/reservationsReducer'
 
 const ReservationForm = ({ listing, reviews }) => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user)
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
-    const [focusedInput, setFocusedInput] = useState(null);
+    // const [focusedInput, setFocusedInput] = useState(null);
     const [numGuests, setNumGuests] = useState(1);
     const [numNights, setNumNights] = useState(0);
     const [rawPrice, setRawPrice] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
     const [serviceFee, setServiceFee] = useState(0)
+    const [showLogin, setShowLogin] = useState(false);
 
     const handleDecrement = () => {
         setNumGuests(prev => {
@@ -45,16 +47,31 @@ const ReservationForm = ({ listing, reviews }) => {
         }
     }, [startDate, endDate, listing?.cleaningFee, listing?.price])
 
+    const handleSubmit = () => {
+        if (!user) {
+            setShowLogin(true);
+            return;
+        }
+        setShowLogin(false)
+
+        const reservation = {
+            listing_id: listing.id,
+            start_date: startDate.format("YYYY-MM-DD"),
+            end_date: endDate.format("YYYY-MM-DD"),
+            num_guests: numGuests
+        }
+        dispatch(createReservation(reservation))
+    }
 
     return (
         <div className='reservation-container'>
             <div className='listing-info'>
                 <div className="reservation-price">
-                    <span className="reservation-price-night">{listing?.price}</span> night
+                    <span className="reservation-price-night">${listing?.price}</span> night
                 </div>
                 <div className="reservation-listing-info">
                     <div>
-                        <span className="reserve-reviews-avg">{listing?.overallRating}</span>{' · '}
+                        <span className="reserve-reviews-avg">&#9733; {listing?.overallRating} · </span>
                         <span className="reserve-reviews">{reviews?.length} reviews</span>
                     </div>
                 </div>
@@ -79,7 +96,8 @@ const ReservationForm = ({ listing, reviews }) => {
                     </div>
                 </div>
             </div>
-            <button className='user-button'>Reserve</button>
+            <button className='user-button' onClick={handleSubmit}>Reserve</button>
+            {showLogin && <p className='login-text'>You must be logged in to reserve</p>}
             <p className='button-text'>You won't be charged yet</p>
             <div className="pricing-container">
                 <div className='price-calculator'>
