@@ -16,10 +16,27 @@ const ListingShow = (props) => {
     const { listingId } = useParams();
     const user = useSelector(state => state.session.user)
     const listing = useSelector(getListing(listingId))
-    const reviews = useSelector(getReviews)
     const userId = listing?.userId
     const host = useSelector(getUser(userId))
     const [showModal, setShowModal] = useState(false)
+    
+    useEffect(() => {
+        if (listingId) {
+            dispatch(fetchListing(listingId))
+        }
+    }, [dispatch, listingId])
+    
+    useEffect(() => {
+        dispatch(fetchReviews)
+    }, [dispatch])
+    
+    useEffect(() => {
+        if (userId) {
+            dispatch(fetchUser(userId))
+        }
+    }, [dispatch, userId])
+    
+    const reviews = useSelector(getReviews) 
 
     useEffect(() => {
         const button = document.querySelector('.user-button')
@@ -31,7 +48,7 @@ const ListingShow = (props) => {
     const openModal = e => {
         if (showModal) return;
         e.stopPropagation();
-        setShowModal(true)
+        setShowModal(true) 
     }
  
     useEffect(() => {
@@ -43,22 +60,6 @@ const ListingShow = (props) => {
         document.addEventListener('click', closeModal)
         return () => document.removeEventListener('click', closeModal)
     }, [showModal])
-
-    useEffect(() => {
-        if (listingId) {
-            dispatch(fetchListing(listingId))
-        }
-    }, [dispatch, listingId])
-
-    useEffect(() => {
-        dispatch(fetchReviews)
-    }, [dispatch])
-
-    useEffect(() => {
-        if (userId) {
-            dispatch(fetchUser(userId))
-        }
-    }, [dispatch, userId])
 
     return(
         <div className='show-container'>
@@ -117,6 +118,14 @@ const ListingShow = (props) => {
                             Review Listing
                         </button>
                     </div>
+                    {showModal && (
+                        user ? (
+                            <Modal onClose={() => setShowModal(false)}>
+                                <ReviewForm setShowModal={setShowModal}/>
+                            </Modal>
+                            ) :
+                            <div className='must-login'>Sorry, must be logged in to leave a review.</div>
+                    )}
                 </div>
             </div>
             <div className="show-reviews">
@@ -125,14 +134,6 @@ const ListingShow = (props) => {
             <div className="show-map">
 
             </div>
-            {showModal && (
-                user ? (
-                    <Modal onClose={() => setShowModal(false)}>
-                        <ReviewForm setShowModal={setShowModal}/>
-                    </Modal>
-                ) :
-                <div>Sorry, must be logged in to leave a review.</div>
-            )}
         </div>
     )
 }

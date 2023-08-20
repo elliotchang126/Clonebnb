@@ -543,12 +543,12 @@ ApplicationRecord.transaction do
             Review.create!(
                 listing_id: i,
                 user_id: user.id,
-                cleanliness: rand(3..5),
-                communication: rand(3..5),
-                check_in: rand(3..5),
-                accuracy: rand(3..5),
-                location: rand(3..5),
-                value: rand(3..5),
+                cleanliness: rand(4..5),
+                communication: rand(4..5),
+                check_in: rand(4..5),
+                accuracy: rand(4..5),
+                location: rand(4..5),
+                value: rand(4..5),
                 body: sample_reviews.sample 
             )
         end

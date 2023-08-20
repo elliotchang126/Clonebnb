@@ -108,6 +108,14 @@
 
 .show-description {
     padding-top: 25px;
+    padding-bottom: 25px;
     width: 100%;
+    font-size: 18px;
     font-weight: 300;
+}
+
+.must-login {
+    color: red;
+    margin-top: -15px;
+    padding-bottom: 10px;
 }
