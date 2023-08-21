@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux"
+import { shallowEqual, useDispatch, useSelector } from "react-redux"
 import { fetchReviews, getReviews } from "../../store/reviewsReducer";
 import { useEffect } from "react";
 import ReviewsIndexItem from "../ReviewsIndexItem/ReviewsIndexItem";
@@ -7,10 +7,10 @@ import ReviewProgressbar from "../ReviewProgressBar/ReviewProgressBar";
 
 const ReviewsIndex = ({ listing }) => {
     const dispatch = useDispatch();
-    const reviews = useSelector(getReviews)
+    const reviews = useSelector(getReviews, shallowEqual)
 
     useEffect(() => {
-        dispatch(fetchReviews())
+        dispatch(fetchReviews)
     }, [dispatch])
 
     return(

@@ -16,7 +16,7 @@ const ListingShow = (props) => {
     const dispatch = useDispatch();
     const { listingId } = useParams();
     const listing = useSelector(getListing(listingId))
-    const reviews = useSelector(getReviews) 
+    const reviews = useSelector(getReviews, shallowEqual);
     const user = useSelector(state => state.session.user)
     const userId = listing?.userId
     const host = useSelector(getUser(userId))

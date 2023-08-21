@@ -5,7 +5,7 @@ import { deleteReservation } from "../../store/reservationsReducer";
 
 const ReservationsIndexItem = ({ reservation }) => {
     const dispatch = useDispatch();
-    const listingId = reservation.listingId;
+    const listingId = reservation?.listingId;
     const listing = useSelector(getListing(listingId))
     const [showUpdate, setShowUpdate] = useState(false)
 
@@ -14,7 +14,7 @@ const ReservationsIndexItem = ({ reservation }) => {
     }
 
     const handleDelete = () => {
-        dispatch(deleteReservation(reservation.id))
+        dispatch(deleteReservation(reservation?.id))
     }
 
     useEffect(() => {
@@ -22,7 +22,9 @@ const ReservationsIndexItem = ({ reservation }) => {
     }, [dispatch, listingId])
 
     return(
-        <></>
+        <div>
+            <div>{listing?.city}</div>
+        </div>
     )
 }
 

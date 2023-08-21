@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux"
+import { shallowEqual, useDispatch, useSelector } from "react-redux"
 import "./ProfileShow.css"
 import ReviewsIndexItem from "../ReviewsIndexItem/ReviewsIndexItem"
 import { fetchUser, getUser } from "../../store/usersReducer"
@@ -8,12 +8,14 @@ import { Modal } from "../../context/Modal"
 import UpdateReviewForm from "../ReviewForm/UpdateReviewForm"
 import handleMouseover from "../../util/buttonUtil"
 import ReservationsIndex from "../Reservations/ReservationsIndex"
+import { getReservations } from "../../store/reservationsReducer"
 
 const ProfileShow = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state?.session?.user);
     // const user = useSelector(getUser(user?.id))
-    const reviews = useSelector(getReviews);
+    const reservations = useSelector(getReservations, shallowEqual)
+    const reviews = useSelector(getReviews, shallowEqual);
     const [showModal, setShowModal] = useState(false);
     const [updateId, setUpdateId] = useState(null);
 
@@ -62,7 +64,7 @@ const ProfileShow = () => {
         <div className="profile-container">
             <h1 className="profile-header">Trips</h1>
                 <div className="reservations-container">
-                    <ReservationsIndex />
+                    {/* <ReservationsIndex /> */}
                 </div>
             <h1 className="profile-header">Your Previous Trip Reviews</h1>
             <div className='profile-reviews-container'>

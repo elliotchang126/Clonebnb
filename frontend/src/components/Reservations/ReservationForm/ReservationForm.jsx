@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import moment from 'moment'
 import './ReservationForm.css'
 import ReservationCalendar from '../ReservationCalendar/ReservationCalendar'
 import { useDispatch, useSelector } from 'react-redux'
@@ -16,6 +17,23 @@ const ReservationForm = ({ listing, reviews }) => {
     const [totalPrice, setTotalPrice] = useState(0);
     const [serviceFee, setServiceFee] = useState(0)
     const [showLogin, setShowLogin] = useState(false);
+
+    const blockedDates = [];
+
+    listing?.reservations?.forEach(reservation => {
+        let resDate = moment(reservation?.startDate);
+        let resEndDate = moment(reservation?.endDate)
+
+        while (resDate <= resEndDate) {
+            blockedDates.push(resDate.format('YYYY-MM-DD'))
+            resDate = resDate.add(1, 'days')
+        }
+    })
+
+    const isDateBlocked = date => {
+        const dateToCheck = moment(date).format('YYYY-MM-DD')
+        return blockedDates.includes(dateToCheck)
+    }
 
     const handleDecrement = () => {
         setNumGuests(prev => {
@@ -86,6 +104,7 @@ const ReservationForm = ({ listing, reviews }) => {
                     setStartDate={setStartDate}
                     endDate={endDate}
                     setEndDate={setEndDate}
+                    isDateBlocked={isDateBlocked}
                 />
                 <div className='num-guests'>
                     <div className='guest-count'>Guests</div>
