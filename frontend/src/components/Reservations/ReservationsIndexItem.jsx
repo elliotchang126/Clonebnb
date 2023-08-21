@@ -23,6 +23,10 @@ const ReservationsIndexItem = ({ reservation }) => {
         return `${month} ${day}, ${year}`
     }
 
+    // useEffect(() => {
+    //     dispatch(fetchListing(listingId))
+    // })
+
     const toggleUpdate = () => {
         setShowUpdate(!showUpdate)
     }
@@ -49,8 +53,8 @@ const ReservationsIndexItem = ({ reservation }) => {
                 </div>
             </div>
             <div className="buttons-container">
-                <button className="update-res-button" onClick={toggleUpdate}>Update</button>
-                <button className="cancel-res-button"onClick={handleCancel}>Cancel</button>
+                <button className="update-res-button" onClick={toggleUpdate}>Update Reservation</button>
+                <button className="cancel-res-button"onClick={handleCancel}>Cancel Reservation</button>
             </div>
             {showUpdate && 
                 <UpdateReservationForm 
