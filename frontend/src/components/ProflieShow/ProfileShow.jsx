@@ -7,6 +7,7 @@ import { deleteReview, getReviews } from "../../store/reviewsReducer"
 import { Modal } from "../../context/Modal"
 import UpdateReviewForm from "../ReviewForm/UpdateReviewForm"
 import handleMouseover from "../../util/buttonUtil"
+import ReservationsIndex from "../Reservations/ReservationsIndex"
 
 const ProfileShow = () => {
     const dispatch = useDispatch();
@@ -60,7 +61,9 @@ const ProfileShow = () => {
     return(
         <div className="profile-container">
             <h1 className="profile-header">Trips</h1>
-
+                <div className="reservations-container">
+                    <ReservationsIndex />
+                </div>
             <h1 className="profile-header">Your Previous Trip Reviews</h1>
             <div className='profile-reviews-container'>
                 {reviews?.map(review => (
