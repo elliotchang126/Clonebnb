@@ -10,5 +10,13 @@ json.reviews do
     end
 end
 
+json.reservations do
+    @user.reservations.each do |reservation|
+        json.set! reservation.id do
+            json.extract! reservation, :id, :listing_id, :user_id, :num_guests, :start_date, :end_date
+        end
+    end
+end
+
 #json.reviews @user.reviews do |review|
 # end

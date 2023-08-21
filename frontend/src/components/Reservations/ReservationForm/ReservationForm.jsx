@@ -4,9 +4,11 @@ import './ReservationForm.css'
 import ReservationCalendar from '../ReservationCalendar/ReservationCalendar'
 import { useDispatch, useSelector } from 'react-redux'
 import { createReservation } from '../../../store/reservationsReducer'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom'
 
 const ReservationForm = ({ listing, reviews }) => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const user = useSelector(state => state.session.user)
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
@@ -79,6 +81,7 @@ const ReservationForm = ({ listing, reviews }) => {
             num_guests: numGuests
         }
         dispatch(createReservation(reservation))
+        history.push(`/users/${user.id}`)
     }
 
     return (

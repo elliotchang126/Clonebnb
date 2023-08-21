@@ -9,7 +9,7 @@ const ReservationsIndex = () => {
     const reservations = useSelector(getReservations)
 
     useEffect(() => {
-        dispatch(fetchReservations())
+        dispatch(fetchReservations)
     }, [dispatch])
 
     return(

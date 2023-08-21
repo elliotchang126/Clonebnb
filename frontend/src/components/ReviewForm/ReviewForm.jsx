@@ -82,11 +82,13 @@ const ReviewForm = (props) => {
                             </fieldset>
                         </div> 
                     ))}
-                    <div>
-                    { reviewErrors.map(error => <li key={error}>{error}</li>)  }
-                    </div>
                 </div>
                 <h2 className='body-header'>Write a Public Review</h2>
+                {/* <ul>
+                { reviewErrors?.map(error => 
+                    <li key={error}>{error}</li>)  
+                }
+                </ul> */}
                 <h3 className='body-instructions'>Tell the next guests what you loved and anything else they should know about this place.</h3>
                 <textarea
                     type='text'
