@@ -70,6 +70,7 @@ const ProfileShow = () => {
             <div className='profile-reviews-container'>
                 {reviews?.map(review => (
                     <div key={`review-${review.id}`}className='profile-review'>
+                        <h4 className='review-listing-title' >{review.listingTitle}</h4>
                         <ReviewsIndexItem className='profile-review-content'review={review} />
                         <button
                             className="review-button"

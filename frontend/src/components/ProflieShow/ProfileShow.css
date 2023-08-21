@@ -50,5 +50,12 @@
 }
 
 .profile-container .review-item-container {
+    margin-top: -10px;
     width: 100%;
+}
+
+.review-listing-title {
+    font-size: 20px;
+    font-weight: 300;
+    padding-top: 10px;
 }

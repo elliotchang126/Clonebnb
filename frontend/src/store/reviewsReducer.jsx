@@ -65,29 +65,29 @@ export const createReview = review => async dispatch => {
             method: 'POST',
             body: JSON.stringify(review)
         })
-        if (res.ok) {
-            const newReview = await res.json()
-            dispatch(receiveReview(newReview))
-            return res
-        } else {
-            const errors = await res.json();
-            throw errors
-        }
-    } catch (errors) {
+
+        const newReview = await res.json()
+        dispatch(receiveReview(newReview))
+        return res
+
+    } catch (err) {
+        const errors = await err.json();
         dispatch(receiveReviewErrors(errors))
     }
 }
 
 export const updateReview = review => async dispatch => {
-    const res = await csrfFetch(`/api/reviews/${review.id}`, {
-        method: 'PATCH',
-        body: JSON.stringify(review)
-    })
-    if (res.ok) {
+    try {
+        const res = await csrfFetch(`/api/reviews/${review.id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(review)
+        })
+
         const updatedReview = await res.json();
         dispatch(receiveReview(updatedReview))
-    } else {
-        const errors = await res.json();
+        return res
+    } catch (err) {
+        const errors = await err.json();
         dispatch(receiveReviewErrors(errors))
     }
 }

@@ -119,7 +119,7 @@ const ListingShow = (props) => {
                 <div className='show-calendar-container'>
                     <div className="calendar-wrapper">
                         <div className="show-calendar">
-                            <ReservationForm listing={listing} reviews={reviews} />
+                            <ReservationForm listing={listing} />
                         </div>
                     </div>
                         <div className="new-review-container">

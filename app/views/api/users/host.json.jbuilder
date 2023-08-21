@@ -6,6 +6,9 @@ json.reviews do
     @user.reviews.each do |review|
         json.set! review.id do
             json.extract! review, :id, :listing_id, :user_id, :cleanliness, :communication, :check_in, :accuracy, :location, :value, :body
+
+            json.first_name review.user.first_name
+            json.listing_title review.listing.title
         end
     end
 end

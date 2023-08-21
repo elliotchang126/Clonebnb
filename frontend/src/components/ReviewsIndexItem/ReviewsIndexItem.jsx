@@ -9,11 +9,11 @@ const ReviewsIndexItem = ({ review }) => {
     const userId = review?.userId
     const guest = useSelector(getUser(userId))
 
-    useEffect(() => {
-        if (!guest && userId) {
-            dispatch(fetchUser(userId))
-        }
-    }, [dispatch, userId, guest])
+    // useEffect(() => {
+    //     if (!guest && userId) {
+    //         dispatch(fetchUser(userId))
+    //     }
+    // }, [dispatch, userId, guest])
 
     const average = ((review.cleanliness + review.communication + review.checkIn + review.accuracy + review.location + review.value) / 6).toFixed(2)
     const averageReview = parseFloat(average)
@@ -23,7 +23,7 @@ const ReviewsIndexItem = ({ review }) => {
             <div className='guest-container'>
                 <BsPersonCircle className='guest-icon'/>
                 <div className="guest-text">
-                    <div className='guest-name'>{guest?.firstName}</div>
+                    <div className='guest-name'>{review?.firstName}</div>
                     <div className='guest-rating'>&#9733; {averageReview}</div>
                 </div>
             </div>

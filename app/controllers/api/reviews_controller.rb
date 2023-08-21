@@ -12,7 +12,7 @@ class Api::ReviewsController < ApplicationController
         if @review
             render :show
         else
-            render json: @review.errors.full_messages, status: 422
+            render json: {errors: @review.errors.full_messages}, status: 422
         end
     end
 
@@ -25,7 +25,7 @@ class Api::ReviewsController < ApplicationController
             render :show
         else
             puts @review.errors.full_messages
-            render json: @review.errors.full_messages, status: 422
+            render json: {errors: @review.errors.full_messages}, status: :unprocessable_entity
         end
     end
 
@@ -34,7 +34,7 @@ class Api::ReviewsController < ApplicationController
         if @review.user_id == current_user.id && @review.update(review_params)
             render json: {message: 'success!'}
         else
-            render json: @review.errors.full_messages, status: 422
+            render json: {errors: @review.errors.full_messages}, status: 422
         end
     end
 
@@ -43,7 +43,7 @@ class Api::ReviewsController < ApplicationController
         if @review
             @review.destroy
         else
-            render json: @review.errors.full_messages, status: 422
+            render json: {errors: @review.errors.full_messages}, status: 422
         end
     end
 

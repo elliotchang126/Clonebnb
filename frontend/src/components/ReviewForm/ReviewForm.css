@@ -145,3 +145,13 @@
     margin-bottom: 20px;
     align-self: center;
 }
+
+.errors-list {
+    height: 60px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.errors-item {
+    color: red
+}

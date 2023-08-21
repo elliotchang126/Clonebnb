@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createReservation } from '../../../store/reservationsReducer'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom'
 
-const ReservationForm = ({ listing }) => {
+const UpdateReservationForm = ({ listing, reviews }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector(state => state.session.user)
@@ -93,7 +93,7 @@ const ReservationForm = ({ listing }) => {
                 <div className="reservation-listing-info">
                     <div>
                         <span className="reserve-reviews-avg">&#9733; {listing?.overallRating} · </span>
-                        <span className="reserve-reviews">{listing?.reviewsLength} reviews</span>
+                        <span className="reserve-reviews">{reviews?.length} reviews</span>
                     </div>
                 </div>
             </div>
@@ -145,4 +145,4 @@ const ReservationForm = ({ listing }) => {
     )
 }
 
-export default ReservationForm
+export default UpdateReservationForm;

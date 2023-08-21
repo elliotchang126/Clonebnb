@@ -16,7 +16,7 @@ class Api::ReservationsController < ApplicationController
         if @reservation.save
             render :show
         else
-            render json: @reservation.errors.full_messages, status: 422
+            render json: {errors: @reservation.errors.full_messages}, status: 422
         end
     end
 
@@ -25,7 +25,7 @@ class Api::ReservationsController < ApplicationController
         if @reservation.user_id == current_user.id && @reservation.update(reservation_params)
             render json: {message: 'success!'}
         else
-            render json: @reservation.errors.full_messages, status: 422
+            render json: {errors: @reservation.errors.full_messages}, status: 422
         end
     end
 
@@ -34,7 +34,7 @@ class Api::ReservationsController < ApplicationController
         if @reservation
             @reservation.destroy
         else
-            render json: @reservation.errors.full_messages, status: 422
+            render json: {errors: @reservation.errors.full_messages}, status: 422
         end
     end
 

@@ -39,11 +39,13 @@ const ReviewForm = (props) => {
         setFormData(prev => ({ ...prev, [name]: value }))
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
-        console.log(formData);
-        dispatch(createReview(formData));
-        setShowModal(false);
+        const dispatched = await dispatch(createReview(formData));
+
+        if (dispatched) {
+            setShowModal(false);
+        }
     }
 
     return(
@@ -83,12 +85,12 @@ const ReviewForm = (props) => {
                         </div> 
                     ))}
                 </div>
-                <h2 className='body-header'>Write a Public Review</h2>
-                {/* <ul>
+                <ul className='errors-list'>
                 { reviewErrors?.map(error => 
-                    <li key={error}>{error}</li>)  
+                    <li className='errors-item' key={error}>{error}</li>)  
                 }
-                </ul> */}
+                </ul>
+                <h2 className='body-header'>Write a Public Review</h2>
                 <h3 className='body-instructions'>Tell the next guests what you loved and anything else they should know about this place.</h3>
                 <textarea
                     type='text'
