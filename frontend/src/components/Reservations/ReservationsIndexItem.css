@@ -4,6 +4,18 @@
     padding-bottom: 10px;
 }
 
+.reservation-info .reservation-city {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.reservation-info .reservation-dates {
+    color: #767676;
+    padding-bottom: 5px;
+}
+
 .res-listing-img-container {
     height: 318px;
     width: 100%;
@@ -20,4 +32,24 @@
     box-sizing: border-box;
     object-fit: cover;
     border-radius: 10px;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.update-res-button, .cancel-res-button {
+    height: 40px;
+    width: 150px;
+    font-size: 16px;
+    border-radius: 10px;
+    color: white;
+    background-color: #ff385c;
+    border: 1px solid lightgray;
+}
+
+.update-res-button:hover, .cancel-res-button:hover {
+    background-color: #e61e4d;;
 }

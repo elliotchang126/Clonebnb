@@ -10,14 +10,14 @@ const ReservationsIndexItem = ({ reservation }) => {
     const listingId = reservation?.listingId;
     const listing = useSelector(getListing(listingId))
     const [showUpdate, setShowUpdate] = useState(false)
-    // const [reservationId, setReservationId] = useState(reservation?.id)
+    const [reservationId, setReservationId] = useState(reservation?.id)
     const [refresh, setRefresh] = useState(false)
 
     const formatDate = (dateString) => {
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         const date = new Date(dateString)
         const month = months[date.getMonth()];
-        const day = date.getDate();
+        const day = date.getDate() + 1;
         const year = date.getFullYear();
 
         return `${month} ${day}, ${year}`
@@ -44,8 +44,8 @@ const ReservationsIndexItem = ({ reservation }) => {
                         alt ={`res-${listing?.id}-${1}`}/>
                 </div>
                 <div className="reservation-info">
-                    <div>{listing?.city}</div>
-                    <div>{formatDate(reservation?.startDate)} - {formatDate(reservation?.endDate)}</div>
+                    <div className='reservation-city'>{listing?.city}, {listing?.state}</div>
+                    <div className='reservation-dates'>{formatDate(reservation?.startDate)} - {formatDate(reservation?.endDate)}</div>
                 </div>
             </div>
             <div className="buttons-container">
@@ -56,7 +56,7 @@ const ReservationsIndexItem = ({ reservation }) => {
                 <UpdateReservationForm 
                     reservation={reservation} 
                     listing={listing} 
-                    // reservationId={reservationId}
+                    reservationId={reservationId}
                     setShowUpdate={setShowUpdate}
                     setRefresh={setRefresh}
                     />}

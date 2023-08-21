@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateReservation } from '../../../store/reservationsReducer'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom'
 
-const UpdateReservationForm = ({ reservation, listing, setRefresh, setShowUpdate }) => {
+const UpdateReservationForm = ({ reservation, listing, reservationId,setRefresh, setShowUpdate }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector(state => state.session.user)
@@ -74,12 +74,13 @@ const UpdateReservationForm = ({ reservation, listing, setRefresh, setShowUpdate
         }
         setShowLogin(false)
         setShowUpdate(false)
-        setRefresh(prev => !prev)
+        // setRefresh(prev => !prev)
 
         const updatedReservation = {
-            id: reservation.id,
+            // ...reservation,
+            id: reservationId,
             listing_id: listing.id,
-            // user_id: reservation?.userId,
+            user_id: reservation?.userId,
             start_date: startDate.format("YYYY-MM-DD"),
             end_date: endDate.format("YYYY-MM-DD"),
             num_guests: numGuests
@@ -97,7 +98,7 @@ const UpdateReservationForm = ({ reservation, listing, setRefresh, setShowUpdate
                 <div className="reservation-listing-info">
                     <div>
                         <span className="reserve-reviews-avg">&#9733; {listing?.overallRating} · </span>
-                        <span className="reserve-reviews">{listing?.reviewLength} reviews</span>
+                        <span className="reserve-reviews">{listing?.reviewsLength} reviews</span>
                     </div>
                 </div>
             </div>
