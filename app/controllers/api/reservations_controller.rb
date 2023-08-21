@@ -42,6 +42,6 @@ class Api::ReservationsController < ApplicationController
     private
 
     def reservation_params
-        params.require(:reservation).permit(:listing_id, :num_guests, :start_date, :end_date)
+        params.require(:reservation).permit(:id, :user_id, :listing_id, :num_guests, :start_date, :end_date)
     end
 end

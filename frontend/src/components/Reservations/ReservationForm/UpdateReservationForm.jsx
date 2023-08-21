@@ -3,17 +3,17 @@ import moment from 'moment'
 import './ReservationForm.css'
 import ReservationCalendar from '../ReservationCalendar/ReservationCalendar'
 import { useDispatch, useSelector } from 'react-redux'
-import { createReservation } from '../../../store/reservationsReducer'
+import { updateReservation } from '../../../store/reservationsReducer'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom'
 
-const UpdateReservationForm = ({ listing, reviews }) => {
+const UpdateReservationForm = ({ reservation, listing, setRefresh, setShowUpdate }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector(state => state.session.user)
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
+    const [startDate, setStartDate] = useState(moment(reservation?.startDate));
+    const [endDate, setEndDate] = useState(moment(reservation?.endDate));
     // const [focusedInput, setFocusedInput] = useState(null);
-    const [numGuests, setNumGuests] = useState(1);
+    const [numGuests, setNumGuests] = useState(reservation?.numGuests);
     const [numNights, setNumNights] = useState(0);
     const [rawPrice, setRawPrice] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
@@ -32,10 +32,10 @@ const UpdateReservationForm = ({ listing, reviews }) => {
         }
     })
 
-    const isDateBlocked = date => {
-        const dateToCheck = moment(date).format('YYYY-MM-DD')
-        return blockedDates.includes(dateToCheck)
-    }
+    // const isDateBlocked = date => {
+    //     const dateToCheck = moment(date).format('YYYY-MM-DD')
+    //     return blockedDates.includes(dateToCheck)
+    // }
 
     const handleDecrement = () => {
         setNumGuests(prev => {
@@ -73,14 +73,18 @@ const UpdateReservationForm = ({ listing, reviews }) => {
             return;
         }
         setShowLogin(false)
+        setShowUpdate(false)
+        setRefresh(prev => !prev)
 
-        const reservation = {
+        const updatedReservation = {
+            id: reservation.id,
             listing_id: listing.id,
+            // user_id: reservation?.userId,
             start_date: startDate.format("YYYY-MM-DD"),
             end_date: endDate.format("YYYY-MM-DD"),
             num_guests: numGuests
         }
-        dispatch(createReservation(reservation))
+        dispatch(updateReservation(updatedReservation))
         history.push(`/users/${user.id}`)
     }
 
@@ -93,7 +97,7 @@ const UpdateReservationForm = ({ listing, reviews }) => {
                 <div className="reservation-listing-info">
                     <div>
                         <span className="reserve-reviews-avg">&#9733; {listing?.overallRating} · </span>
-                        <span className="reserve-reviews">{reviews?.length} reviews</span>
+                        <span className="reserve-reviews">{listing?.reviewLength} reviews</span>
                     </div>
                 </div>
             </div>
@@ -107,7 +111,7 @@ const UpdateReservationForm = ({ listing, reviews }) => {
                     setStartDate={setStartDate}
                     endDate={endDate}
                     setEndDate={setEndDate}
-                    isDateBlocked={isDateBlocked}
+                    // isDateBlocked={isDateBlocked}
                 />
                 <div className='num-guests'>
                     <div className='guest-count'>Guests</div>
@@ -118,7 +122,7 @@ const UpdateReservationForm = ({ listing, reviews }) => {
                     </div>
                 </div>
             </div>
-            <button className='user-button' onClick={handleSubmit}>Reserve</button>
+            <button className='user-button' onClick={handleSubmit}>Update Reservation</button>
             {showLogin && <p className='login-text'>You must be logged in to reserve</p>}
             <p className='button-text'>You won't be charged yet</p>
             <div className="pricing-container">

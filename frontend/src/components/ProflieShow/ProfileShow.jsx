@@ -14,7 +14,8 @@ const ProfileShow = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state?.session?.user);
     // const user = useSelector(getUser(user?.id))
-    const reservations = useSelector(getReservations, shallowEqual)
+    const reservations = useSelector(getReservations)
+    console.log(reservations)
     const reviews = useSelector(getReviews, shallowEqual);
     const [showModal, setShowModal] = useState(false);
     const [updateId, setUpdateId] = useState(null);
@@ -64,7 +65,7 @@ const ProfileShow = () => {
         <div className="profile-container">
             <h1 className="profile-header">Trips</h1>
                 <div className="reservations-container">
-                    {/* <ReservationsIndex /> */}
+                    <ReservationsIndex reservations={reservations} />
                 </div>
             <h1 className="profile-header">Your Previous Trip Reviews</h1>
             <div className='profile-reviews-container'>
