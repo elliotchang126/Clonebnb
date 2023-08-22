@@ -12,6 +12,7 @@ const ReservationForm = ({ listing }) => {
     const user = useSelector(state => state.session.user)
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
+    const [dateError, setDateError] = useState('')
     // const [focusedInput, setFocusedInput] = useState(null);
     const [numGuests, setNumGuests] = useState(1);
     const [numNights, setNumNights] = useState(0);
@@ -19,6 +20,7 @@ const ReservationForm = ({ listing }) => {
     const [totalPrice, setTotalPrice] = useState(0);
     const [serviceFee, setServiceFee] = useState(0)
     const [showLogin, setShowLogin] = useState(false);
+    const reservationErrors = useSelector(state => state.errors.reservations)
 
     const blockedDates = [];
 
@@ -74,6 +76,11 @@ const ReservationForm = ({ listing }) => {
         }
         setShowLogin(false)
 
+        if (!startDate || !endDate) {
+            setDateError('Check-in and checkout dates are required')
+            return;
+        }
+
         const reservation = {
             listing_id: listing.id,
             start_date: startDate.format("YYYY-MM-DD"),
@@ -82,6 +89,7 @@ const ReservationForm = ({ listing }) => {
         }
         dispatch(createReservation(reservation))
         history.push(`/users/${user.id}`)
+        setDateError('')
     }
 
     return (
@@ -120,6 +128,10 @@ const ReservationForm = ({ listing }) => {
             </div>
             <button className='user-button' onClick={handleSubmit}>Reserve</button>
             {showLogin && <p className='login-text'>You must be logged in to reserve</p>}
+            {dateError && <p className='login-text'>{dateError}</p>}
+            <ul>
+            {reservationErrors.map(error => <li key={error}>{error}</li>)}
+            </ul>
             <p className='button-text'>You won't be charged yet</p>
             <div className="pricing-container">
                 <div className='price-calculator'>

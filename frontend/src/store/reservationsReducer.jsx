@@ -33,65 +33,73 @@ export const getReservations = state => state.reservations ? Object.values(state
 export const getReservation = reservationId => state => state.reservations ? state.reservations[reservationId] : null;
 
 export const fetchReservations = () => async dispatch => {
+    try {
     const res = await csrfFetch('/api/reservations')
-
-    if (res.ok) {
+    // if (res.ok) {
         const reservations = await res.json();
         dispatch(receiveReservations(reservations))
-    } else {
-        const errors = await res.json();
+        return res
+    } catch (err) {
+        const errors = await err.json();
         dispatch(receiveReservationErrors(errors))
     }
 }
 
 export const fetchReservation = reservationId => async dispatch => {
+    try {
     const res = await csrfFetch(`/api/reservations/${reservationId}`)
 
-    if (res.ok) {
+    // if (res.ok) {
         const reservation = await res.json();
         dispatch(receiveReservation(reservation))
-    } else {
-        const errors = await res.json();
+        return res
+    } catch (err) {
+        const errors = await err.json();
         dispatch(receiveReservationErrors(errors))
     }
 }
 
 export const createReservation = reservation => async dispatch => {
+    try {
     const res = await csrfFetch('/api/reservations', {
         method: 'POST',
         body: JSON.stringify(reservation)
     })
-    if (res.ok) {
+    // if (res.ok) {
         const newReservation = await res.json();
         dispatch(receiveReservation(newReservation))
-    } else {
-        const errors = await res.json();
+        return res
+    } catch (err) {
+        const errors = await err.json();
         dispatch(receiveReservationErrors(errors))
     }
 }
 
 export const updateReservation = reservation => async dispatch => {
+    try {
     const res = await csrfFetch(`/api/reservations/${reservation.id}`, {
         method: 'PATCH',
         body: JSON.stringify(reservation)
     })
-    if (res.ok) {
+    // if (res.ok) {
         const updatedReservation = await res.json();
         dispatch(receiveReservation(updatedReservation))
-    } else {
-        const errors = await res.json();
+        return res
+    } catch (err) {
+        const errors = await err.json();
         dispatch(receiveReservationErrors(errors))
     }
 }
 
 export const deleteReservation = reservationId => async dispatch => {
+    try {
     const res = await csrfFetch(`/api/reservations/${reservationId}`, {
         method: 'DELETE',
     })
-    if (res.ok) {
+    // if (res.ok) {
         dispatch(removeReservation(reservationId))
-    } else {
-        const errors = await res.json();
+    } catch (err) {
+        const errors = await err.json();
         dispatch(receiveReservationErrors(errors))
     }
 }

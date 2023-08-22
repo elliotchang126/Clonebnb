@@ -12,6 +12,7 @@ const UpdateReservationForm = ({ reservation, listing, reservationId,setRefresh,
     const user = useSelector(state => state.session.user)
     const [startDate, setStartDate] = useState(moment(reservation?.startDate));
     const [endDate, setEndDate] = useState(moment(reservation?.endDate));
+    const [dateError, setDateError] = useState('')
     // const [focusedInput, setFocusedInput] = useState(null);
     const [numGuests, setNumGuests] = useState(reservation?.numGuests);
     const [numNights, setNumNights] = useState(0);
@@ -19,6 +20,7 @@ const UpdateReservationForm = ({ reservation, listing, reservationId,setRefresh,
     const [totalPrice, setTotalPrice] = useState(0);
     const [serviceFee, setServiceFee] = useState(0)
     const [showLogin, setShowLogin] = useState(false);
+    const reservationErrors = useSelector(state => state.errors.reservations)
 
     const blockedDates = [];
 
@@ -73,9 +75,13 @@ const UpdateReservationForm = ({ reservation, listing, reservationId,setRefresh,
             return;
         }
         setShowLogin(false)
-        setShowUpdate(false)
         // setRefresh(prev => !prev)
-
+        
+        if (!startDate || !endDate) {
+            setDateError('Check-in and checkout dates are required')
+            return;
+        }
+        
         const updatedReservation = {
             // ...reservation,
             id: reservationId,
@@ -86,7 +92,9 @@ const UpdateReservationForm = ({ reservation, listing, reservationId,setRefresh,
             num_guests: numGuests
         }
         dispatch(updateReservation(updatedReservation))
+        setShowUpdate(false)
         history.push(`/users/${user.id}`)
+        setDateError('')
     }
 
     return (
@@ -124,7 +132,11 @@ const UpdateReservationForm = ({ reservation, listing, reservationId,setRefresh,
                 </div>
             </div>
             <button className='user-button' onClick={handleSubmit}>Update Reservation</button>
+            {dateError && <p className='login-text'>{dateError}</p>}
             {showLogin && <p className='login-text'>You must be logged in to reserve</p>}
+            <ul>
+            {reservationErrors.map(error => <li key={error}>{error}</li>)}
+            </ul>
             <p className='button-text'>You won't be charged yet</p>
             <div className="pricing-container">
                 <div className='price-calculator'>
