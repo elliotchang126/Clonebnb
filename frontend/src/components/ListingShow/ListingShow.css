@@ -136,3 +136,8 @@
     border: 1px solid #767676;
     border-radius: 10px;
 }
+
+.show-map {
+    height: 500px;
+    width: 100%;
+}

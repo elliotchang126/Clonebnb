@@ -11,6 +11,8 @@ import ReviewsIndex from '../ReviewsIndex/ReviewsIndex'
 import handleMouseover from '../../util/buttonUtil';
 import { fetchReviews, getReviews } from '../../store/reviewsReducer';
 import ReservationForm from '../Reservations/ReservationForm/ReservationForm';
+// import MapWrapper from '../GoogleMaps/MapWrapper';
+import ListingMapWrapper from '../GoogleMaps/ListingMap';
 
 const ListingShow = (props) => {
     const dispatch = useDispatch();
@@ -141,7 +143,9 @@ const ListingShow = (props) => {
                 <ReviewsIndex listing={listing} />
             </div>
             <div className="show-map">
-
+                <h1 className='show-map-title'>Where you'll be</h1>
+                <ListingMapWrapper listing={listing}/>
+                <div className="show-map-location">{listing?.city}, {listing?.state}, {listing?.country}</div>
             </div>
         </div>
     )
