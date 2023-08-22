@@ -44,11 +44,11 @@ const ReservationsIndexItem = ({ reservation }) => {
             <div className="reservation-listing-container">
                 <div className="res-listing-img-container">
                     <img className='res-listing-img'
-                        src={listing?.photoUrls[0]} 
-                        alt ={`res-${listing?.id}-${1}`}/>
+                        src={reservation?.photoUrl} 
+                        alt ={`res-${reservation?.id}-${1}`}/>
                 </div>
                 <div className="reservation-info">
-                    <div className='reservation-city'>{listing?.city}, {listing?.state}</div>
+                    <div className='reservation-city'>{reservation?.city}, {reservation?.state}</div>
                     <div className='reservation-dates'>{formatDate(reservation?.startDate)} - {formatDate(reservation?.endDate)}</div>
                 </div>
             </div>

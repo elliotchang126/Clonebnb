@@ -15,7 +15,6 @@ const ProfileShow = () => {
     const user = useSelector(state => state?.session?.user);
     // const user = useSelector(getUser(user?.id))
     const reservations = useSelector(getReservations)
-    console.log(reservations)
     const reviews = useSelector(getReviews, shallowEqual);
     const [showModal, setShowModal] = useState(false);
     const [updateId, setUpdateId] = useState(null);

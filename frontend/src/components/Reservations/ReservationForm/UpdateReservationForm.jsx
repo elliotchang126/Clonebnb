@@ -79,7 +79,7 @@ const UpdateReservationForm = ({ reservation, listing, reservationId,setRefresh,
         const updatedReservation = {
             // ...reservation,
             id: reservationId,
-            listing_id: listing.id,
+            listing_id: reservation.listingId,
             user_id: reservation?.userId,
             start_date: startDate.format("YYYY-MM-DD"),
             end_date: endDate.format("YYYY-MM-DD"),

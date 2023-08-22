@@ -23,7 +23,7 @@ class Api::ReservationsController < ApplicationController
     def update
         @reservation = Reservation.find_by(id: params[:id])
         if @reservation.user_id == current_user.id && @reservation.update(reservation_params)
-            render json: {message: 'success!'}
+            render :show
         else
             render json: {errors: @reservation.errors.full_messages}, status: 422
         end

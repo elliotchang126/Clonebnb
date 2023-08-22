@@ -11,7 +11,6 @@ export const receiveListings = listings => ({
 })
 
 export const receiveListing = payload => {
-    // debugger
     return {
         type: RECEIVE_LISTING,
         payload
@@ -64,7 +63,6 @@ export const fetchListing = listingId => async dispatch => {
 }
 
 const listingsReducer = (state={}, action) => {
-    // debugger
     switch (action.type) {
         case RECEIVE_LISTINGS:
             return { ...action.listings }
