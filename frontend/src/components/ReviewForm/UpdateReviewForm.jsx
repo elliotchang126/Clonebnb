@@ -6,8 +6,8 @@ import './ReviewForm.css'
 import { IoIosStar } from 'react-icons/io'
 import handleMouseover from "../../util/buttonUtil";
 
-const UpdateReviewForm = (props) => {
-    const {setShowModal, reviewId} = props
+const UpdateReviewForm = ({ setShowModal, reviewId, setRefresh }) => {
+    // const {setShowModal, reviewId} = props
     const dispatch = useDispatch();
     // const { listingId } = useParams();
     let review = useSelector(getReview(reviewId))
@@ -49,6 +49,7 @@ const UpdateReviewForm = (props) => {
 
         if (dispatched) {
             setShowModal(false);
+            setRefresh(prev => !prev)
         }
     }
 

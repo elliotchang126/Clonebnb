@@ -18,10 +18,11 @@ const ProfileShow = () => {
     const reviews = useSelector(getReviews, shallowEqual);
     const [showModal, setShowModal] = useState(false);
     const [updateId, setUpdateId] = useState(null);
+    const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
         dispatch(fetchUser(user?.id))
-    }, [dispatch, user.id])
+    }, [dispatch, user.id, refresh])
 
     const openModal = e => {
         if (showModal) return;
@@ -88,7 +89,7 @@ const ProfileShow = () => {
             {showModal && (
                 user ? (
                     <Modal onClose={() => setShowModal(false)}>
-                        <UpdateReviewForm setShowModal={setShowModal} reviewId={updateId}/>
+                        <UpdateReviewForm setShowModal={setShowModal} reviewId={updateId} setRefresh={setRefresh} />
                     </Modal>
                 ) :
                 <div>Sorry, must be logged in to leave a review.</div>

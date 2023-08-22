@@ -23,10 +23,6 @@ const ReservationsIndexItem = ({ reservation }) => {
         return `${month} ${day}, ${year}`
     }
 
-    // useEffect(() => {
-    //     dispatch(fetchListing(listingId))
-    // })
-
     const toggleUpdate = () => {
         setShowUpdate(!showUpdate)
     }
