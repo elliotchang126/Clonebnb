@@ -2,7 +2,13 @@
     margin-left: 10px;
     width: 100px;
     padding: none;
-    border: none;
+    /* border: 1px solid lightgray; */
+}
+
+.DateInput_input {
+    font-size: 18px;
+    color: #484848;
+    line-height: 18px;;
 }
 
 .DateRangePickerInput {
