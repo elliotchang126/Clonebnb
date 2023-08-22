@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { fetchListing, getListing } from "../../store/listingsReducer";
 import { deleteReservation, fetchReservation } from "../../store/reservationsReducer";
+import moment from "moment";
 import './ReservationsIndexItem.css'
 import UpdateReservationForm from "./ReservationForm/UpdateReservationForm";
 
@@ -14,13 +15,7 @@ const ReservationsIndexItem = ({ reservation }) => {
     const [refresh, setRefresh] = useState(false)
 
     const formatDate = (dateString) => {
-        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        const date = new Date(dateString)
-        const month = months[date.getMonth()];
-        const day = date.getDate() + 1;
-        const year = date.getFullYear();
-
-        return `${month} ${day}, ${year}`
+        return moment(dateString).format('MMM D, YYYY')
     }
 
     const toggleUpdate = () => {
