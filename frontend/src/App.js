@@ -6,6 +6,7 @@ import ListingIndex from './components/ListingIndex/ListingIndex';
 import ListingShow from './components/ListingShow/ListingShow';
 import ReviewForm from './components/ReviewForm/ReviewForm';
 import ProfileShow from './components/ProflieShow/ProfileShow';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path={`/listings/:listingId`} component={ListingShow} />
         <Redirect to='/404' />
       </Switch>
+      <Footer />
     </>
   );
 }
