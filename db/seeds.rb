@@ -45,7 +45,7 @@ ApplicationRecord.transaction do
 
     users << demo
 
-    20.times do
+    23.times do
         user = User.create!(
             email: Faker::Internet.unique.email,
             password: Faker::Internet.password(min_length: 6, max_length: 20),
@@ -517,6 +517,86 @@ ApplicationRecord.transaction do
     )
     
     omg_listings << listing20
+
+    listing21 = Listing.create!(
+        user_id: 21,
+        category: 'amazing pools',
+        address: '245 S Westgate Ave',
+        city: 'Los Angeles',
+        state: 'California',
+        country: 'United States',
+        zip_code: 90049,
+        title: 'Incredible Poolhouse in the Heart of LA',
+        description: "Welcome to our stunning resort home. This two story home has 6 bedrooms and 8 beds that will accommodate any large groups and family. Multiple seating areas are perfect for those who like to roam this beautiful home. Our large sunroom and game room makes this house an entertainers paradise. You will also be greeted with a private Oasis that features a heated grotto jacuzzi pool, and slide. This unique experience is what wonderful memories are made of.",
+        bedrooms: 6,
+        bathrooms: 3,
+        price: 395,
+        cleaning_fee: 100,
+        latitude: 34.0590289,
+        longitude: -118.4743393
+    )
+    
+    pool_listings << listing21
+
+    listing22 = Listing.create!(
+        user_id: 22,
+        category: 'design',
+        address: '1035 N Clark St',
+        city: 'Chicago',
+        state: 'Illinois',
+        country: 'United States',
+        zip_code: 60610,
+        title: 'Stunning Penthouse with Private Rooftop',
+        description: "This exclusive listing offers a combined 4,000 sq. ft penthouse loft, encompassing the entire building with 5 bedrooms, located in the heart of downtown Chicago, next to the 'Magnificent Mile'. Renovated in 2016, the space boasts exposed brick, 20-foot ceilings, vintage barn wood floors, and a rooftop deck with views of Willis (Sears) Tower. Note: The unit is accessed via 45 steps (2 flights) and features unique accommodations including a reclaimed wood nook with a twin bed.",
+        bedrooms: 5,
+        bathrooms: 4,
+        price: 425,
+        cleaning_fee: 120,
+        latitude: 41.901499,
+        longitude: -87.6335937
+    )
+
+    design_listings << listing22
+
+    listing23 = Listing.create!(
+        user_id: 23,
+        category: 'iconic cities',
+        address: '240 E 27th St',
+        city: 'New York',
+        state: 'New York',
+        country: 'United States',
+        zip_code: 10016,
+        title: 'Penthouse in NYC with Panoramic View',
+        description: "Welcome to our exquisite retreat gem, perfectly positioned to offer breathtaking views of the Statue of Liberty and captivating sunsets. Nestled in a high-rise haven, this luxurious apartment provides an unparalleled experience, all while being conveniently located near all the city's attractions. Prepare to be dazzled as you step into our meticulously designed apartment. The living space is a masterpiece of modern comfort, adorned with floor-to-ceiling windows that frame stunning vistas. Relax on the plush furnishings and relish the vistas of the iconic Statue of Liberty and the mesmerizing sunsets that paint the skyline.",
+        bedrooms: 4,
+        bathrooms: 3,
+        price: 550,
+        cleaning_fee: 150,
+        latitude: 40.7402195,
+        longitude: -73.9795651
+    )
+
+    iconic_listings << listing23
+
+    listing24 = Listing.create!(
+        user_id: 24,
+        category: 'beachfront',
+        address: '1010 N Venetian Dr',
+        city: 'Miami Beach',
+        state: 'Florida',
+        country: 'United States',
+        zip_code: 33139,
+        title: "Villa Castillo: Miami Beach's Premier Luxury Escape",
+        description: "Introducing Villa Castillo, a luxurious haven situated a stone's throw away from the iconic Miami Beach. Nestled amidst the vibrant heartbeat of Miami, this residence is in proximity to the city's bustling nightlife, ensuring guests have the best of both tranquility and excitement. Ideal for sizable gatherings, from bachelor and bachelorette festivities to memorable family reunions, Villa Castillo caters to all. The property boasts of soaring high ceilings and a contemporary design aesthetic, providing a touch of elegance to your stay. To top it off, indulge in our heated pool, offering the ultimate relaxation and making your getaway truly impeccable.",
+        bedrooms: 6,
+        bathrooms: 3,
+        price: 720,
+        cleaning_fee: 200,
+        latitude: 25.7904762,
+        longitude: -80.176548
+    )
+
+    beachfront_listings << listing24
     
     # file96 = URI.open('https://clonebnb-seeds.s3.us-west-1.amazonaws.com/Clonebnb-Photos/omg/omg-2-1.png')
     
@@ -538,7 +618,7 @@ ApplicationRecord.transaction do
     ]
     
     users.each do |user|
-        random_listings = (1..20).to_a.shuffle[0...9]
+        random_listings = (1..24).to_a.shuffle[0...8]
         random_listings.each do |i|
             Review.create!(
                 listing_id: i,
@@ -555,6 +635,74 @@ ApplicationRecord.transaction do
     end
 
     puts "Done!"
+
+    puts 'Creating reservations...'
+
+    reservation1 = Reservation.create!(
+        listing_id: 3,
+        user_id: 1,
+        num_guests: 4,
+        start_date: "2023-12-02",
+        end_date: "2023-12-05"
+    )
+
+    reservation2 = Reservation.create!(
+        listing_id: 9,
+        user_id: 1,
+        num_guests: 5,
+        start_date: "2024-01-11",
+        end_date: "2024-01-15"
+    )
+
+    reservation3 = Reservation.create!(
+        listing_id: 15,
+        user_id: 1,
+        num_guests: 3,
+        start_date: "2023-11-20",
+        end_date: "2023-11-21"
+    )
+    
+    reservation4 = Reservation.create!(
+        listing_id: 6,
+        user_id: 1,
+        num_guests: 4,
+        start_date: "2024-02-16",
+        end_date: "2024-02-18"
+    )
+
+    reservation5 = Reservation.create!(
+        listing_id: 23,
+        user_id: 1,
+        num_guests: 6,
+        start_date: "2023-06-09",
+        end_date: "2023-06-12"
+    )
+
+    reservation6 = Reservation.create!(
+        listing_id: 12,
+        user_id: 1,
+        num_guests: 4,
+        start_date: "2023-04-27",
+        end_date: "2023-04-29"
+    )
+
+    reservation7 = Reservation.create!(
+        listing_id: 18,
+        user_id: 1,
+        num_guests: 4,
+        start_date: "2023-08-01",
+        end_date: "2023-08-04"
+    )
+
+    reservation8 = Reservation.create!(
+        listing_id: 20,
+        user_id: 1,
+        num_guests: 4,
+        start_date: "2023-01-16",
+        end_date: "2023-01-18"
+    )
+
+    puts 'Done!'
 end
     
     puts 'Attaching images to listings...'
