@@ -586,7 +586,7 @@ ApplicationRecord.transaction do
         state: 'Florida',
         country: 'United States',
         zip_code: 33139,
-        title: "Villa Castillo: Miami Beach's Premier Luxury Escape",
+        title: "Miami Beach's Premier Luxury Escape",
         description: "Introducing Villa Castillo, a luxurious haven situated a stone's throw away from the iconic Miami Beach. Nestled amidst the vibrant heartbeat of Miami, this residence is in proximity to the city's bustling nightlife, ensuring guests have the best of both tranquility and excitement. Ideal for sizable gatherings, from bachelor and bachelorette festivities to memorable family reunions, Villa Castillo caters to all. The property boasts of soaring high ceilings and a contemporary design aesthetic, providing a touch of elegance to your stay. To top it off, indulge in our heated pool, offering the ultimate relaxation and making your getaway truly impeccable.",
         bedrooms: 6,
         bathrooms: 3,
