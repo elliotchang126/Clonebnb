@@ -16,4 +16,15 @@
 #  updated_at    :datetime         not null
 #
 class Review < ApplicationRecord
+    validates :cleanliness, :communication, :check_in, :accuracy, :location, :value, :body, presence: true
+
+    validates :cleanliness, :communication, :check_in, :accuracy, :location, :value, numericality: { only_integer: true }, inclusion: { in: 1..5 }
+
+    belongs_to :listing
+    
+    belongs_to :user
+
+    def average_rating
+        ((cleanliness + communication + check_in + accuracy + location + value) / 6.0).round(2)
+    end
 end

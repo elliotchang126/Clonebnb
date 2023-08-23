@@ -1,0 +1,58 @@
+.reservation-container {
+    /* border: 1px solid #767676;
+    border-radius: 10px; */
+    padding-bottom: 10px;
+}
+
+.reservation-info .reservation-city {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.reservation-info .reservation-dates {
+    color: #767676;
+    padding-bottom: 5px;
+}
+
+.res-listing-img-container {
+    height: 318px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-snap-type: x mandatory;
+}
+
+.res-listing-img {
+    width: 318px;
+    box-sizing: border-box;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.update-res-button, .cancel-res-button {
+    height: 40px;
+    width: 150px;
+    font-size: 14px;
+    border-radius: 10px;
+    color: white;
+    /* background-color: #ff385c; */
+    background-image: linear-gradient(to right, #ff385c 0%, #e61e4d 27.5%,#e31c5f 40%,#d70466 57.5%,#bd1e59 75%,#bd1e59 100%); 
+    border: 1px solid lightgray;
+    cursor: pointer;
+    outline: none;
+}
+
+.update-res-button:hover, .cancel-res-button:hover {
+    background-image: linear-gradient(to left, #ff385c 0%, #e61e4d 27.5%,#e31c5f 40%,#d70466 57.5%,#bd1e59 75%,#bd1e59 100%); 
+}

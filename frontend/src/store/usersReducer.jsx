@@ -10,10 +10,12 @@ export const receiveUsers = users => ({
     users
 })
 
-export const receiveUser = user => ({
-    type: RECEIVE_USER,
-    user
-})
+export const receiveUser = payload => {
+    return {
+        type: RECEIVE_USER,
+        payload
+    }
+}
 
 export const receiveUserErrors = errorMessage => ({
     type: RECEIVE_USER_ERRORS,
@@ -51,7 +53,7 @@ const usersReducer = (state={}, action) => {
         case RECEIVE_USERS:
             return { ...action.users };
         case RECEIVE_USER:
-            return { ...state, [action.user.id]: action.user };
+            return { ...state, [action.payload.user.id]: action.payload.user };
         default:
             return state;
     }

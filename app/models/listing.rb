@@ -35,4 +35,64 @@ class Listing < ApplicationRecord
 
     belongs_to :user
 
+    has_many :reviews,
+        dependent: :destroy
+    
+    has_many :reservations,
+        dependent: :destroy
+
+    def overall_rating
+        return nil unless reviews.any?
+        # reviews.average(:average_rating).round(2)
+        avg_ratings = reviews.map(&:average_rating)
+        (avg_ratings.sum / avg_ratings.length).round(2)
+    end
+
+    def avg_cleanliness
+        return nil unless reviews.any?
+        total = 0.0
+        reviews.each { |review| total += review.cleanliness }
+        average = (total / reviews.length).round(1)
+        return average
+    end
+
+    def avg_communication
+        return nil unless reviews.any?
+        total = 0.0
+        reviews.each { |review| total += review.communication }
+        average = (total / reviews.length).round(1)
+        return average
+    end
+
+    def avg_check_in
+        return nil unless reviews.any?
+        total = 0.0
+        reviews.each { |review| total += review.check_in }
+        average = (total / reviews.length).round(1)
+        return average
+    end
+
+    def avg_accuracy
+        return nil unless reviews.any?
+        total = 0.0
+        reviews.each { |review| total += review.accuracy }
+        average = (total / reviews.length).round(1)
+        return average
+    end
+
+    def avg_location
+        return nil unless reviews.any?
+        total = 0.0
+        reviews.each { |review| total += review.location }
+        average = (total / reviews.length).round(1)
+        return average
+    end
+
+    def avg_value
+        return nil unless reviews.any?
+        total = 0.0
+        reviews.each { |review| total += review.value }
+        average = (total / reviews.length).round(1)
+        return average
+    end
 end

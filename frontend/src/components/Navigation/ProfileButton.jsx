@@ -5,13 +5,19 @@ import '../../context/Modal.css'
 import UserModal from "../UserForm/checkEmailModal";
 import { Modal } from "../../context/Modal";
 import * as sessionActions from '../../store/sessionReducer'
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 const ProfileButton = ({ user }) => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const [showMenu, setShowMenu] = useState(false)
     const [showModal, setShowModal] = useState(false)
+
+    const handleProfileClick = () => {
+        history.push(`/users/${user.id}`)
+    }
 
     const openMenu = (e) => {
         if (showMenu) return;
@@ -36,9 +42,9 @@ const ProfileButton = ({ user }) => {
         return () => document.removeEventListener('click', closeMenu)
     }, [showMenu])
 
-    const logout = e => {
-        // e.preventDefault();
+    const logout = () => {
         dispatch(sessionActions.logout())
+        history.push('/')
     }
 
     const openModal = e => {
@@ -68,7 +74,7 @@ const ProfileButton = ({ user }) => {
                 <div className="profile-dropdown">
                     <div className='dropdown-eles dropdown-name'>{user.firstName + " " + user.lastName}</div>
                     <div className='dropdown-eles dropdown-email'>{user.email}</div>
-                    <div className='dropdown-eles dropdown-trips'>Trips</div>
+                    <div className='dropdown-eles dropdown-trips' onClick={handleProfileClick}>Profile</div>
                     <div className='dropdown-eles dropdown-logout'>
                     <div onClick={logout}>Log Out</div>
                     </div>

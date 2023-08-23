@@ -10,10 +10,12 @@ export const receiveListings = listings => ({
     listings
 })
 
-export const receiveListing = listing => ({
-    type: RECEIVE_LISTING,
-    listing
-})
+export const receiveListing = payload => {
+    return {
+        type: RECEIVE_LISTING,
+        payload
+    }
+}
 
 export const receiveListingErrors = errorMessage => ({
     type: RECEIVE_LISTING_ERRORS,
@@ -23,8 +25,14 @@ export const receiveListingErrors = errorMessage => ({
 export const getListings = state => state.listings ? Object.values(state.listings) : [];
 export const getListing = listingId => state => state.listings ? state.listings[listingId] : null;
 
-export const fetchListings = () => async dispatch => {
-    const res = await csrfFetch('/api/listings')
+export const fetchListings = params => async dispatch => {
+    let baseUrl = '/api/listings?'
+
+    for ( let key in params ) {
+        baseUrl = baseUrl + `${key}=${params[key]}&`
+    }
+
+    const res = await csrfFetch(`${baseUrl}`)
     if (res.ok) {
         const listings = await res.json();
         dispatch(receiveListings(listings))
@@ -65,7 +73,7 @@ const listingsReducer = (state={}, action) => {
         case RECEIVE_LISTINGS:
             return { ...action.listings }
         case RECEIVE_LISTING:
-            return { ...state, [action.listing.id]: action.listing }
+            return { ...state, [action.payload.listing.id]: action.payload.listing }
         default:
             return state;
     }
