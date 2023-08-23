@@ -15,7 +15,10 @@ const Navigation = () => {
         search: ''
     })
 
-    const handleSearchChange = e => setSearchParams(prev => ({ ...prev, search: e.target.value}));
+    const handleHome = (e) => {
+        e.preventDefault();
+        window.location.href = '/';
+    }
 
     let sessionLinks = (
             <ProfileButton user={user}/>
@@ -61,7 +64,7 @@ const Navigation = () => {
         <div className='navbar'>
             <div className='home-logo'>
                 {/* <NavLink exact to='/'><i className="fa-solid fa-house-chimney-user" style={{color: "#ff5a5f"}}></i></NavLink>  */}
-                <NavLink exact to='/'><img className='site-logo' src={logo} alt='site-logo'/></NavLink> 
+                <NavLink exact to='/' onClick={handleHome}><img className='site-logo' src={logo} alt='site-logo'/></NavLink> 
                 {/* Placeholder Image */}
             </div>
             <div className='searchbar-container'>
