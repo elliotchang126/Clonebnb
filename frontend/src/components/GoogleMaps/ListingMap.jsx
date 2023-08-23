@@ -24,13 +24,8 @@ const ListingMap = ({ listing }) => {
     
     const icon = {
         url: houseIcon,
-        scaledSize: new window.google.maps.Size(50, 50),
-        fillColor: '#FFFFFF',
-        fillOpacity: 1,
-        strokeColor: '#000', // Border color
-        strokeWeight: 2, // Border width
-        scale: 1, // You can scale your icon here
-        anchor: new window.google.maps.Point(25, 28)
+        scaledSize: new window.google.maps.Size(80, 80),
+        anchor: new window.google.maps.Point(40, 40)
 
     }
 
