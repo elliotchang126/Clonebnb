@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import logo from '../../assets/airbnb_logo.svg'
+import clonebnb from '../../assets/Clonebnb.png'
 import UserFormModal from "../UserForm";
 import './Navigation.css'
 import { useMemo, useState } from "react";
@@ -64,7 +65,7 @@ const Navigation = () => {
         <div className='navbar'>
             <div className='home-logo'>
                 {/* <NavLink exact to='/'><i className="fa-solid fa-house-chimney-user" style={{color: "#ff5a5f"}}></i></NavLink>  */}
-                <NavLink exact to='/' onClick={handleHome}><img className='site-logo' src={logo} alt='site-logo'/></NavLink> 
+                <NavLink exact to='/' onClick={handleHome}><img className='site-logo' src={clonebnb} alt='site-logo'/></NavLink> 
                 {/* Placeholder Image */}
             </div>
             <div className='searchbar-container'>
