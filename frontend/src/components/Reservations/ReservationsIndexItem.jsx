@@ -14,6 +14,8 @@ const ReservationsIndexItem = ({ reservation }) => {
     const [reservationId, setReservationId] = useState(reservation?.id)
     const [refresh, setRefresh] = useState(false)
 
+    const futureTrip = moment().isBefore(moment(reservation?.startDate))
+
     const formatDate = (dateString) => {
         return moment(dateString).format('MMM D, YYYY')
     }
@@ -43,10 +45,12 @@ const ReservationsIndexItem = ({ reservation }) => {
                     <div className='reservation-dates'>{formatDate(reservation?.startDate)} - {formatDate(reservation?.endDate)}</div>
                 </div>
             </div>
-            <div className="buttons-container">
-                <button className="update-res-button" onClick={toggleUpdate}>Update Reservation</button>
-                <button className="cancel-res-button"onClick={handleCancel}>Cancel Reservation</button>
-            </div>
+            {futureTrip && (
+                <div className="buttons-container">
+                    <button className="update-res-button" onClick={toggleUpdate}>Update Reservation</button>
+                    <button className="cancel-res-button"onClick={handleCancel}>Cancel Reservation</button>
+                </div>
+            )}
             {showUpdate && 
                 <UpdateReservationForm 
                     reservation={reservation} 

@@ -5,3 +5,12 @@
     gap: 25px;
     margin: 20px;
 }
+
+.trip-title {
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.current-trip > .reservations-index{
+    justify-content: flex-start;
+}

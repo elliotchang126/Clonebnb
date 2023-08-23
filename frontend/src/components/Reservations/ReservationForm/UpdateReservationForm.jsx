@@ -61,13 +61,13 @@ const UpdateReservationForm = ({ reservation, listing, reservationId,setRefresh,
             const nights = time / (1000 * 3600 * 24)
             setNumNights(nights)
             
-            const price = listing?.price * nights
-            const fee = Math.round(((price + listing?.cleaningFee) * 0.08))
+            const price = reservation?.price * nights
+            const fee = Math.round(((price + reservation?.cleaningFee) * 0.08))
             setRawPrice(price)
             setServiceFee(fee)
-            setTotalPrice(price + listing?.cleaningFee + fee)
+            setTotalPrice(price + reservation?.cleaningFee + fee)
         }
-    }, [startDate, endDate, listing?.cleaningFee, listing?.price])
+    }, [startDate, endDate, reservation?.cleaningFee, reservation?.price])
 
     const handleSubmit = () => {
         if (!user) {
@@ -101,12 +101,12 @@ const UpdateReservationForm = ({ reservation, listing, reservationId,setRefresh,
         <div className='reservation-container'>
             <div className='listing-info'>
                 <div className="reservation-price">
-                    <span className="reservation-price-night">${listing?.price}</span> night
+                    <span className="reservation-price-night">${reservation?.price}</span> night
                 </div>
                 <div className="reservation-listing-info">
                     <div>
-                        <span className="reserve-reviews-avg">&#9733; {listing?.overallRating} · </span>
-                        <span className="reserve-reviews">{listing?.reviewsLength} reviews</span>
+                        <span className="reserve-reviews-avg">&#9733; {reservation?.overallRating} · </span>
+                        <span className="reserve-reviews">{reservation?.reviews.length} reviews</span>
                     </div>
                 </div>
             </div>
@@ -141,12 +141,12 @@ const UpdateReservationForm = ({ reservation, listing, reservationId,setRefresh,
             <div className="pricing-container">
                 <div className='price-calculator'>
                     <div className="pricing-item-container">
-                        <div className="price-text">${listing?.price} x {numNights} {numNights === 1 ? "night" : "nights"}</div>
+                        <div className="price-text">${reservation?.price} x {numNights} {numNights === 1 ? "night" : "nights"}</div>
                         <div className="price-value">${rawPrice}</div>
                     </div>
                     <div className="pricing-item-container">
                         <div className="price-text">Cleaning fee</div>
-                        <div className="price-value">${listing?.cleaningFee}</div>
+                        <div className="price-value">${reservation?.cleaningFee}</div>
                     </div>
                     <div className="pricing-item-container">
                         <div className="price-text">Clonebnb service fee</div>

@@ -23,10 +23,29 @@ const ReservationsIndex = ({ reservations }) => {
     ));
 
     return(
-        <div className="reservations-index">
-            {reservations.map(reservation => 
-                <ReservationsIndexItem key={reservation.id} reservation={reservation} />
+        <div>
+            {currentTrips &&(
+                <div className='current-trip'>
+                    <h1 className='trip-title'>Where you are</h1>
+                    <div className="reservations-index">
+                        {currentTrips.map(reservation => 
+                            <ReservationsIndexItem key={reservation.id} reservation={reservation} />                    
+                        )}
+                    </div>
+                </div>
+            )}
+            <h1 className='trip-title'>Where you're going</h1>
+            <div className="reservations-index">
+                {futureTrips.map(reservation => 
+                    <ReservationsIndexItem key={reservation.id} reservation={reservation} />
+                    )}
+            </div>
+            <h1 className='trip-title'>Where you've been</h1>
+            <div className="reservations-index">
+                {pastTrips.map(reservation => 
+                    <ReservationsIndexItem key={reservation.id} reservation={reservation} />                    
                 )}
+            </div>
         </div>
     )
 }
