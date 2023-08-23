@@ -25,8 +25,14 @@ export const receiveListingErrors = errorMessage => ({
 export const getListings = state => state.listings ? Object.values(state.listings) : [];
 export const getListing = listingId => state => state.listings ? state.listings[listingId] : null;
 
-export const fetchListings = () => async dispatch => {
-    const res = await csrfFetch('/api/listings')
+export const fetchListings = params => async dispatch => {
+    let baseUrl = '/api/listings?'
+
+    for ( let key in params ) {
+        baseUrl = baseUrl + `${key}=${params[key]}&`
+    }
+
+    const res = await csrfFetch(`${baseUrl}`)
     if (res.ok) {
         const listings = await res.json();
         dispatch(receiveListings(listings))
