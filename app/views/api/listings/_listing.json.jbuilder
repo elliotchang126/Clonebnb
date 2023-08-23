@@ -10,6 +10,8 @@ json.set! :average_location, listing.avg_location
 json.set! :average_value, listing.avg_value
 json.set! :reviews_length, listing.reviews.length
 
+json.set! :host, listing.user.first_name
+
 # json.photoUrl listing.photo.attached? ? listing.photo.url : nil
 json.photoUrls listing.photos.attached? ? listing.photos.map{ |photo| url_for(photo) } : []
 

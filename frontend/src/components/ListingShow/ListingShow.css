@@ -138,8 +138,9 @@
 }
 
 .show-map {
-    height: 550px;
+    height: 500px;
     width: 100%;
+    margin-bottom: 100px;
 }
 
 .show-map-title {
