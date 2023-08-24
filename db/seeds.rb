@@ -25,11 +25,17 @@ ApplicationRecord.transaction do
     User.destroy_all
     Listing.destroy_all
     Review.destroy_all
+    Reservation.destroy_all
+
+    puts 'Done!'
 
     puts 'Resetting primary keys'
     ApplicationRecord.connection.reset_pk_sequence!('users')
     ApplicationRecord.connection.reset_pk_sequence!('listings')
     ApplicationRecord.connection.reset_pk_sequence!('reviews')
+    ApplicationRecord.connection.reset_pk_sequence!('reservations')
+
+    puts 'Done!'
 
     puts "Creating users..."
 
