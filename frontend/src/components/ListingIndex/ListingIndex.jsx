@@ -42,17 +42,6 @@ const ListingIndex = () => {
             {listings.map(listing =>
                 <ListingIndexItem key={listing.id} listing={listing}/>
             )}
-                {/* <ListingIndexItem />
-                <ListingIndexItem />
-                <ListingIndexItem />
-                <ListingIndexItem />
-                <ListingIndexItem />
-                <ListingIndexItem />
-                <ListingIndexItem />
-                <ListingIndexItem />
-                <ListingIndexItem />
-                <ListingIndexItem />
-                <ListingIndexItem /> */}
             </div>
         </div>
     )

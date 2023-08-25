@@ -7,9 +7,11 @@ import UserFormModal from "../UserForm";
 import './Navigation.css'
 import { useMemo, useState } from "react";
 import { fetchListings } from "../../store/listingsReducer";
+import { useLocation } from "react-router-dom/cjs/react-router-dom";
 
 const Navigation = () => {
-    const dispatch = useDispatch()
+    let location = useLocation();
+    const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
     // const [search, setSearch] = useState({})
     const [searchParams, setSearchParams] = useState({
@@ -24,20 +26,9 @@ const Navigation = () => {
     let sessionLinks = (
             <ProfileButton user={user}/>
         )
-    // } else {
-    //     sessionLinks = (
-    //         <>
-    //             <UserFormModal />
-    //             {/* <NavLink to='/login'>Login</NavLink>
-    //             <NavLink to='/signup'>Signup</NavLink> */}
-    //         </>
-    //     );
-    // }
 
     const handleSearch = e => {
         e.preventDefault()
-        // dispatch(fetchListings(searchParams))
-        // setSearchParams({search:''})
     }
 
     const defineDebounceBehavior = () => {
@@ -64,12 +55,10 @@ const Navigation = () => {
     return (
         <div className='navbar'>
             <div className='home-logo'>
-                {/* <NavLink exact to='/'><i className="fa-solid fa-house-chimney-user" style={{color: "#ff5a5f"}}></i></NavLink>  */}
                 <NavLink exact to='/' onClick={handleHome}><img className='site-logo' src={clonebnb} alt='site-logo'/></NavLink> 
-                {/* Placeholder Image */}
             </div>
             <div className='searchbar-container'>
-                <form className='search-form' onSubmit={handleSearch}>
+            {location.pathname === "/" && <form className='search-form' onSubmit={handleSearch}>
                     <input
                         className='searchbar'
                         type='text'
@@ -78,7 +67,7 @@ const Navigation = () => {
                         onChange={handleInputChange('search')}
                     />
                     <button className='search-button'><i className="fa-solid fa-magnifying-glass" style={{color: "#ffffff",}} ></i></button>
-                </form>
+                </form>}
             </div>
             <div className='navbar-user'>
                 {sessionLinks}
@@ -88,12 +77,3 @@ const Navigation = () => {
 }
 
 export default Navigation
-// return (
-//     <>
-//         <ul>
-//             <NavLink to='/'>Home</NavLink>{' '}
-//             <NavLink to='/login'>Login</NavLink>{' '}
-//             <NavLink to='/signup'>Signup</NavLink>
-//         </ul>
-//     </>
-// )
