@@ -121,6 +121,26 @@
     /* height: 1800px; */
 }
 
+.info-images {
+    width: 110%
+}
+
+.info-description {
+    width: 110%;
+    padding: 20px 0px 30px 0px;
+    border-bottom: 2px solid rgb(227, 227, 227);
+}
+
+.amenities-image {
+    padding-top: 20px;
+}
+
+.info-image, .amenities-image {
+    width: 100%;
+    padding-bottom: 30px;
+    border-bottom: 2px solid rgb(227, 227, 227);
+}
+
 .must-login {
     color: red;
     margin-top: -15px;

@@ -13,6 +13,8 @@ import { fetchReviews, getReviews } from '../../store/reviewsReducer';
 import ReservationForm from '../Reservations/ReservationForm/ReservationForm';
 // import MapWrapper from '../GoogleMaps/MapWrapper';
 import ListingMapWrapper from '../GoogleMaps/ListingMap';
+import amenities from '../../assets/amenities.png'
+import info from '../../assets/info.png'
 
 const ListingShow = (props) => {
     const dispatch = useDispatch();
@@ -116,7 +118,11 @@ const ListingShow = (props) => {
                         <BsPersonCircle className='profile-icon' />
                     </div>
                     <div className="show-description">
-                        {listing?.description}
+                        <div className='info-images'><img className='info-image' src={info} alt="" /></div>
+                        <div className='info-description'>
+                            {listing?.description}
+                        </div>
+                        <div className="info-images"><img className='amenities-image' src={amenities} alt="" /></div>
                     </div>
                 </div>
                 <div className='show-calendar-container'>
