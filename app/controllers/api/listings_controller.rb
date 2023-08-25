@@ -5,14 +5,19 @@ class Api::ListingsController < ApplicationController
 
         if params[:search]
             @listings = @listings.where("city ILIKE ?", "%#{params[:search]}%")
+            # debugger
+            if @listings.length < 1
+                render json: {errors: "No search results found for #{params[:search]}"}, status: 404
+            end
         end
         if params[:state]
             @listings = @listings.where("state ILIKE ?", "%#{params[:state]}%")
+            render :index
         end
         if params[:category]
             @listings = @listings.where("lower(category) = ?", params[:category].downcase)
+            render :index
         end
-        render :index
     end
 
     def show
