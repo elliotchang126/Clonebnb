@@ -38,6 +38,7 @@ const SignupForm = (props) => {
     }, [])
 
     const handleSubmit = async e => {
+        setEmail(email.toLowerCase())
         e.preventDefault();
         setEmailError('')
         setPasswordError('')
@@ -127,7 +128,7 @@ const SignupForm = (props) => {
                         type='text'
                         placeholder="Email"
                         value={email}
-                        onChange ={e => setEmail(e.target.value)} required/>
+                        onChange ={e => setEmail(e.target.value.toLowerCase())} required/>
                     <label htmlFor='email-input' className='user-label'>Email</label>
                 </div>
                 {emailError && <div className="error-message">

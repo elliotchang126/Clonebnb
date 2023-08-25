@@ -17,8 +17,10 @@
 }
 
 .guest-name {
-    font-size: 20px;
+    /* font-size: 20px; */
+    font-weight: 600;
     padding: 10px 0px 0px 0px;
+    color: #484848;
 
 }
 
@@ -29,4 +31,5 @@
 
 .guest-review {
     font-weight: 300;
+    line-height: 25px;
 }

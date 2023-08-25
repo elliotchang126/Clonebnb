@@ -35,6 +35,7 @@ const LoginForm = (props) => {
 
     const handleSubmit = async e => {
         e.preventDefault()
+        setEmail(email.toLowerCase())
         await dispatch(sessionActions.login({email, password}))
         .catch(async (res) => {
             let data;
@@ -62,7 +63,7 @@ const LoginForm = (props) => {
                     type='text'
                     placeholder='Email'
                     value={email}
-                    onChange ={e => setEmail(e.target.value)} required/>
+                    onChange ={e => setEmail(e.target.value.toLowerCase())} required/>
                 <label htmlFor='email-input' className='user-label'>Email</label>
             </div>
             <div className="input-wrapper">

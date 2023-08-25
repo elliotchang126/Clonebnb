@@ -31,14 +31,14 @@ export const fetchListings = params => async dispatch => {
     for ( let key in params ) {
         baseUrl = baseUrl + `${key}=${params[key]}&`
     }
-
-    const res = await csrfFetch(`${baseUrl}`)
-    if (res.ok) {
+    try {
+        const res = await csrfFetch(`${baseUrl}`)
         const listings = await res.json();
         dispatch(receiveListings(listings))
         return res
-    } else {
-        const errors = await res.json();
+    } catch (err) {
+        const errors = await err.json();
+        console.log(errors)
         dispatch(receiveListingErrors(errors))
     }
 }
@@ -74,6 +74,8 @@ const listingsReducer = (state={}, action) => {
             return { ...action.listings }
         case RECEIVE_LISTING:
             return { ...state, [action.payload.listing.id]: action.payload.listing }
+        case RECEIVE_LISTING_ERRORS:
+            return {}
         default:
             return state;
     }

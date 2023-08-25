@@ -8,10 +8,27 @@ import { useEffect } from 'react';
 const ListingIndex = () => {
     const dispatch = useDispatch();
     const listings = useSelector(getListings,shallowEqual);
+    const listingErrors = useSelector(state => state.errors.listings)
 
     useEffect(() => {
         dispatch(fetchListings())
     }, [dispatch])
+
+    // const handleRender = () => {
+
+    //     if(listingErrors){
+    //         return listingErrors
+    //     }else{
+    //         return listings.map(listing => {
+
+    //            return <ListingIndexItem key={listing.id} listing={listing}/>
+    //         })
+            
+    //     }
+        // const test =  listingErrors ? listingErrors : listings.map(listing =>
+        //     <ListingIndexItem key={listing.id} listing={listing}/>)
+        //     return test
+    // }
 
     return (
         <div>
@@ -19,6 +36,9 @@ const ListingIndex = () => {
                 <ListingTypes />
             </div>
             <div className='listing-index'>
+                {listingErrors && ( 
+                    <div className='listing-errors' >{listingErrors}</div>
+                )}
             {listings.map(listing =>
                 <ListingIndexItem key={listing.id} listing={listing}/>
             )}

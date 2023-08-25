@@ -25,6 +25,7 @@ const ListingShow = (props) => {
     const [showModal, setShowModal] = useState(false)
     
     useEffect(() => {
+        window.scrollTo(0,0)
         if (listingId) {
             dispatch(fetchListing(listingId))
         }

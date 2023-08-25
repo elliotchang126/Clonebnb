@@ -68,7 +68,7 @@ const UserModal = ({ setShowModal }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        checkEmail()
+        checkEmail(email)
     }
 
     return (
@@ -88,7 +88,7 @@ const UserModal = ({ setShowModal }) => {
                                 type='text'
                                 placeholder='Email'
                                 value={email}
-                                onChange={e => setEmail(e.target.value)} required />
+                                onChange={e => setEmail(e.target.value.toLowerCase())} required />
                             <label htmlFor='email-input'>Email</label>
                         </div>
                         {emailError && <div className="error-message">

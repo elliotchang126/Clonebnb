@@ -1,7 +1,7 @@
 .reservations-index {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    /* justify-content: center; */
     gap: 25px;
     margin: 20px;
 }
@@ -11,6 +11,6 @@
     font-weight: 300;
 }
 
-.current-trip > .reservations-index{
+/* .current-trip > .reservations-index{
     justify-content: flex-start;
-}
+} */
