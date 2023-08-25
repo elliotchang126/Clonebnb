@@ -103,8 +103,8 @@
 
 .new-review-container .user-button {
     margin-top: 20px;
-    width:100%;
-    /* max-width: 350px; */
+    /* width:100%; */
+    max-width: 392px;
 }
 
 .profile-icon {
