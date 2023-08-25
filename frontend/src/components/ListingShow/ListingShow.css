@@ -104,6 +104,7 @@
 .new-review-container .user-button {
     margin-top: 20px;
     width:100%;
+    /* max-width: 350px; */
 }
 
 .profile-icon {
@@ -159,6 +160,7 @@
     padding: 20px;
     border: 1px solid #767676;
     border-radius: 10px;
+    max-width: 350px;
 }
 
 .show-map {

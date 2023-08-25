@@ -9,7 +9,6 @@ const ListingIndex = () => {
     const dispatch = useDispatch();
     const listings = useSelector(getListings,shallowEqual);
     const listingErrors = useSelector(state => state.errors.listings)
-
     useEffect(() => {
         dispatch(fetchListings())
     }, [dispatch])
@@ -36,7 +35,7 @@ const ListingIndex = () => {
                 <ListingTypes />
             </div>
             <div className='listing-index'>
-                {listingErrors && ( 
+                {listingErrors.length !== 0 && ( 
                     <div className='listing-errors' >{listingErrors}</div>
                 )}
             {listings.map(listing =>
