@@ -82,19 +82,19 @@ end
 ```
 
 ```javascript
-    useEffect(() => {
-        if (startDate && endDate) {
-            const start = new Date(startDate);
-            const end = new Date(endDate);
-            const time = end.getTime() - start.getTime();
-            const nights = time / (1000 * 3600 * 24)
-            setNumNights(nights)
-            
-            const price = listing?.price * nights
-            const fee = Math.round(((price + listing?.cleaningFee) * 0.08))
-            setRawPrice(price)
-            setServiceFee(fee)
-            setTotalPrice(price + listing?.cleaningFee + fee)
-        }
-    }, [startDate, endDate, listing?.cleaningFee, listing?.price])
+useEffect(() => {
+    if (startDate && endDate) {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const time = end.getTime() - start.getTime();
+        const nights = time / (1000 * 3600 * 24)
+        setNumNights(nights)
+        
+        const price = listing?.price * nights
+        const fee = Math.round(((price + listing?.cleaningFee) * 0.08))
+        setRawPrice(price)
+        setServiceFee(fee)
+        setTotalPrice(price + listing?.cleaningFee + fee)
+    }
+}, [startDate, endDate, listing?.cleaningFee, listing?.price])
 ```
