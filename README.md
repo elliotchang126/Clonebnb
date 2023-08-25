@@ -52,16 +52,33 @@ The two full CRUD features on the application, which users are allowed to create
 
 ![](./app/assets/profile.gif)
 
-```javascript
-json.extract! reservation, :id, :listing_id, :user_id, :num_guests, :start_date, :end_date
+```ruby
+json.user do
+    json.partial! '/api/users/user', user: @user
+end
 
-json.photoUrl url_for(reservation.listing.photos[0])
-json.city reservation.listing.city
-json.state reservation.listing.state
-json.price reservation.listing.price
-json.cleaning_fee reservation.listing.cleaning_fee
-json.reviews reservation.listing.reviews
-json.overall_rating reservation.listing.overall_rating
+json.reviews do
+    @user.reviews.each do |review|
+        json.set! review.id do
+            json.extract! review, :id, :listing_id, :user_id, :cleanliness, :communication, :check_in, :accuracy, :location, :value, :body
+
+            json.first_name review.user.first_name
+            json.listing_title review.listing.title
+        end
+    end
+end
+
+json.reservations do
+    @user.reservations.each do |reservation|
+        json.set! reservation.id do
+            json.extract! reservation, :id, :listing_id, :user_id, :num_guests, :start_date, :end_date
+
+            json.photoUrl url_for(reservation.listing.photos[0])
+            json.city reservation.listing.city
+            json.state reservation.listing.state
+        end
+    end
+end
 ```
 
 ```javascript
