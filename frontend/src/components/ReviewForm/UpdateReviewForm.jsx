@@ -29,7 +29,7 @@ const UpdateReviewForm = ({ setShowModal, reviewId, setRefresh }) => {
     const [hoverRating, setHoverRating] = useState({rating: '', num: 0})
 
     useEffect(() => {
-        const button = document.querySelector('.user-button')
+        const button = document.querySelector('.new-review-button')
          button.addEventListener('mousemove', handleMouseover);
 
         return () => button.removeEventListener('mousemove', handleMouseover);
@@ -105,7 +105,7 @@ const UpdateReviewForm = ({ setShowModal, reviewId, setRefresh }) => {
                     onChange={handleChange}
                     placeholder="Write a public review"
                     />
-                <button className='user-button'>Update Review</button>
+                <button className='new-review-button'>Update Review</button>
             </form>
         // </div>
     )
